@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteRule ^/?$ index.php
+RewriteRule ^home?$ index.php
+RewriteRule ^User/Main?$ User/Main.php
+RewriteRule ^User/Management/auther?$ User/Management/auther.php
+RewriteRule ^User/Management/Category?$ User/Management/category.php
+RewriteRule ^User/Management/Unit?$ User/Management/unit.php
+RewriteRule ^User/Management/Brand?$ User/Management/brand.php
+RewriteRule ^User/Management/Size?$ User/Management/size.php
