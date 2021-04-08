@@ -8,3 +8,9 @@ RewriteRule ^User/Management/Category?$ User/Management/category.php
 RewriteRule ^User/Management/Unit?$ User/Management/unit.php
 RewriteRule ^User/Management/Brand?$ User/Management/brand.php
 RewriteRule ^User/Management/Size?$ User/Management/size.php
+RewriteRule ^User/Management/Product?$ User/Management/product.php
+RewriteRule ^User/Management/Supplier?$ User/Management/supplier.php
+RewriteRule ^User/Management/Customer?$ User/Management/customer.php
+RewriteRule ^User/Management/Rate?$ User/Management/rate.php
+RewriteRule ^User/Management/Account?$ User/Management/account.php
+RewriteRule ^User/Order/Order?$ User/Order/order.php

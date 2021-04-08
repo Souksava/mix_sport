@@ -185,6 +185,17 @@
                     </div>
                 </div>
             </form>
+            <?php
+                if($title == "ສັ່ງຊື້ສິນຄ້າ"){
+                    echo'
+                    <ul class="navbar-nav">
+                        <li class="nav-item d-none d-sm-inline-block">
+                            <a class="nav-link">ກວດສອບສິນຄ້າ</a>
+                        </li>
+                    </ul>
+                    ';
+                }
+            ?>
         </nav>
 
         <!-- Main Sidebar Container -->
@@ -363,7 +374,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Management/employee" class="nav-link">
+                                    <a href="<?php echo $links ?>Management/Supplier" class="nav-link">
                                         <i class="far fas fa-users nav-icon"></i>
                                         <p>ຈັດການຂໍ້ມູນຜູ້ສະໜອງ</p>
                                     </a>
@@ -371,7 +382,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Management/employee" class="nav-link">
+                                    <a href="<?php echo $links ?>Management/Customer" class="nav-link">
                                         <i class="far fas fa-users nav-icon"></i>
                                         <p>ຈັດການຂໍ້ມູນລູກຄ້າ</p>
                                     </a>
@@ -379,7 +390,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Management/employee" class="nav-link">
+                                    <a href="<?php echo $links ?>Management/Rate" class="nav-link">
                                         <i class="far fas fa-euro-sign nav-icon"></i>
                                         <p>ຈັດການຂໍ້ມູນອັດຕາແລກປ່ຽນ</p>
                                     </a>
@@ -387,7 +398,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Management/employee" class="nav-link">
+                                    <a href="<?php echo $links ?>Management/Account" class="nav-link">
                                         <i class="far fas fa-file-invoice-dollar nav-icon"></i>
                                         <p>ຈັດການຂໍ້ມູນເລກທີບັນຊີ</p>
                                     </a>
@@ -404,7 +415,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Form/accept" class="nav-link">
+                                    <a href="<?php echo $links ?>Order/Order" class="nav-link">
                                         <i class="fas fa-shopping-cart nav-icon"></i>
                                         <p>ສັ່ງຊື້ສິນຄ້າ</p>
                                     </a>
