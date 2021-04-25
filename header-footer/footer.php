@@ -1,141 +1,42 @@
-<!-- Content Wrapper. Contains page content -->
 
+<div class="ps-footer__copyright">
+    <div class="ps-container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                <p>&copy; <a href="#">Mix Sport</a>, Inc. All Copyrights Resevered.</p>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-wrapper -->
-<footer class="main-footer">
-    <strong>Copyright &copy; 2020 </strong>
-    All rights reserved.
-</footer>
-
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-</aside>
-<!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
-<script type="text/javascript">
-<?php
-if($stt == 1){
-?>
-    // function loadDocalert() {
-    //         setInterval(function(){
-    //             var xhttp = new XMLHttpRequest();
-    //             xhttp.onreadystatechange = function() {
-    //                 if (this.readyState == 4 && this.status == 200) {
-    //                 document.getElementById("alert_mananger").innerHTML = this.responseText;
-    //                 }
-    //             };
-    //             xhttp.open("GET", "<?php echo $path ?>header-footer/alert_manager.php", true);
-    //             xhttp.send();
-    //         },1000);
-    //     }
-    //     loadDocalert(); 
-<?php
-}
-if($stt == 2){
-?>
-//   function loadDocalert2() {
-//             setInterval(function(){
-//                 var xhttp = new XMLHttpRequest();
-//                 xhttp.onreadystatechange = function() {
-//                     if (this.readyState == 4 && this.status == 200) {
-//                     document.getElementById("alert_user").innerHTML = this.responseText;
-//                     }
-//                 };
-//                 xhttp.open("GET", "<?php echo $path ?>header-footer/alert_user.php", true);
-//                 xhttp.send();
-//             },1000);
-//         }
-//         loadDocalert2(); 
-<?php
-}
-?>
-       
+</main>
+<!-- JS Library-->
+<script type="text/javascript" src="plugins/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+<script type="text/javascript" src="plugins/owl-carousel/owl.carousel.min.js"></script>
+<script type="text/javascript" src="plugins/gmap3.min.js"></script>
+<script type="text/javascript" src="plugins/imagesloaded.pkgd.js"></script>
+<script type="text/javascript" src="plugins/isotope.pkgd.min.js"></script>
+<script type="text/javascript" src="plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="plugins/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="plugins/slick/slick/slick.min.js"></script>
+<script type="text/javascript" src="plugins/elevatezoom/jquery.elevatezoom.js"></script>
+<script type="text/javascript" src="plugins/Magnific-Popup/dist/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx39JFH5nhxze1ZydH-Kl8xXM3OK4fvcg&amp;region=GB"></script>
+<script type="text/javascript" src="plugins/revolution/js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="plugins/revolution/js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="plugins/revolution/js/extensions/revolution.extension.video.min.js"></script>
+<script type="text/javascript" src="plugins/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script type="text/javascript" src="plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js">
 </script>
-<!-- jQuery -->
-<script src="<?php echo $path ?>plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="<?php echo $path ?>plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-$.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="<?php echo $path ?>dist/js/loading.js"></script>
-<script src="<?php echo $path ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="<?php echo $path ?>plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?php echo $path ?>plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?php echo $path ?>plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="<?php echo $path ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="<?php echo $path ?>plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?php echo $path ?>plugins/moment/moment.min.js"></script>
-<script src="<?php echo $path ?>plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tcususdominus Bootstrap 4 -->
-<script src="<?php echo $path ?>plugins/tcususdominus-bootstrap-4/js/tcususdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="<?php echo $path ?>plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<?php echo $path ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo $path ?>dist/js/adminlte.js"></script>
-<script src="<?php echo $path ?>dist/js/style.js"></script>
-<script src="<?php echo $path ?>dist/js/jquery.highlight.js"></script>
-<!-- <script src="<?php echo $path ?>dist/js/modal.js" type="text/javascript"></script> -->
-
-
-<script>
-$(window).load(function() {
-    // Update Modal
-    // delete import
-
-    $('.btnDelete_import').on('click', function() {
-        $('#exampleModalDelete').modal('show');
-        $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function() {
-            return $(this).text();
-        }).get();
-        console.log(data);
-        $('#id').val(data[0]);
-    });
-    // delete form
-    $('.btnDelete_form').on('click', function() {
-        $('#exampleModalDelete').modal('show');
-        $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function() {
-            return $(this).text();
-        }).get();
-        console.log(data);
-        $('#id').val(data[0]);
-    });
-    // delete accept
-    $('.btnDelete_accept').on('click', function() {
-        $('#exampleModalDelete').modal('show');
-        $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function() {
-            return $(this).text();
-        }).get();
-        console.log(data);
-        $('#id').val(data[0]);
-    });
-    // delete distribute
-    $('.btnDelete_dist').on('click', function() {
-        $('#exampleModalDelete').modal('show');
-        $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function() {
-            return $(this).text();
-        }).get();
-        console.log(data);
-        $('#id').val(data[0]);
-    });
-});
-
-</script>
+<script type="text/javascript" src="plugins/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script type="text/javascript" src="plugins/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+<script type="text/javascript" src="plugins/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<!-- Custom scripts-->
+<script type="text/javascript" src="js/main.js"></script>
 </body>
 
 </html>

@@ -1,16 +1,23 @@
 RewriteEngine On
 
 RewriteRule ^/?$ index.php
-RewriteRule ^home?$ index.php
-RewriteRule ^User/Main?$ User/Main.php
-RewriteRule ^User/Management/auther?$ User/Management/auther.php
-RewriteRule ^User/Management/Category?$ User/Management/category.php
-RewriteRule ^User/Management/Unit?$ User/Management/unit.php
-RewriteRule ^User/Management/Brand?$ User/Management/brand.php
-RewriteRule ^User/Management/Size?$ User/Management/size.php
-RewriteRule ^User/Management/Product?$ User/Management/product.php
-RewriteRule ^User/Management/Supplier?$ User/Management/supplier.php
-RewriteRule ^User/Management/Customer?$ User/Management/customer.php
-RewriteRule ^User/Management/Rate?$ User/Management/rate.php
-RewriteRule ^User/Management/Account?$ User/Management/account.php
-RewriteRule ^User/Order/Order?$ User/Order/order.php
+RewriteRule ^productdetail?$ productdetail.php
+RewriteRule ^Administrator/Login?$ Administrator/index.php
+RewriteRule ^Administrator/User/Main?$ Administrator/User/Main.php
+RewriteRule ^Administrator/User/Management/Employee?$ Administrator/User/Management/employee.php
+RewriteRule ^Administrator/User/Management/auther?$ Administrator/User/Management/auther.php
+RewriteRule ^Administrator/User/Management/Category?$ Administrator/User/Management/category.php
+RewriteRule ^Administrator/User/Management/Unit?$ Administrator/User/Management/unit.php
+RewriteRule ^Administrator/User/Management/Brand?$ Administrator/User/Management/brand.php
+RewriteRule ^Administrator/User/Management/Size?$ Administrator/User/Management/size.php
+RewriteRule ^Administrator/User/Management/Product?$ Administrator/User/Management/product.php
+RewriteRule ^Administrator/User/Management/Supplier?$ Administrator/User/Management/supplier.php
+RewriteRule ^Administrator/User/Management/Customer?$ Administrator/User/Management/customer.php
+RewriteRule ^Administrator/User/Management/Rate?$ Administrator/User/Management/rate.php
+RewriteRule ^Administrator/User/Management/Account?$ Administrator/User/Management/account.php
+RewriteRule ^Administrator/User/Order/Order?$ Administrator/User/Order/order.php
+RewriteRule ^Administrator/User/Order/Import?$ Administrator/User/Order/import.php
+RewriteRule ^Administrator/User/Order/Broken?$ Administrator/User/Order/broken.php
+RewriteRule ^Administrator/User/Service/Confirm?$ Administrator/User/Service/confirm.php
+RewriteRule ^Administrator/User/Service/Payment?$ Administrator/User/Service/payment.php
+RewriteRule ^Administrator/User/Service/Sell?$ Administrator/User/Service/sell.php

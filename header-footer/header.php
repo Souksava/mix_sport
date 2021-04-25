@@ -1,583 +1,181 @@
-<?php
-//    session_start();
-//    if($_SESSION['ses_status_id'] == 1){
-//         $stt = 1;
-//    }
-//    if($_SESSION['ses_status_id'] == 2){
-//     $stt = 2;
-//     }
-//     if($_SESSION['ses_status_id'] == 3){
-//         $stt = 3;
-//     }
-//     if($_SESSION['ses_status_id'] == 4){
-//         $stt = 4;
-    $stt = 2;
-//     }
-//     if($_SESSION['ses_seven_id'] == ''){
-//         unset($_SESSION['ses_id']);
-//         unset($_SESSION['email']);
-//         unset($_SESSION['emp_name']);
-//         unset($_SESSION['emp_id']);
-//         unset($_SESSION['img_path']);
-//         unset($_SESSION['ses_status_id']);
-//         echo"<meta http-equiv='refresh' content='1;URL=$path'>";        
-//     }
-//     else if($_SESSION['ses_status_id'] != $stt){
-//         unset($_SESSION['ses_id']);
-//         unset($_SESSION['email']);
-//         unset($_SESSION['emp_name']);
-//         unset($_SESSION['emp_id']);
-//         unset($_SESSION['img_path']);
-//         unset($_SESSION['ses_status_id']);
-//         echo"<meta http-equiv='refresh' content='1;URL=$path'>";
-//     }
-//     else{
-//             include (''.$path.'oop/obj.php');
-//             // Import
-//             if(isset($_POST['stock'])){
-//                 $obj->cookie_stock(trim($_POST['code']),trim($_POST['serial']),trim($_POST['qty']),trim($_POST['price']),trim($_POST['pro_no']),trim($_POST['dnv']),trim($_POST['imp_no']),trim($_POST['remark']));
-//             }
-//             if(isset($_POST['btnDelete_stock'])){
-//                 $obj->del_stock(trim($_POST['id']));
-//             }
-//             if(isset($_POST['clear-stock'])){
-//                 $obj->clear_stock();
-//             }
-//             if(isset($_POST['btnStock'])){
-//                 $obj->save_stock(trim($_POST['sup_id']),trim($_POST['rate_id']),$_SESSION['emp_id']);
-//             }
-//             //End Import
-//             // Check-Stock
-//             if(isset($_POST['check_stock'])){
-//                 $obj->cookie_check_stock(trim($_POST['code']),trim($_POST['serial']),trim($_POST['qty']),trim($_POST['remark']));
-//             }
-//             if(isset($_POST['btnDelete_Check_Stock'])){
-//                 $obj->del_check_stock(trim($_POST['id']));
-//             }
-//             if(isset($_POST['clear_check_stock'])){
-//                 $obj->clear_check_stock();
-//             }
-            
-//             if(isset($_POST['btnCheck_stock'])){
-//                 $obj->save_check_stock($_SESSION['emp_id'],$_POST['pro_addr']);
-//             }
-//             //End Check-Stock
-
-//             //Spare-part
-//             if(isset($_POST['add_spare'])){
-//                 $obj->cookie_spare_part(trim($_POST['code']),trim($_POST['serialout']),trim($_POST['spare_part']),trim($_POST['pro_id']),trim($_POST['serialin']),trim($_POST['remark']));
-//             }
-//             if(isset($_POST['btnDelete_spare'])){
-//                 $obj->del_spare_part(trim($_POST['id']));
-//             }
-//             if(isset($_POST['clear_spare'])){
-//                 $obj->clear_spare_part();
-//             }
-//             if(isset($_POST['btnSave_spare'])){
-//                 $obj->save_spare_part($_SESSION['emp_id']);
-//             }
-//             //ປ່ຽນອາໄຫຼ່ End Spare-Part
-//             //ຟອມເບີກ
-//             if(isset($_POST['add_distribute'])){
-//                 $obj->cookie_distribute(trim($_POST['code']),trim($_POST['serial']),trim($_POST['qty']),trim($_POST['form_id']),trim($_POST['remark']));
-//             }
-//             if(isset($_POST['clear_distribute'])){
-//                 $obj->clear_distribute();
-//             }
-//             if(isset($_POST['btnDelete_distribute'])){
-//                 $obj->del_distribute(trim($_POST['id']));
-//             }
-//             if(isset($_POST['btnSave_distribute'])){
-//                 $obj->save_distribute($_SESSION['emp_id']);
-//             }
-//             //ສິ້ນສຸດຟອມເບີກ
-//             //ສິນຄ້າເບີກແລ້ວນຳກັບຄືນ
-//             if(isset($_POST['add_putback'])){
-//                 $obj->cookie_putback(trim($_POST['code']),trim($_POST['serial']),trim($_POST['qty']),trim($_POST['form_id']),trim($_POST['remark']));
-//             }
-//             if(isset($_POST['clear_putback'])){
-//                 $obj->clear_putback();
-//             }
-//             if(isset($_POST['btnDelete_putback'])){
-//                 $obj->del_putback(trim($_POST['id']));
-//             }
-//             if(isset($_POST['btnSave_putback'])){
-//                 $obj->save_putback($_SESSION['emp_id']);
-//             }
-//             //ສິ້ນສຸດ
-//                         //ສິນຄ້າເບີກແລ້ວນຳກັບຄືນ
-//                         if(isset($_POST['form_add'])){
-//                             $obj->cookie_form(trim($_POST['code']),trim($_POST['qty']));
-//                         }
-//                         if(isset($_POST['clear_form'])){
-//                             $obj->clear_form();
-//                         }
-//                         if(isset($_POST['del_list_form_id'])){
-//                             $obj->del_form(trim($_POST['del_list_form_id']));
-//                         }
-//                         if(isset($_POST['form_id'])){
-//                             $mail_user_name = $_SESSION['emp_name'];
-//                             $obj->save_form(trim($_POST['form_id']),$_SESSION['emp_id'],trim($_POST['cus_id']),trim($_POST['amount']),trim($_POST['packing']));
-            
-//                         }
-//                         //ສິ້ນສຸດ
-//                     }
-                    
-      ?>
 <!DOCTYPE html>
-<html>
-
-<head>
+<!--[if IE 7]><html class="ie ie7"><![endif]-->
+<!--[if IE 8]><html class="ie ie8"><![endif]-->
+<!--[if IE 9]><html class="ie ie9"><![endif]-->
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" href="<?php echo $path; ?>icon/logo.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="Administrator/icon/logo.jpg" rel="icon">
+    <meta name="author" content="Nghia Minh Luong">
+    <meta name="keywords" content="Default Description">
+    <meta name="description" content="Default keyword">
     <title><?php echo $title; ?></title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo $path ?>plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tcususdominus Bbootstrap 4 -->
-    <!-- <link rel="stylesheet"
-        href="<?php echo $path ?>plugins/tcususdominus-bootstrap-4/css/tcususdominus-bootstrap-4.min.css"> -->
-    <!-- iCheck -->
-    <link rel="stylesheet" href="<?php echo $path ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="<?php echo $path ?>plugins/jqvmap/jqvmap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo $path ?>dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="<?php echo $path ?>dist/css/alt/style.css">
+    <!-- Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:300,400,700%7CMontserrat:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="plugins/ps-icon/style.css">
+    <!-- CSS Library-->
+    <link rel="stylesheet" href="plugins/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/owl-carousel/assets/owl.carousel.css">
+    <link rel="stylesheet" href="plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
+    <link rel="stylesheet" href="plugins/slick/slick/slick.css">
+    <link rel="stylesheet" href="plugins/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="plugins/Magnific-Popup/dist/magnific-popup.css">
+    <link rel="stylesheet" href="plugins/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="plugins/revolution/css/settings.css">
+    <link rel="stylesheet" href="plugins/revolution/css/layers.css">
+    <link rel="stylesheet" href="plugins/revolution/css/navigation.css">
+    <!-- Custom-->
+    <link rel="stylesheet" href="css/style.css">
+    <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
+    <!--WARNING: Respond.js doesn't work if you view the page via file://-->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
 
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="<?php echo $path ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="<?php echo $path ?>plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="<?php echo $path ?>plugins/summernote/summernote-bs4.css">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="<?php echo $path ?>dist/js/sweetalert.min.js"></script>
-</head>
-
-<body class="hold-transition sidebar-mini layout-fixed">
-
-    <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light font14">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a class="nav-link"><?php echo $title; ?></a>
-                </li>
-            </ul>
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" name="search" id="search"
-                        placeholder="ຄົ້ນຫາ" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+  </head>
+  <!--[if IE 7]><body class="ie7 lt-ie8 lt-ie9 lt-ie10"><![endif]-->
+  <!--[if IE 8]><body class="ie8 lt-ie9 lt-ie10"><![endif]-->
+  <!--[if IE 9]><body class="ie9 lt-ie10"><![endif]-->
+  <body class="ps-loading">
+    <div class="header--sidebar"></div>
+    <header class="header">
+      <div class="header__top">
+        <div class="container-fluid">
+          <div class="row">
+                <div class="col-lg-6 col-md-8 col-sm-6 col-xs-12 ">
+                  <p>ບ້ານ ຫ້ວຍຫົງ ເມືອງ ຈັນທະບູລີ ນະຄອນຫຼວງວຽງຈັນ  -  Tel: 020 7877 7784</p>
                 </div>
+                <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 ">
+                  <div class="header__actions"><a href="#">ເຂົ້າສູ່ລະບົບ & ລົງທະບຽນ</a>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
+      <nav class="navigation">
+        <div class="container-fluid">
+          <div class="navigation__column left">
+            <div class="header__logo"><a class="ps-logo" href="/"><img src="Administrator/icon/logo.jpg"   class="brand-image img-circle elevation-3" style="width: 65px;" alt=""></a></div>
+          </div>
+          <div class="navigation__column center">
+                <ul class="main-menu menu">
+                  <li class="menu-item menu-item-has-children dropdown"><a href="/">ໜ້າຫຼັກ</a>
+                  </li>
+                  <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">ປະເພດສິນຄ້າ</a>
+                    <div class="mega-menu">
+                      <div class="mega-wrap">
+                        <div class="mega-column">
+                          <ul class="mega-item mega-features">
+                            <li><a href="product-listing.html">NEW RELEASES</a></li>
+                            <li><a href="product-listing.html">FEATURES SHOES</a></li>
+                            <li><a href="product-listing.html">BEST SELLERS</a></li>
+                            <li><a href="product-listing.html">NOW TRENDING</a></li>
+                            <li><a href="product-listing.html">SUMMER ESSENTIALS</a></li>
+                            <li><a href="product-listing.html">MOTHER'S DAY COLLECTION</a></li>
+                            <li><a href="product-listing.html">FAN GEAR</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-column">
+                          <h4 class="mega-heading">Shoes</h4>
+                          <ul class="mega-item">
+                            <li><a href="product-listing.html">All Shoes</a></li>
+                            <li><a href="product-listing.html">Running</a></li>
+                            <li><a href="product-listing.html">Training & Gym</a></li>
+                            <li><a href="product-listing.html">Basketball</a></li>
+                            <li><a href="product-listing.html">Football</a></li>
+                            <li><a href="product-listing.html">Soccer</a></li>
+                            <li><a href="product-listing.html">Baseball</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-column">
+                          <h4 class="mega-heading">CLOTHING</h4>
+                          <ul class="mega-item">
+                            <li><a href="product-listing.html">Compression & Nike Pro</a></li>
+                            <li><a href="product-listing.html">Tops & T-Shirts</a></li>
+                            <li><a href="product-listing.html">Polos</a></li>
+                            <li><a href="product-listing.html">Hoodies & Sweatshirts</a></li>
+                            <li><a href="product-listing.html">Jackets & Vests</a></li>
+                            <li><a href="product-listing.html">Pants & Tights</a></li>
+                            <li><a href="product-listing.html">Shorts</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-column">
+                          <h4 class="mega-heading">Accessories</h4>
+                          <ul class="mega-item">
+                            <li><a href="product-listing.html">Compression & Nike Pro</a></li>
+                            <li><a href="product-listing.html">Tops & T-Shirts</a></li>
+                            <li><a href="product-listing.html">Polos</a></li>
+                            <li><a href="product-listing.html">Hoodies & Sweatshirts</a></li>
+                            <li><a href="product-listing.html">Jackets & Vests</a></li>
+                            <li><a href="product-listing.html">Pants & Tights</a></li>
+                            <li><a href="product-listing.html">Shorts</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-column">
+                          <h4 class="mega-heading">BRAND</h4>
+                          <ul class="mega-item">
+                            <li><a href="product-listing.html">NIKE</a></li>
+                            <li><a href="product-listing.html">Adidas</a></li>
+                            <li><a href="product-listing.html">Dior</a></li>
+                            <li><a href="product-listing.html">B&G</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="menu-item menu-item-has-children dropdown"><a href="contact-us.html">ກ່ຽວກັບເຮົາ</a>
+                  <li class="menu-item menu-item-has-children dropdown"><a href="contact-us.html">ຕິດຕໍ່ເຮົາ</a>
+                  </li>
+                </ul>
+          </div>
+          <div class="navigation__column right">
+            <form class="ps-search--header" action="do_action" method="post">
+              <input class="form-control" type="text" placeholder="Search Product…">
+              <button><i class="ps-icon-search"></i></button>
             </form>
-            <?php
-                if($title == "ສັ່ງຊື້ສິນຄ້າ"){
-                    echo'
-                    <ul class="navbar-nav">
-                        <li class="nav-item d-none d-sm-inline-block">
-                            <a class="nav-link">ກວດສອບສິນຄ້າ</a>
-                        </li>
-                    </ul>
-                    ';
-                }
-            ?>
-        </nav>
-
-        <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4 font14">
-            <!-- Brand Logo -->
-            <a href="<?php echo $links ?>Main" class="brand-link">
-                <img src="<?php echo $path ?>icon/logo.jpg" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">MIX SPORT</span>
-            </a>
-
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="<?php echo $path ?>image/image.jpeg" class="img-circle elevation-2" alt="">
+            <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
+              <div class="ps-cart__listing">
+                <div class="ps-cart__content">
+                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
+                    <div class="ps-cart-item__thumbnail"><a href="productdetail"></a><img src="Administrator/image/product.jpeg" alt=""></div>
+                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="productdetail">Amazin’ Glazin’</a>
+                      <p><span>ຈຳນວນ:<i>12</i></span><span>ລວມ:<i>39,000 ກີບ</i></span></p>
                     </div>
-                    <div class="info">
-                        <a href="#" class="d-block">User</a>
+                  </div>
+                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
+                    <div class="ps-cart-item__thumbnail"><a href="productdetail"></a><img src="Administrator/image/product.jpeg" alt=""></div>
+                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="productdetail">The Crusty Croissant</a>
+                      <p><span>ຈຳນວນ:<i>12</i></span><span>ລວມ:<i>29,000 ກີບ</i></span></p>
                     </div>
+                  </div>
+                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
+                    <div class="ps-cart-item__thumbnail"><a href="productdetail"></a><img src="Administrator/image/product.jpeg" alt=""></div>
+                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="productdetail">The Rolling Pin</a>
+                      <p><span>ຈຳນວນ:<i>12</i></span><span>ລວມ:<i>19,000 ກີບ</i></span></p>
+                    </div>
+                  </div>
                 </div>
-                <?php
-                    if($stt == 1){  
-                ?>
-                                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    ຈັດການຂໍ້ມູນຫຼັກ
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Management/auther" class="nav-link">
-                                        <i class="fas fa-user nav-icon"></i>
-                                        <p>ຈັດການຂໍ້ມູນພະນັກງານ</p>
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    ລາຍງານ
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-employee" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານການຂາຍສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-customer" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານການສັ່ງຊື້ສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-supplier" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານລາຍຈ່າຍ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-product" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານລາຍຮັບ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-stock" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານຂໍ້ມູນລູກຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-check-stock" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານຂໍ້ມູນຜູ້ສະໜອງ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-warehouse" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານການສັ່ງຈອງສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                                <i class="nav-icon fas fa-power-off"></i>
-                                <p>
-                                    ອອກຈາກລະບົບ
-                                </p>
-                            </a>
-                        </li>
-                        </li>
-                    </ul>
-                </nav>
-                <?php
-                }
-                if($stt == 2){
-                ?>
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    ຈັດການຂໍ້ມູນຫຼັກ
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $links ?>Management/Category" class="nav-link">
-                                        <i class="fas fa-network-wired nav-icon"></i>
-                                        <p>ຈັດການຂໍ້ມູນປະເພດສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                <a href="<?php echo $links ?>Management/Unit" class="nav-link">
-                                        <i class="far fas fa-boxes nav-icon"></i>
-                                        <p>ຈັດການຂໍ້ມູນຫົວໜ່ວຍສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $links ?>Management/Brand" class="nav-link">
-                                        <i class="far fas fa-copyright nav-icon"></i>
-                                        <p>ຈັດການຂໍ້ມູນຍີ່ຫໍ້ສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $links ?>Management/Size" class="nav-link">
-                                        <i class="far fas fa-pencil-ruler nav-icon"></i>
-                                        <p>ຈັດການຂໍ້ມູນຂະໜາດສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $links ?>Management/Product" class="nav-link">
-                                        <i class="fab fa-product-hunt nav-icon"></i>
-                                        <p>ຈັດການຂໍ້ມູນສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $links ?>Management/Supplier" class="nav-link">
-                                        <i class="far fas fa-users nav-icon"></i>
-                                        <p>ຈັດການຂໍ້ມູນຜູ້ສະໜອງ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $links ?>Management/Customer" class="nav-link">
-                                        <i class="far fas fa-users nav-icon"></i>
-                                        <p>ຈັດການຂໍ້ມູນລູກຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $links ?>Management/Rate" class="nav-link">
-                                        <i class="far fas fa-euro-sign nav-icon"></i>
-                                        <p>ຈັດການຂໍ້ມູນອັດຕາແລກປ່ຽນ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $links ?>Management/Account" class="nav-link">
-                                        <i class="far fas fa-file-invoice-dollar nav-icon"></i>
-                                        <p>ຈັດການຂໍ້ມູນເລກທີບັນຊີ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
-                                <i class="fas fa-shopping-cart nav-icon"></i>
-                                <p>
-                                    ສັ່ງຊື້ ແລະ ນຳເຂົ້າສິນຄ້າ
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $links ?>Order/Order" class="nav-link">
-                                        <i class="fas fa-shopping-cart nav-icon"></i>
-                                        <p>ສັ່ງຊື້ສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Form/accept" class="nav-link">
-                                        <i class="fas fa-truck nav-icon"></i>
-                                        <p>ນຳເຂົ້າສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Form/accept" class="nav-link">
-                                        <i class="fas fa-cubes nav-icon"></i>
-                                        <p>ສິນຄ້າຊຳ່ຫຼຸດ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
-                                <i class="fas fa-store nav-icon"></i>
-                                <p>
-                                    ບໍລິການ
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Form/accept" class="nav-link">
-                                        <i class="fas fa-vote-yea nav-icon"></i>
-                                        <p>ຢືນຢັນການສັ່ງຊື້</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Form/accept" class="nav-link">
-                                        <i class="fab fa-amazon-pay nav-icon"></i>
-                                        <p>ຊ່ຳລະການສັ່ງຊື້</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Form/accept" class="nav-link">
-                                        <i class="fas fa-vote-yea nav-icon"></i>
-                                        <p>ຂາຍສິນຄ້າໜ້າຮ້ານ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    ລາຍງານ
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-employee" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານການຂາຍສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-customer" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານການສັ່ງຊື້ສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-supplier" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານລາຍຈ່າຍ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-product" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານລາຍຮັບ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-stock" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານຂໍ້ມູນລູກຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-check-stock" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານຂໍ້ມູນຜູ້ສະໜອງ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="'.$links.'Report/report-warehouse" class="nav-link">
-                                        <i class="far fas fa-book nav-icon"></i>
-                                        <p>ລາຍງານການສັ່ງຈອງສິນຄ້າ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                                <i class="nav-icon fas fa-power-off"></i>
-                                <p>
-                                    ອອກຈາກລະບົບ
-                                </p>
-                            </a>
-                        </li>
-                        </li>
-                    </ul>
-                </nav>
-                <?php
-                }
-                ?>
-            </div>
-        </aside>
-
-        <form action="#" method="POST" id="formLogout">
-            <div class="modal fade font14" id="exampleModal" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">ຢຶນຢັນ</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" align="center">
-                            ທ່ານຕ້ອງການອອກຈາກລະບົບ ຫຼື ບໍ່ ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-dismiss="modal">ຍົກເລີກ</button>
-                            <button type="submit" name="btnLogout" class="btn btn-outline-danger">ອອກຈາກລະບົບ</button>
-                        </div>
-                    </div>
+                <div class="ps-cart__total">
+                  <p>ຈຳນວນທັງໝົດ:<span>36</span></p>
+                  <p>ມູນຄ່າລວມ:<span>99,000 ກີບ</span></p>
                 </div>
+                <div class="ps-cart__footer"><a class="ps-btn" href="cart.html">ໄປທີ່ກະຕ່າ<i class="ps-icon-arrow-left"></i></a></div>
+              </div>
             </div>
-        </form>
-        <?php
-            // if(isset($_POST['btnLogout'])){
-            //     $obj->logout();
-            // }
-        ?>
-        <div class="main-footer">
+            <div class="menu-toggle"><span></span></div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="header-services">
+      <div class="ps-services owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="7000" data-owl-gap="0" data-owl-nav="true" data-owl-dots="false" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on">
+        <p class="ps-service"><i class="ps-icon-delivery"></i><strong>ບໍລິການຈັດສົ່ງຟຣີ</strong>: ຮ້ານມິກສະປອດບໍລິການ</p>
+        <p class="ps-service"><i class="ps-icon-delivery"></i><strong>ບໍລິການຈັດສົ່ງຟຣີ</strong>: ຮ້ານມິກສະປອດບໍລິການ</p>
+        <p class="ps-service"><i class="ps-icon-delivery"></i><strong>ບໍລິການຈັດສົ່ງຟຣີ</strong>: ຮ້ານມິກສະປອດບໍລິການ</p>
+      </div>
+    </div>
+    <main class="ps-main">
