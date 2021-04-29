@@ -23,7 +23,7 @@
 }
 else
 {
-   $obj->select_brand_limit("%%", "%%",$page);
+   $obj->select_brand_limit("%%",$page);
 }
 
 if(mysqli_num_rows($resultbrand_limit) > 0)

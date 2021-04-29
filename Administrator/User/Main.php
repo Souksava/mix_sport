@@ -8,6 +8,11 @@
 
 
 <div class="row">
+<a href="<?php echo $links ?>Management/Employee" class="m-a">
+        <div class="btn btn-light mainlink">
+            ຈັດການຂໍ້ມູນພະນັກງານ
+        </div>
+    </a>
     <a href="<?php echo $links ?>Management/auther" class="m-a">
         <div class="btn btn-light mainlink">
             ຈັດການຂໍ້ມູນປະເພດສິນຄ້າ

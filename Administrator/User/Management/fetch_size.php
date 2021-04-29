@@ -19,14 +19,14 @@
  if(isset($_POST["query"]))
 {
    $highlight = $_POST['query'];
-   $obj->select_unit_limit("%".$_POST['query']."%",$page);
+   $obj->select_size_limit("%".$_POST['query']."%",$page);
 }
 else
 {
-   $obj->select_unit_limit("%%",$page);
+   $obj->select_size_limit("%%",$page);
 }
 
-if(mysqli_num_rows($resultunit_limit) > 0)
+if(mysqli_num_rows($resultsize_limit) > 0)
 {
  $output .= '
   <div class="table-responsive">
@@ -35,17 +35,17 @@ if(mysqli_num_rows($resultunit_limit) > 0)
         <th style="width: 120px;">ເຄື່ອງມື</th>
         <th>ລຳດັບ</th>
         <th>ລະຫັດ</th>
-        <th>ຫົວໜ່ວຍສິນຄ້າ</th>
+        <th>ຂະໜາດສິນຄ້າ</th>
     </tr>
  ';
  $no_ =  $rank;
- while($row = mysqli_fetch_array($resultunit_limit))
+ while($row = mysqli_fetch_array($resultsize_limit))
  {
 $no_ += 1;
   $output .= '
     <tr>
         <td>
-        <input class="form-check-input" type="checkbox" name="id2[]" value="'.$row["unit_id"].'" id="flexCheckDefault'.$row["unit_id"].'">
+        <input class="form-check-input" type="checkbox" name="id2[]" value="'.$row["size_id"].'" id="flexCheckDefault'.$row["size_id"].'">
         &nbsp; &nbsp;
         <a href="#" data-toggle="modal" data-target="#exampleModalupdate"
             class="fa fa-pen toolcolor btnUpdate"></a>&nbsp; &nbsp;
@@ -53,12 +53,12 @@ $no_ += 1;
             class="fa fa-trash toolcolor btn_Delete"></a>
     </td>
     <td>'.$no_.'</td>
-    <td>'.$row["unit_id"].'</td>
-    <td>'.$row["unit_name"].'</td>
+    <td>'.$row["size_id"].'</td>
+    <td>'.$row["size_name"].'</td>
     </tr>
   ';
  }
- mysqli_free_result($resultunit_limit);  
+ mysqli_free_result($resultsize_limit);  
  mysqli_next_result($conn);
  $output .='
    </table>
@@ -67,15 +67,15 @@ $no_ += 1;
  echo $output;
  if(isset($_POST["query"]))
  {
-    $obj->select_unit("%".$_POST['query']."%");
+    $obj->select_size("%".$_POST['query']."%");
  }
  else
  {
-    $obj->select_unit("%%");
+    $obj->select_size("%%");
  }
 
- $count = mysqli_num_rows($resultunit);
- mysqli_free_result($resultunit);  
+ $count = mysqli_num_rows($resultsize);
+ mysqli_free_result($resultsize);  
  mysqli_next_result($conn);
  $a = ceil($count/15);
  if(isset($_POST['page'])){
@@ -180,7 +180,7 @@ $('.btn_Delete').on('click', function() {
             return $(this).text();
         }).get();
         console.log(data);
-        $('#unit_id').val(data[2]);
-        $('#unit_name2').val(data[3]);
+        $('#size_id').val(data[2]);
+        $('#size_name2').val(data[3]);
     });
 </script>
