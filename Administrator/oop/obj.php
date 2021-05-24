@@ -555,8 +555,245 @@ class obj{
             }
         }
     }
-    
-   
+    public static function insert_supplier($company,$tel,$fax,$address,$email){
+        global $conn;
+        $check_name = mysqli_query($conn,"select * from supplier where company='$company'");
+        if(mysqli_num_rows($check_name) > 0){
+            echo"<script>";
+            echo"window.location.href='Supplier?name=same';";
+            echo"</script>";
+        }
+        else{
+            $result = mysqli_query($conn,"call insert_supplier('$company','$tel','$fax','$address','$email')");
+            if(!$result){
+                echo"<script>";
+                echo"window.location.href='Supplier?save=fail';";
+                echo"</script>";
+            }
+            else{
+                echo"<script>";
+                echo"window.location.href='Supplier?save2=success';";
+                echo"</script>";
+            }
+        }
+    }
+    public static function select_supplier($search){
+        global $conn;
+        global $result_supplier;
+        $result_supplier = mysqli_query($conn,"call select_supplier('$search')");
+    }
+    public static function select_supplier_limit($search,$page){
+        global $conn;
+        global $result_supplier_limit;
+        $result_supplier_limit = mysqli_query($conn,"call select_supplier_limit('$search','$page')");
+    }
+    public static function del_supplier($sup_id){
+        global $conn;
+        $check_order = mysqli_query($conn,"select * from orders where sup_id='$sup_id'");
+        $check_import = mysqli_query($conn,"select * from import where sup_id='$sup_id'");
+        if(mysqli_num_rows($check_order) > 0){
+            echo"<script>";
+            echo"window.location.href='Supplier?order=has';";
+            echo"</script>";
+        }
+        else if(mysqli_num_rows($check_import) > 0){
+            echo"<script>";
+            echo"window.location.href='Supplier?import=has';";
+            echo"</script>";
+        }
+        else{
+            $result = mysqli_query($conn,"call del_supplier('$sup_id');");
+            if(!$result){
+                echo"<script>";
+                echo"window.location.href='Supplier?del=fail';";
+                echo"</script>";
+            }
+            else{
+                echo"<script>";
+                echo"window.location.href='Supplier?del2=success';";
+                echo"</script>";
+            }
+        }
+    }
+   public static function update_supplier($sup_id,$company,$tel,$fax,$address,$email){
+       global $conn;
+       $result = mysqli_query($conn,"call update_supplier('$sup_id','$company','$tel','$fax','$address','$email')");
+       if(!$result){
+        echo"<script>";
+        echo"window.location.href='Supplier?update=fail';";
+        echo"</script>";
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Supplier?update2=success';";
+            echo"</script>";
+        }
+   }
+   public static function select_customer($search){
+    global $conn;
+    global $result_customer;
+    $result_customer = mysqli_query($conn,"call select_customer('$search')");
+    }
+    public static function select_customer_limit($search,$page){
+        global $conn;
+        global $result_customer_limit;
+        $result_customer_limit = mysqli_query($conn,"call select_customer_limit('$search','$page')");
+    }
+    public static function select_rate(){
+        global $conn;
+        global $result_rate;
+        $result_rate = mysqli_query($conn,"call select_rate()");
+    }
+    public static function insert_rate($rate_id,$rate_buy,$rate_sell){
+        global $conn;
+        $check_rate = mysqli_query($conn,"select * from rate where rate_id='$rate_id'");
+        if(mysqli_num_rows($check_rate) > 0){
+            echo"<script>";
+            echo"window.location.href='Rate?rateid=same';";
+            echo"</script>";
+        }
+        else{
+            $result = mysqli_query($conn,"call insert_rate('$rate_id','$rate_buy','$rate_sell')");
+            if(!$result){
+                echo"<script>";
+                echo"window.location.href='Rate?save=fail';";
+                echo"</script>";
+            }
+            else{
+                echo"<script>";
+                echo"window.location.href='Rate?save2=success';";
+                echo"</script>";
+            }
+        }
+    }
+    public static function update_rate($rate_id,$rate_buy,$rate_sell){
+        global $conn;
+        $result = mysqli_query($conn,"call update_rate('$rate_id','$rate_buy','$rate_sell')");
+        if(!$result){
+            echo"<script>";
+            echo"window.location.href='Rate?update=fail';";
+            echo"</script>";
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Rate?update2=success';";
+            echo"</script>";
+         }
+    }
+    public static function del_rate($rate_id){
+        global $conn;
+        if($rate_id == "THB" || $rate_id == "USD"){
+            echo"<script>";
+            echo"window.location.href='Rate?rate=found';";
+            echo"</script>";
+        }
+        else{
+            $result = mysqli_query($conn,"call del_rate('$rate_id')");
+            if(!$result){
+                echo"<script>";
+                echo"window.location.href='Rate?del=fail';";
+                echo"</script>";
+            }
+            else{
+                echo"<script>";
+                echo"window.location.href='Rate?del2=success';";
+                echo"</script>";
+            }
+        }
+    }
+    public static function select_acc(){
+        global $conn;
+        global $result_acc;
+        $result_acc = mysqli_query($conn,"call select_acc()");
+    }
+    public static function insert_acc($bank,$acc_name,$acc_no,$qr_code){
+        global $conn;
+        global $path;
+       $check_bank = mysqli_query($conn,"select * from account where bank='$bank'");
+       if(mysqli_num_rows($check_bank) > 0){
+            echo"<script>";
+            echo"window.location.href='Account?bank=same';";
+            echo"</script>";
+       }
+       else{
+            if($qr_code == ""){
+                $Pro_image = "";
+            }
+            else{
+                $ext = pathinfo(basename($_FILES['qrcode']['name']), PATHINFO_EXTENSION);
+                $new_image_name = 'Mix_'.uniqid().".".$ext;
+                $image_path = $path.'image/';
+                $upload_path = $image_path.$new_image_name;
+                move_uploaded_file($_FILES['qrcode']['tmp_name'], $upload_path);
+                $Pro_image = $new_image_name;
+            }
+            $result = mysqli_query($conn,"call insert_acc('$bank','$acc_name','$acc_no','$Pro_image')");
+            if(!$result){
+                echo"<script>";
+                echo"window.location.href='Account?save=fail';";
+                echo"</script>";
+            }
+            else{
+                echo"<script>";
+                echo"window.location.href='Account?save2=success';";
+                echo"</script>";
+            }
+       }
+    }
+    public static function update_acc($bank,$acc_name,$acc_no,$qr_code){
+        global $conn;
+        global $path;
+        $get_img = mysqli_query($conn, "select qr_code from account where bank='$bank'");
+        $data = mysqli_fetch_array($get_img, MYSQLI_ASSOC);
+        if($qr_code == ""){//ກວດສອບຄ່າຟາຍຮູບມາວ່າເປັນຄ່າວ່າງ ຫຼື ບໍ່
+            $Pro_image = $data['qr_code'];
+        }
+        else{//ຖ້າຄ່າຟາຍຮູບບໍ່ເປັນຄ່າວ່າງໃຫ້ເຮັດວຽກໃນຈຸດນີ້
+            $ext = pathinfo(basename($_FILES['qrcode2']['name']), PATHINFO_EXTENSION);
+            $new_image_name = 'Mix_'.uniqid().".".$ext;
+            $image_path = $path.'image/';
+            $upload_path = $image_path.$new_image_name;
+            move_uploaded_file($_FILES['qrcode2']['tmp_name'], $upload_path);
+            $Pro_image = $new_image_name;
+            $path2 = $image_path.$data['qr_code'];
+            if(file_exists($path2) && !empty($data['qr_code'])){
+                unlink($path2);
+                
+            }
+        }
+        $result = mysqli_query($conn,"call update_acc('$bank','$acc_name','$acc_no','$Pro_image')");
+        if(!$result){
+            echo"<script>";
+            echo"window.location.href='Account?update=fail';";
+            echo"</script>";
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Account?update2=success';";
+            echo"</script>";
+        }
+    }
+    public static function del_acc($bank){
+        global $conn;
+        global $path;
+        $get_img = mysqli_query($conn,"select qr_code from account where bank='$bank'");
+        $data = mysqli_fetch_array($get_img, MYSQLI_ASSOC);
+        $path2 = $path.'image/'.$data['qr_code'];
+        if(file_exists($path2) && !empty($data['qr_code'])){
+            unlink($path2);        
+        }
+        $result = mysqli_query($conn,"call del_acc('$bank')");
+        if(!$result){
+            echo"<script>";
+            echo"window.location.href='Account?del=fail';";
+            echo"</script>";
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Account?del2=success';";
+            echo"</script>";
+        }
+    }
 }
 $obj = new obj();
 ?>

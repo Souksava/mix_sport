@@ -5,36 +5,49 @@
   $session_path = "../../";
   include ("../../header-footer/header.php");
 ?>
-<div class="row">
-    <div class="table-responsive">
-        <table class="table-bordered" style="width: 1800px;text-align: center;">
-            <tr style="font-size: 18px;">
-                <th>ລຳດັບ</th>
-                <th>ລະຫັດ</th>
-                <th>ຊື່ລູກຄ້າ</th>
-                <th>ນາມສະກຸນ</th>
-                <th>ເພດ</th>
-                <th>ທີ່ຢູ່ລູກຄ້າ</th>
-                <th>ເບີໂທລະສັບ</th>
-                <th>What's App</th>
-                <th>ອີເມວ</th>
-                <th>ວັນທີສະໝັກ</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>001</td>
-                <td>ທິບພາວັນ</td>
-                <td>ວົງຄຳສີ</td>
-                <td>ຍິງ</td>
-                <td>ບ້ານ ວັດໄຕ ເມືອງ ສີໂຄດຕະບອງ ນະຄອນຫຼວງວຽງຈັນ</td>
-                <td>020 5588 9988</td>
-                <td>020 5588 9988</td>
-                <td>Thipphavanh@gmail.com</td>
-                <td>20/04/2021 18:09:02</td>
-            </tr>
-        </table>
-    </div>
+<div id="result_data" class="result_data">
+    <?php
+            include ($path."header-footer/loading.php");
+        ?>
 </div>
 <?php
     include ("../../header-footer/footer.php");
   ?>
+
+<script>
+$(document).ready(function() {
+    load_data("%%", "0");
+
+    function load_data(query, page) {
+        $.ajax({
+            url: "fetch_customer.php",
+            method: "POST",
+            data: {
+                query: query,
+                page: page
+            },
+            success: function(data) {
+                $("#result_data").html(data);
+            }
+        });
+    }
+    $('#search').keyup(function() {
+        var page = "0";
+        var search = $('#search').val();
+        if (search != '') {
+            load_data(search, page);
+        } else {
+            load_data('%%', page);
+        }
+    });
+    $(document).on("click", ".page-links_table", function() {
+        var page = this.id;
+        var search = $('#search').val();
+        if (search != "") {
+            load_data(search, page);
+        } else {
+            load_data("%%", page);
+        }
+    });
+});
+</script>

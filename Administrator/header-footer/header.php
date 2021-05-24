@@ -239,6 +239,36 @@
                         </div>
                     ';
                 }
+                if($title == "ຜູ້ສະໜອງ"){
+                    echo'
+                        <div class="form-inline ml-3">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" name="search" id="search"
+                                    placeholder="ຄົ້ນຫາ" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
+                if($title == "ລູກຄ້າ"){
+                    echo'
+                        <div class="form-inline ml-3">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" name="search" id="search"
+                                    placeholder="ຄົ້ນຫາ" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
                 if($title == "ສິນຄ້າ"){
                     echo'
                         <div class="form-inline ml-3">

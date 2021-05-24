@@ -396,9 +396,9 @@
         $logic = 0;
             if(isset($_POST["id2"])){
                 foreach($_POST["id2"] as $checkid){
-                    $check_order = mysqli_query($conn,"select * from orderdetail where pro_id='$id'");
-                    $check_import = mysqli_query($conn,"select * from import where pro_id='$id'");
-                    $check_selldetail = mysqli_query($conn,"select * from selldetail where pro_id='$id'");
+                    $check_order = mysqli_query($conn,"select * from orderdetail where pro_id='$checkid'");
+                    $check_import = mysqli_query($conn,"select * from import where pro_id='$checkid'");
+                    $check_selldetail = mysqli_query($conn,"select * from selldetail where pro_id='$checkid'");
                     if(mysqli_num_rows($check_order) > 0){
                         $logic = 1;
                         echo"<script>";
