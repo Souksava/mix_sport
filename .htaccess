@@ -1,7 +1,7 @@
 RewriteEngine On
 
 RewriteRule ^/?$ index.php
-RewriteRule ^productdetail?$ productdetail.php
+RewriteRule ^Productdetail?$ productdetail.php
 RewriteRule ^Administrator/Login?$ Administrator/index.php
 RewriteRule ^Administrator/User/Main?$ Administrator/User/Main.php
 RewriteRule ^Administrator/User/Management/Employee?$ Administrator/User/Management/employee.php
@@ -21,3 +21,4 @@ RewriteRule ^Administrator/User/Order/Broken?$ Administrator/User/Order/broken.p
 RewriteRule ^Administrator/User/Service/Confirm?$ Administrator/User/Service/confirm.php
 RewriteRule ^Administrator/User/Service/Payment?$ Administrator/User/Service/payment.php
 RewriteRule ^Administrator/User/Service/Sell?$ Administrator/User/Service/sell.php
+RewriteRule ^Administrator/User/Service/Bill?$ Administrator/User/Service/bill.php

@@ -164,13 +164,48 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="<?php echo $path ?>dist/js/sweetalert.min.js"></script>
 </head>
+    <?php
+        include (''.$path.'oop/obj.php');
+        if(isset($_POST['pro_id_order'])){
+            $obj->cookie_order(trim($_POST['pro_id_order']),trim($_POST['qty']),trim($_POST['price']));
+        }
+        if(isset($_POST['btnClear'])){
+            $obj->clear_order();
+        }
+        if(isset($_POST['cookie_pro_id'])){
+            $obj->del_order(trim($_POST['cookie_pro_id']));
+        }
+        if(isset($_POST['order_id'])){
+            $obj->save_order(trim($_POST['order_id']),"1",trim($_POST['sup_id']));
+        }
+        if(isset($_POST['pro_id_import'])){
+            $obj->cookie_import(trim($_POST['pro_id_import']),trim($_POST['qty']),trim($_POST['price']),trim($_POST['remark']));
+        }
+        if(isset($_POST['btnClear_import'])){
+            $obj->clear_import();
+        }
+        if(isset($_POST['cookie_pro_id_import'])){
+            $obj->del_import(trim($_POST['cookie_pro_id_import']));
+        }
+        if(isset($_POST['sup_id_import'])){
+            $obj->save_import(trim($_POST['order_id_import']),"1",trim($_POST['sup_id_import']),trim($_POST['import_no']));
+        }
+        if(isset($_POST["btnAdd_sell"])){
+            $obj->cookie_sell(trim($_POST["pro_id_sell"]),trim($_POST["qty_sell"]));
+        }
+        if(isset($_GET["listsell"])){
+            $obj->del_sell(trim($_GET["listsell"]));
+        }
+        if(isset($_POST["sell_id"])){
+            $obj->save_sell(trim($_POST["sell_id"]),"1","1","1","ເງິນສົດ","ໜ້າຮ້ານ",trim($_FILES["img"]["name"]),trim($_POST["getmoney"]));
+        }
+        
+    ?>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div id="loader-wrapper">
         <div id="loader"></div>
     </div>
-    <?php
-     include (''.$path.'oop/obj.php');
-?>
+
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light font14">
             <ul class="navbar-nav">
@@ -286,9 +321,39 @@
                 }
                 if($title == "ສັ່ງຊື້ສິນຄ້າ"){
                     echo'
+                        <div class="form-inline ml-3">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" name="search" id="search"
+                                    placeholder="ຄົ້ນຫາ" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
+                if($title == "ສິນຄ້າຊ່ຳຫຼຸດ"){
+                    echo'
+                        <div class="form-inline ml-3">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" name="search" id="search"
+                                    placeholder="ຄົ້ນຫາ" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
+                if($title == "ສັ່ງຊື້ສິນຄ້າ"){
+                    echo'
                     <ul class="navbar-nav">
                         <li class="nav-item d-none d-sm-inline-block">
-                            <a class="nav-link">ກວດສອບສິນຄ້າ</a>
+                            <a class="nav-link qtyalert" href="#">ກວດສອບສິນຄ້າ</a>
                         </li>
                     </ul>
                     ';

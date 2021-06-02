@@ -1,6 +1,10 @@
 <?php 
   $title = "ລາຍລະອຽດສິນຄ້າ";
+  $path = "";
 include ('header-footer/header.php');
+$pro_id = $_GET["id"];
+$result_product = mysqli_query($conn,"SELECT pro_id,pro_name,qty,price,p.cate_id,cate_name,p.unit_id,unit_name,p.brand_id,brand_name,p.size_id,size_name,qty_alert,img FROM product p LEFT JOIN category c ON p.cate_id=c.cate_id LEFT JOIN unit u ON p.unit_id=u.unit_id LEFT JOIN brand b ON p.brand_id=b.brand_id LEFT JOIN size s ON p.size_id=s.size_id WHERE pro_id = '$pro_id';");
+$row_product = mysqli_fetch_array($result_product,MYSQLI_ASSOC);
 ?>
       <div class="test">
         <div class="container">
@@ -17,39 +21,36 @@ include ('header-footer/header.php');
               <div class="ps-product__thumbnail">
                 <div class="ps-product__preview">
                   <div class="ps-product__variants">
-                    <div class="item"><img src="Administrator/image/product.jpeg" alt=""></div>
-                    <div class="item"><img src="Administrator/image/product2.jpeg" alt=""></div>
-                    <div class="item"><img src="Administrator/image/product3.jpeg" alt=""></div>
+                    <div class="item"><img src="Administrator/image/<?php echo $row_product["img"] ?>" alt=""></div>
                   </div>
                 </div>
                 <div class="ps-product__image">
-                  <div class="item"><img class="zoom" src="Administrator/image/product.jpeg" alt="" data-zoom-image="Administrator/image/product.jpeg"></div>
-                  <div class="item"><img class="zoom" src="Administrator/image/product2.jpeg" alt="" data-zoom-image="Administrator/image/product2.jpeg"></div>
-                  <div class="item"><img class="zoom" src="Administrator/image/product3.jpeg" alt="" data-zoom-image="Administrator/image/product3.jpeg"></div>
+                  <div class="item"><img class="zoom" src="Administrator/image/<?php echo $row_product["img"] ?>" alt="" data-zoom-image="Administrator/image/<?php echo $row_product["img"] ?>"></div>
                 </div>
               </div>
               <div class="ps-product__thumbnail--mobile">
-                <div class="ps-product__main-img"><img src="Administrator/image/product.jpeg" alt=""></div>
+                <div class="ps-product__main-img"><img src="Administrator/image/<?php echo $row_product["img"] ?>" alt=""></div>
                 <div class="ps-product__preview owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="20" data-owl-nav="true" data-owl-dots="false" data-owl-item="3" data-owl-item-xs="3" data-owl-item-sm="3" data-owl-item-md="3" data-owl-item-lg="3" data-owl-duration="1000" data-owl-mousedrag="on">
-                  <img src="Administrator/image/product.jpeg" alt="">
-                  <img src="Administrator/image/product2.jpeg" alt="">
-                  <img src="Administrator/image/product3.jpeg" alt="">
+                  <img src="Administrator/image/<?php echo $row_product["img"] ?>" alt="">
                 </div>
               </div>
               <div class="ps-product__info">
-                <h1>ເສື້ອແມນຢູ່</h1>
-                <p class="ps-product__category"><a href="#"> ເສື້ອກິລາ</a>,<a href="#"> Nike</a></p>
-                <h3 class="ps-product__price">50,000 ກີບ</h3>
+                <h1><?php echo $row_product["pro_name"] ?></h1>
+                <p class="ps-product__category"><a href="#"> <?php echo $row_product["cate_name"] ?></a>,<a href="#"> <?php echo $row_product["brand_name"] ?></a></p>
+                <h3 class="ps-product__price"><?php echo number_format($row_product["price"],2) ?> ກີບ</h3>
+                <?php
+                if($row_product["qty"] > 0){
+                  echo' <h5 style="color: green;"><i class="fas fa-check"></i> ມີສິນຄ້າ</h5>';
+                }
+                else{
+                  echo'<h5 style="color: red;"><i class="fas fa-times-circle"></i> ສິນຄ້າໝົດ</h5>';
+                }
+                ?>
                 <div class="ps-product__block ps-product__size">
-                  <h4>ເລືອກຂະໜາດ</h4>
-                  <select class="ps-select selectpicker">
-                    <option value="1">ເລືອກຂະໜາດ</option>
-                    <option value="2">S</option>
-                    <option value="3">M</option>
-                    <option value="3">L</option>
-                  </select>
+                  <h4>ຂະໜາດ: <?php echo $row_product["size_name"] ?></h4>
+                 
                   <div class="form-group">
-                    <input class="form-control" type="number" value="1">
+                    <input class="form-control" min="1" type="number" value="1">
                   </div>
                 </div>
                 <div class="ps-product__shopping"><a class="ps-btn mb-10" href="cart.html">ເພີ່ມໃສ່ກະຕາ<i class="ps-icon-next"></i></a>
@@ -75,97 +76,30 @@ include ('header-footer/header.php');
           <div class="ps-section__content">
             <div class="ps-owl--colection owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="30" data-owl-nav="false" data-owl-dots="false" data-owl-item="4" data-owl-item-xs="1" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-duration="1000" data-owl-mousedrag="on">
               <!-- One item -->
+              <?php
+              $cate_id = $row_product["cate_id"];
+              $result_category = mysqli_query($conn,"SELECT pro_id,pro_name,qty,price,p.cate_id,cate_name,p.unit_id,unit_name,p.brand_id,brand_name,p.size_id,size_name,qty_alert,img FROM product p LEFT JOIN category c ON p.cate_id=c.cate_id LEFT JOIN unit u ON p.unit_id=u.unit_id LEFT JOIN brand b ON p.brand_id=b.brand_id LEFT JOIN size s ON p.size_id=s.size_id WHERE p.cate_id = '$cate_id';");
+              foreach($result_category as $row_category){
+              ?>
               <div class="ps-shoes--carousel">
                 <div class="ps-shoe">
                   <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div><img src="Administrator/image/product2.jpeg" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                    <img src="Administrator/image/<?php echo $row_category["img"] ?>" alt=""><a class="ps-shoe__overlay" href="Productdetail?id=<?php echo $row_category["pro_id"] ?>"></a>
                   </div>
                   <div class="ps-shoe__content">
                     <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""></div>
+                      <div class="ps-shoe__variant normal"><img src="Administrator/image/<?php echo $row_category["img"] ?>" alt=""></div>
                     </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">ເສື້ອລີເວີພູ</a>
-                      <p class="ps-shoe__categories"><a href="#">ເສື້ອກີລາ</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 25,000 ກີບ</span>
+                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="Productdetail?id=<?php echo $row_category["pro_id"] ?>"><?php echo $row_category["pro_name"] ?></a>
+                      <p class="ps-shoe__categories"><a href="#"><?php echo $row_category["cate_name"] ?></a>,<a href="#"> <?php echo $row_category["brand_name"] ?></a>,<a href="#"> <?php echo $row_category["size_name"] ?></a></p><span class="ps-shoe__price"> <?php echo number_format($row_category["price"],2) ?> ກີບ</span>
                     </div>
                   </div>
                 </div>
               </div>
+              <?php
+              }
+              ?>
               <!-- End One item -->
-              <div class="ps-shoes--carousel">
-                <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div>
-                    <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><img src="Administrator/image/product3.jpeg" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
-                  </div>
-                  <div class="ps-shoe__content">
-                    <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""></div>
-                    </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">ເສື້ອອາຊູນອນ</a>
-                      <p class="ps-shoe__categories"><a href="#">ເສື້ອກິລາ</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price">
-                         15,000 ກີບ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="ps-shoes--carousel">
-                <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div><img src="Administrator/image/product4.jpeg" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
-                  </div>
-                  <div class="ps-shoe__content">
-                    <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product4.jpeg" alt=""><img src="Administrator/image/product4.jpeg" alt=""><img src="Administrator/image/product4.jpeg" alt=""><img src="Administrator/image/product4.jpeg" alt=""></div>
-                    </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">ເສືອແບັກເບີນ</a>
-                      <p class="ps-shoe__categories"><a href="#">ເສື້ອກິລາ</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 35,000 ກີບ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="ps-shoes--carousel">
-                <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail"><img src="Administrator/image/product5.jpeg" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
-                  </div>
-                  <div class="ps-shoe__content">
-                    <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product5.jpeg" alt=""><img src="Administrator/image/product5.jpeg" alt=""><img src="Administrator/image/product5.jpeg" alt=""><img src="Administrator/image/product5.jpeg" alt=""></div>
-                    </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">ເສື້ອສຸດສະກະ</a>
-                      <p class="ps-shoe__categories"><a href="#">ເສື້ອກິລາ</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 29,000 ກີບ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="ps-shoes--carousel">
-                <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div><img src="Administrator/image/product6.jpeg" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
-                  </div>
-                  <div class="ps-shoe__content">
-                    <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product6.jpeg" alt=""><img src="Administrator/image/product6.jpeg" alt=""><img src="Administrator/image/product6.jpeg" alt=""><img src="Administrator/image/product6.jpeg" alt=""></div>
-                    </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">ເສື້ອເຊວຊີ</a>
-                      <p class="ps-shoe__categories"><a href="#">ເສື້ອກິລາ</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 59,000 ກີບ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="ps-shoes--carousel">
-                <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail"><img src="Administrator/image/product7.jpeg" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
-                  </div>
-                  <div class="ps-shoe__content">
-                    <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product7.jpeg" alt=""><img src="Administrator/image/product7.jpeg" alt=""><img src="Administrator/image/product7.jpeg" alt=""><img src="Administrator/image/product7.jpeg" alt=""></div>
-                    </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">ເສື້ອ Jeep</a>
-                      <p class="ps-shoe__categories"><a href="#">ເສື້ອກິລາ</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 35,000 ກີບ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

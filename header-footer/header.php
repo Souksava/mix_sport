@@ -10,33 +10,39 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="Administrator/icon/logo.jpg" rel="icon">
+    <link href="<?php echo $path ?>Administrator/icon/logo.jpg" rel="icon">
     <meta name="author" content="Nghia Minh Luong">
     <meta name="keywords" content="Default Description">
     <meta name="description" content="Default keyword">
     <title><?php echo $title; ?></title>
     <!-- Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:300,400,700%7CMontserrat:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="plugins/ps-icon/style.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/ps-icon/style.css">
     <!-- CSS Library-->
-    <link rel="stylesheet" href="plugins/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="plugins/owl-carousel/assets/owl.carousel.css">
-    <link rel="stylesheet" href="plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
-    <link rel="stylesheet" href="plugins/slick/slick/slick.css">
-    <link rel="stylesheet" href="plugins/bootstrap-select/dist/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="plugins/Magnific-Popup/dist/magnific-popup.css">
-    <link rel="stylesheet" href="plugins/jquery-ui/jquery-ui.min.css">
-    <link rel="stylesheet" href="plugins/revolution/css/settings.css">
-    <link rel="stylesheet" href="plugins/revolution/css/layers.css">
-    <link rel="stylesheet" href="plugins/revolution/css/navigation.css">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/owl-carousel/assets/owl.carousel.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/slick/slick/slick.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/Magnific-Popup/dist/magnific-popup.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/revolution/css/settings.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/revolution/css/layers.css">
+    <link rel="stylesheet" href="<?php echo $path ?>plugins/revolution/css/navigation.css">
+    <link rel="stylesheet" href="<?php echo $path ?>Administrator/plugins/fontawesome-free/css/all.min.css">
     <!-- Custom-->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?php echo $path ?>css/style.css">
     <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
     <!--WARNING: Respond.js doesn't work if you view the page via file://-->
     <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
 
   </head>
+  <?php
+    include (''.$path.'Administrator/oop/connect.php');
+  ?>
   <!--[if IE 7]><body class="ie7 lt-ie8 lt-ie9 lt-ie10"><![endif]-->
   <!--[if IE 8]><body class="ie8 lt-ie9 lt-ie10"><![endif]-->
   <!--[if IE 9]><body class="ie9 lt-ie10"><![endif]-->
@@ -133,10 +139,16 @@
                 </ul>
           </div>
           <div class="navigation__column right">
-            <form class="ps-search--header" action="do_action" method="post">
-              <input class="form-control" type="text" placeholder="Search Product…">
-              <button><i class="ps-icon-search"></i></button>
-            </form>
+            <?php 
+              if($title == "ສິນຄ້າ"){
+                ?>
+                <form class="ps-search--header" action="do_action" method="post">
+                  <input class="form-control" id="search" type="text" placeholder="Search Product…">
+                  <button><i class="ps-icon-search"></i></button>
+                </form>
+                <?php
+              }
+            ?>
             <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
               <div class="ps-cart__listing">
                 <div class="ps-cart__content">

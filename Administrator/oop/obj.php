@@ -447,10 +447,22 @@ class obj{
         global $conn; //ດຶງຕົວປ່ຽນພາຍນອກ class ມາໃຊ້
         $resultproduct = mysqli_query($conn,"call select_product('$search');"); 
     }
+    public static function select_check_product_limit($page){
+        // method ຂອງການດຶງຂໍ້ມູນຕຳແໜ່ງມາສະແດງ
+        global $resultproduct_limit;//ຕັ້ງໂຕປ່ຽນຢູ່ພາຍໃນ class ເອົາໄປໃຊ້ນອກ class
+        global $conn; //ດຶງຕົວປ່ຽນພາຍນອກ class ມາໃຊ້
+        $resultproduct_limit = mysqli_query($conn,"call select_check_product_limit('$page');"); 
+    }
+    public static function select_check_product(){
+        // method ຂອງການດຶງຂໍ້ມູນຕຳແໜ່ງມາສະແດງ
+        global $resultproduct;//ຕັ້ງໂຕປ່ຽນຢູ່ພາຍໃນ class ເອົາໄປໃຊ້ນອກ class
+        global $conn; //ດຶງຕົວປ່ຽນພາຍນອກ class ມາໃຊ້
+        $resultproduct = mysqli_query($conn,"call select_check_product();"); 
+    }
     public static function insert_product($pro_id,$pro_name,$qty,$price,$cate_id,$unit_id,$brand_id,$size_id,$qty_alert,$img){
         global $conn;
         global $path;
-        $check_pro_id = mysqli_query($conn,"select * from prodcut where pro_id='$pro_id'");
+        $check_pro_id = mysqli_query($conn,"select * from product where pro_id='$pro_id'");
         if(mysqli_num_rows($check_pro_id) > 0){
             echo"<script>";
             echo"window.location.href='Product?proid=same';";
@@ -793,6 +805,536 @@ class obj{
             echo"window.location.href='Account?del2=success';";
             echo"</script>";
         }
+    }
+    public static function get_order(){
+        global $conn;
+        global $order;
+        $order = "";
+        $result_order = mysqli_query($conn,"call get_order();");
+        if(mysqli_num_rows($result_order) > 0){
+            $row_order = mysqli_fetch_array($result_order, MYSQLI_ASSOC);
+            $order = (int)$row_order['order_id'] + 1;
+            $order = sprintf("%06s",$order);
+        }
+        else{
+            $order = "000001";
+        }
+        mysqli_free_result($result_order);  
+        mysqli_next_result($conn);
+    }
+    public static function select_order_cookie(){
+        global $cart_data;
+        if(isset($_COOKIE['list_order'])){//ຕອນໂຫຼດກວດສອບວ່າຄຸກກີ້ມີຄ່າວ່າງຫຼືບໍ່
+            $cookie_data = $_COOKIE['list_order'];//ຕັ້ງຄຸກກີ້ໃຫ້ເປັນ string
+            $cart_data = json_decode($cookie_data, true);// ຕັ້ງຄຸກກີ້ໃຫ້ເປັນຮູບແບບ json
+        }
+    }
+    public static function cookie_order($pro_id,$qty,$price){
+        global $conn;
+        $check_product = mysqli_query($conn,"select * from product where pro_id='$pro_id';");
+        if(mysqli_num_rows($check_product) > 0){
+            if(isset($_COOKIE['list_order'])){//ກວດສອບວ່າຄຸກກີ້ distribute_list ນັ້ນມີຄ່າຫຼືບໍ່
+                $cookie_data = $_COOKIE['list_order'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+                $cart_data = json_decode($cookie_data, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
+            }
+            else{
+                $cart_data = array();//ຖ້າຄຸກກີ້ບໍ່ມີຄ່າຂໍ້ມູນແລ້ວຕັ້ງໂຕປ່ຽນໃຫ້ເປັນອາເລ
+            }
+            $item_id_list = array_column($cart_data,'pro_id');//ຕັ້ງຄ່າ serial ໃຫ້ມີຄ່າເທົ່າກັບ array $cart_data['code']
+            if(in_array($pro_id,$item_id_list)){//ຖ້າວ່າໄອດີທີ່ປ້ອນມາທາງຄີບອດຕົງກັນກັບໄອດີທີ່ຢູ່ໃນ Array Cart_data ໃຫ້ເຮັດວຽກຈຸດນີ້
+                foreach($cart_data as $keys => $values){//Loop ຂໍ້ມູນ cart_data ອອກມາເພື່ອຊອກຫາໄອດີທີ່ປ້ອນເຂົ້າມາກັບໄອດີທີ່ຢູ່ໃນ cart_data ທີ່ຕົງກັນ
+                    if($cart_data[$keys]["pro_id"] == $pro_id){//ຖ້າຫາກວ່າຊອກຫາໄອດີທີຕົງກັນໄດ້ແລ້ວແມ່ນເຮັດວຽກດັ່ງນີ້
+                        $cart_data[$keys]["qty"] = $cart_data[$keys]["qty"] + $qty;//ປັບໃຫ້ຈຳນວນຂອງ array cart_data ບວກໃຫ້ກັບຈຳນວນທີ່ປ້ອນເຂົ້າມາ
+                    }
+                }
+                echo"<script>";
+                echo"window.location.href='Order';";
+                echo"</script>";
+            }
+            else{ // ຖ້າວ່າໄອດີບໍ່ຕົງກັນໃຫ້ເພີ່ມຂໍ້ມູນເຂົ້າໃນຄຸກກີ້
+                $getin = mysqli_query($conn,"SELECT pro_id,pro_name,qty,price,p.cate_id,cate_name,p.unit_id,unit_name,p.brand_id,brand_name,p.size_id,size_name,qty_alert,img FROM product p LEFT JOIN category c ON p.cate_id=c.cate_id LEFT JOIN unit u ON p.unit_id=u.unit_id LEFT JOIN brand b ON p.brand_id=b.brand_id LEFT JOIN size s ON p.size_id=s.size_id WHERE pro_id = '$pro_id';");
+                $get_info = mysqli_fetch_array($getin,MYSQLI_ASSOC);
+                $pro_name = $get_info['pro_name'];
+                $cate_name = $get_info['cate_name'];
+                $unit_name = $get_info['unit_name'];
+                $brand_name = $get_info['brand_name'];
+                $size_name = $get_info['size_name'];
+                $img = $get_info['img'];
+                $item_array = [//ເພີ່ມຂໍ້ມູນທີ່ຮັບມາຈາກຄີບອດເຂົ້າໄວ້ໃນຕົວປ່ຽນອາເລ $item_array
+                    "pro_id" => $pro_id,
+                    "img" => $img,
+                    "pro_name" => $pro_name,
+                    "unit_name" => $unit_name,
+                    "cate_name" => $cate_name,
+                    "brand_name" => $brand_name,
+                    "size_name" => $size_name,
+                    "qty" => $qty,
+                    "price" => $price
+                ];
+                $cart_data[] = $item_array;//ເພີ່ມຂໍ້ມູນຈາກ $item_array ເຂົ້າໄປໃນ $cart_data
+            }
+            $item_data ="";
+            $item_data = json_encode($cart_data);//ປັບ item_data ໃຫ້ມັນສິ້ນສຸດການຮັບຂໍ້ມູນຈາກ $cart_data
+            setcookie('list_order',$item_data,time() + (86400 * 30));//ຕັ້ງຄ່າເວລາຄຸກກີ້
+            echo"<script>";
+            echo"window.location.href='Order';";
+            echo"</script>";
+        
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Order?product=null';";
+            echo"</script>";
+        }
+            
+        
+    }
+    public static function clear_order(){
+        setcookie("list_order","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
+        echo"<script>";
+        echo"window.location.href='Order';";
+        echo"</script>";
+    }
+    public static function del_order($pro_id){
+        $cookie_data = $_COOKIE['list_order'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+        $cart_data = json_decode($cookie_data, true);//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນອາເລໃນຮູບແບບ json
+        foreach($cart_data as $keys => $values){//ຊອກຫາຄ່າໄອດີຢູ່ໃນອາເລ
+            if($cart_data[$keys]['pro_id'] == $pro_id){//ຖ້າໄອດີຕົງກັນໃຫ້ລົບຂໍ້ມູນ
+                unset($cart_data[$keys]);//ລົບຂໍ້ມູນຢູ່ຄຸກກີ້ໝົດແຖວທີ່ມີໄອດີຕົງກັນ
+                $item_data = json_encode($cart_data);//ໃຫ້ຈົບການສ້າງອາເລໃນຮູບແບບ json
+                setcookie('list_order',$item_data,time() + (86400 * 30));//ຕັ້ງເວລາຄຸກກີ້
+                foreach($cart_data as $keys => $values){}
+                if(!$cart_data[$keys]){
+                    setcookie("list_order","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
+                }
+                echo"<script>";
+                echo"window.location.href='Order';";
+                echo"</script>";
+            }
+        }
+    }
+    public static function save_order($order_id,$emp_id,$sup_id){
+        global $conn;
+        if(isset($_COOKIE['list_order'])){//ກວດສອບວ່າຄຸກກີ້ order ນັ້ນມີຄ່າຫຼືບໍ່
+            $result = mysqli_query($conn,"call insert_order('$order_id','$emp_id','$sup_id')");
+            // mysqli_free_result($result);  
+            // mysqli_next_result($conn);
+            if(!$result){
+                echo"<script>";
+                echo"window.location.href='Order?save=fail';";
+                echo"</script>";
+            }
+            else{
+                $cookie_data = $_COOKIE['list_order'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+                $cart_data = json_decode($cookie_data, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
+                foreach($cart_data as $data){
+                    $pro_id = $data['pro_id'];
+                    $qty = $data['qty'];
+                    $price = $data['price'];
+                    $result2 = mysqli_query($conn,"call insert_order_detail('$pro_id','$qty','$price','$order_id')");
+                    // mysqli_free_result($result2);  
+                    // mysqli_next_result($conn);
+                }
+                if(!$result2){
+                    echo"<script>";
+                    echo"window.location.href='Order?save=fail';";
+                    echo"</script>";
+                }
+                else{
+                    setcookie("list_order","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
+                    echo"<script>";
+                    echo"window.location.href='Order?save2=success';";
+                    echo"</script>";
+                }
+            }
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Order?list=null';";
+            echo"</script>";
+        }
+    }
+    public static function cookie_import($pro_id,$qty,$price,$remark){
+        global $conn;
+        $check_product = mysqli_query($conn,"select * from product where pro_id='$pro_id';");
+        if(mysqli_num_rows($check_product) > 0){
+            if(isset($_COOKIE['list_import'])){//ກວດສອບວ່າຄຸກກີ້ distribute_list ນັ້ນມີຄ່າຫຼືບໍ່
+                $cookie_data = $_COOKIE['list_import'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+                $cart_data = json_decode($cookie_data, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
+            }
+            else{
+                $cart_data = array();//ຖ້າຄຸກກີ້ບໍ່ມີຄ່າຂໍ້ມູນແລ້ວຕັ້ງໂຕປ່ຽນໃຫ້ເປັນອາເລ
+            }
+            $item_id_list = array_column($cart_data,'pro_id');//ຕັ້ງຄ່າ serial ໃຫ້ມີຄ່າເທົ່າກັບ array $cart_data['code']
+            if(in_array($pro_id,$item_id_list)){//ຖ້າວ່າໄອດີທີ່ປ້ອນມາທາງຄີບອດຕົງກັນກັບໄອດີທີ່ຢູ່ໃນ Array Cart_data ໃຫ້ເຮັດວຽກຈຸດນີ້
+                foreach($cart_data as $keys => $values){//Loop ຂໍ້ມູນ cart_data ອອກມາເພື່ອຊອກຫາໄອດີທີ່ປ້ອນເຂົ້າມາກັບໄອດີທີ່ຢູ່ໃນ cart_data ທີ່ຕົງກັນ
+                    if($cart_data[$keys]["pro_id"] == $pro_id){//ຖ້າຫາກວ່າຊອກຫາໄອດີທີຕົງກັນໄດ້ແລ້ວແມ່ນເຮັດວຽກດັ່ງນີ້
+                        $cart_data[$keys]["qty"] = $cart_data[$keys]["qty"] + $qty;//ປັບໃຫ້ຈຳນວນຂອງ array cart_data ບວກໃຫ້ກັບຈຳນວນທີ່ປ້ອນເຂົ້າມາ
+                    }
+                }
+            }
+            else{ // ຖ້າວ່າໄອດີບໍ່ຕົງກັນໃຫ້ເພີ່ມຂໍ້ມູນເຂົ້າໃນຄຸກກີ້
+                $getin = mysqli_query($conn,"SELECT pro_id,pro_name,qty,price,p.cate_id,cate_name,p.unit_id,unit_name,p.brand_id,brand_name,p.size_id,size_name,qty_alert,img FROM product p LEFT JOIN category c ON p.cate_id=c.cate_id LEFT JOIN unit u ON p.unit_id=u.unit_id LEFT JOIN brand b ON p.brand_id=b.brand_id LEFT JOIN size s ON p.size_id=s.size_id WHERE pro_id = '$pro_id';");
+                $get_info = mysqli_fetch_array($getin,MYSQLI_ASSOC);
+                $pro_name = $get_info['pro_name'];
+                $cate_name = $get_info['cate_name'];
+                $unit_name = $get_info['unit_name'];
+                $brand_name = $get_info['brand_name'];
+                $size_name = $get_info['size_name'];
+                $img = $get_info['img'];
+                $item_array = [//ເພີ່ມຂໍ້ມູນທີ່ຮັບມາຈາກຄີບອດເຂົ້າໄວ້ໃນຕົວປ່ຽນອາເລ $item_array
+                    "pro_id" => $pro_id,
+                    "img" => $img,
+                    "pro_name" => $pro_name,
+                    "unit_name" => $unit_name,
+                    "cate_name" => $cate_name,
+                    "brand_name" => $brand_name,
+                    "size_name" => $size_name,
+                    "qty" => $qty,
+                    "price" => $price,
+                    "remark" => $remark
+                ];
+                $cart_data[] = $item_array;//ເພີ່ມຂໍ້ມູນຈາກ $item_array ເຂົ້າໄປໃນ $cart_data
+            }
+            $item_data ="";
+            $item_data = json_encode($cart_data);//ປັບ item_data ໃຫ້ມັນສິ້ນສຸດການຮັບຂໍ້ມູນຈາກ $cart_data
+            setcookie('list_import',$item_data,time() + (86400 * 30));//ຕັ້ງຄ່າເວລາຄຸກກີ້
+            echo"<script>";
+            echo"window.location.href='Import';";
+            echo"</script>";
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Import?product=null';";
+            echo"</script>";
+        }
+ 
+    }
+    public static function select_import_cookie(){
+        global $cart_data;
+        if(isset($_COOKIE['list_import'])){//ຕອນໂຫຼດກວດສອບວ່າຄຸກກີ້ມີຄ່າວ່າງຫຼືບໍ່
+            $cookie_data = $_COOKIE['list_import'];//ຕັ້ງຄຸກກີ້ໃຫ້ເປັນ string
+            $cart_data = json_decode($cookie_data, true);// ຕັ້ງຄຸກກີ້ໃຫ້ເປັນຮູບແບບ json
+        }
+    }
+    public static function clear_import(){
+        setcookie("list_import","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
+        echo"<script>";
+        echo"window.location.href='Import';";
+        echo"</script>";
+    }
+    public static function del_import($pro_id){
+        $cookie_data = $_COOKIE['list_import'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+        $cart_data = json_decode($cookie_data, true);//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນອາເລໃນຮູບແບບ json
+        foreach($cart_data as $keys => $values){//ຊອກຫາຄ່າໄອດີຢູ່ໃນອາເລ
+            if($cart_data[$keys]['pro_id'] == $pro_id){//ຖ້າໄອດີຕົງກັນໃຫ້ລົບຂໍ້ມູນ
+                unset($cart_data[$keys]);//ລົບຂໍ້ມູນຢູ່ຄຸກກີ້ໝົດແຖວທີ່ມີໄອດີຕົງກັນ
+                $item_data = json_encode($cart_data);//ໃຫ້ຈົບການສ້າງອາເລໃນຮູບແບບ json
+                setcookie('list_import',$item_data,time() + (86400 * 30));//ຕັ້ງເວລາຄຸກກີ້
+                foreach($cart_data as $keys => $values){}
+                if(!$cart_data[$keys]){
+                    setcookie("list_import","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
+                }
+                echo"<script>";
+                echo"window.location.href='Import';";
+                echo"</script>";
+            }
+        }
+    }
+    public static function save_import($order_id,$emp_id,$sup_id,$import_no){
+        global $conn;
+        $check_order = mysqli_query($conn,"select * from orders where order_id='$order_id'");
+        if(mysqli_num_rows($check_order) > 0){
+            if(isset($_COOKIE['list_import'])){//ກວດສອບວ່າຄຸກກີ້ order ນັ້ນມີຄ່າຫຼືບໍ່
+                $cookie_data = $_COOKIE['list_import'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+                $cart_data = json_decode($cookie_data, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
+                foreach($cart_data as $data){
+                    $pro_id = $data['pro_id'];
+                    $qty = $data['qty'];
+                    $price = $data['price'];
+                    $remark = $data['remark'];
+                    // (imp_bill,order_id,sup_id,emp_id,pro_id,qty,price,remark)
+                    $result2 = mysqli_query($conn,"call insert_import('$import_no','$order_id','$sup_id','$emp_id','$pro_id','$qty','$price','$remark')");
+                    mysqli_free_result($result2);  
+                    mysqli_next_result($conn);
+                    $update_product = mysqli_query($conn,"update product set qty=qty+'$qty' where pro_id='$pro_id'");
+                }
+                if(!$result2){
+                    echo"<script>";
+                    echo"window.location.href='Import?save=fail';";
+                    echo"</script>";
+                }
+                else{
+                    setcookie("list_import","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
+                    echo"<script>";
+                    echo"window.location.href='Import?save2=success';";
+                    echo"</script>";
+                }
+            
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Import?list=null';";
+            echo"</script>";
+        }
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Import?order=wrong';";
+            echo"</script>";
+        }
+        
+    }
+    public static function select_broke($search){
+        // method ຂອງການດຶງຂໍ້ມູນຕຳແໜ່ງມາສະແດງ
+        global $resultbroke;//ຕັ້ງໂຕປ່ຽນຢູ່ພາຍໃນ class ເອົາໄປໃຊ້ນອກ class
+        global $conn; //ດຶງຕົວປ່ຽນພາຍນອກ class ມາໃຊ້
+        $resultbroke = mysqli_query($conn,"call select_broke('$search');"); 
+    }
+    public static function select_broke_limit($search,$page){
+        // method ຂອງການດຶງຂໍ້ມູນຕຳແໜ່ງມາສະແດງ
+        global $resultbroke_limit;//ຕັ້ງໂຕປ່ຽນຢູ່ພາຍໃນ class ເອົາໄປໃຊ້ນອກ class
+        global $conn; //ດຶງຕົວປ່ຽນພາຍນອກ class ມາໃຊ້
+        $resultbroke_limit = mysqli_query($conn,"call select_broke_limit('$search','$page');"); 
+    }
+    public static function insert_broke($pro_id,$qty,$remark){
+        global $conn;
+        $check_product = mysqli_query($conn,"select * from product where pro_id='$pro_id'");
+        if(mysqli_num_rows($check_product) > 0){
+            $row = mysqli_fetch_array($check_product,MYSQLI_ASSOC);
+            $price = $row["price"];
+            $result = mysqli_query($conn,"call insert_broke('$pro_id','$qty','$price','$remark');");
+            if(!$result){
+                echo"<script>";
+                echo"window.location.href='Broke?save=fail';";
+                echo"</script>";
+            }
+            else{
+                echo"<script>";
+                echo"window.location.href='Broke?save2=success';";
+                echo"</script>";
+            }
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Broke?product=null';";
+            echo"</script>";
+        }
+    }
+    public static function update_broke($broke_id,$qty,$remark){
+        global $conn;
+        $result = mysqli_query($conn,"call update_broke('$broke_id','$qty','$remark')");
+        if(!$result){
+            echo"<script>";
+            echo"window.location.href='Broke?update=fail';";
+            echo"</script>";
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Broke?update2=success';";
+            echo"</script>";
+        }
+    }
+    public static function del_broke($broke_id){
+        global $conn;
+        $result = mysqli_query($conn,"call del_broke('$broke_id')");
+        if(!$result){
+            echo"<script>";
+            echo"window.location.href='Broke?del=fail';";
+            echo"</script>";
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Broke?del2=success';";
+            echo"</script>";
+        }
+    }
+    public static function select_sell_cookie(){
+        global $cart_data;
+        if(isset($_COOKIE['list_sell'])){//ຕອນໂຫຼດກວດສອບວ່າຄຸກກີ້ມີຄ່າວ່າງຫຼືບໍ່
+            $cookie_data = $_COOKIE['list_sell'];//ຕັ້ງຄຸກກີ້ໃຫ້ເປັນ string
+            $cart_data = json_decode($cookie_data, true);// ຕັ້ງຄຸກກີ້ໃຫ້ເປັນຮູບແບບ json
+        }
+    }
+    public static function cookie_sell($pro_id,$qty){
+        global $conn;
+        if($qty == ""){
+            $qty = 1;
+        }
+        $check_product = mysqli_query($conn,"select * from product where pro_id='$pro_id';");
+        if(mysqli_num_rows($check_product) > 0){
+            if(isset($_COOKIE['list_sell'])){//ກວດສອບວ່າຄຸກກີ້ distribute_list ນັ້ນມີຄ່າຫຼືບໍ່
+                $cookie_data = $_COOKIE['list_sell'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+                $cart_data = json_decode($cookie_data, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
+            }
+            else{
+                $cart_data = array();//ຖ້າຄຸກກີ້ບໍ່ມີຄ່າຂໍ້ມູນແລ້ວຕັ້ງໂຕປ່ຽນໃຫ້ເປັນອາເລ
+            }
+            $item_id_list = array_column($cart_data,'pro_id');//ຕັ້ງຄ່າ serial ໃຫ້ມີຄ່າເທົ່າກັບ array $cart_data['code']
+            if(in_array($pro_id,$item_id_list)){//ຖ້າວ່າໄອດີທີ່ປ້ອນມາທາງຄີບອດຕົງກັນກັບໄອດີທີ່ຢູ່ໃນ Array Cart_data ໃຫ້ເຮັດວຽກຈຸດນີ້
+                foreach($cart_data as $keys => $values){//Loop ຂໍ້ມູນ cart_data ອອກມາເພື່ອຊອກຫາໄອດີທີ່ປ້ອນເຂົ້າມາກັບໄອດີທີ່ຢູ່ໃນ cart_data ທີ່ຕົງກັນ
+                    if($cart_data[$keys]["pro_id"] == $pro_id){//ຖ້າຫາກວ່າຊອກຫາໄອດີທີຕົງກັນໄດ້ແລ້ວແມ່ນເຮັດວຽກດັ່ງນີ້
+                        $new_qty = $cart_data[$keys]["qty"] + $qty;//ປັບໃຫ້ຈຳນວນຂອງ array cart_data ບວກໃຫ້ກັບຈຳນວນທີ່ປ້ອນເຂົ້າມາ
+                    }
+                }
+                $check_qty = mysqli_fetch_array($check_product,MYSQLI_ASSOC);
+                if($check_qty["qty"] < $new_qty){
+                    echo"<script>";
+                    echo"window.location.href='Sell?stock=orver';";
+                    echo"</script>";
+                }
+                else{
+                    $item_id_list2 = array_column($cart_data,'pro_id');//
+                    if(in_array($pro_id,$item_id_list2)){//ຖ້າວ່າໄອດີທີ່ປ້ອນມາທາງຄີບອດຕົງກັນກັບໄອດີທີ່ຢູ່ໃນ Array Cart_data ໃຫ້ເຮັດວຽກຈຸດນີ້
+                        foreach($cart_data as $keys2 => $values2){//Loop ຂໍ້ມູນ cart_data ອອກມາເພື່ອຊອກຫາໄອດີທີ່ປ້ອນເຂົ້າມາກັບໄອດີທີ່ຢູ່ໃນ cart_data ທີ່ຕົງກັນ
+                            if($cart_data[$keys2]["pro_id"] == $pro_id){//ຖ້າຫາກວ່າຊອກຫາໄອດີທີຕົງກັນໄດ້ແລ້ວແມ່ນເຮັດວຽກດັ່ງນີ້
+                                $cart_data[$keys2]["qty"] = $cart_data[$keys2]["qty"] + $qty;//ປັບໃຫ້ຈຳນວນຂອງ array cart_data ບວກໃຫ້ກັບຈຳນວນທີ່ປ້ອນເຂົ້າມາ
+                            }
+                        }
+                        echo"<script>";
+                        echo"window.location.href='Sell';";
+                        echo"</script>";
+                    }
+                }
+            }
+
+            else{ // ຖ້າວ່າໄອດີບໍ່ຕົງກັນໃຫ້ເພີ່ມຂໍ້ມູນເຂົ້າໃນຄຸກກີ້
+                $getin = mysqli_query($conn,"SELECT pro_id,pro_name,qty,price,p.cate_id,cate_name,p.unit_id,unit_name,p.brand_id,brand_name,p.size_id,size_name,qty_alert,img FROM product p LEFT JOIN category c ON p.cate_id=c.cate_id LEFT JOIN unit u ON p.unit_id=u.unit_id LEFT JOIN brand b ON p.brand_id=b.brand_id LEFT JOIN size s ON p.size_id=s.size_id WHERE pro_id = '$pro_id';");
+                $get_info = mysqli_fetch_array($getin,MYSQLI_ASSOC);
+                $pro_name = $get_info['pro_name'];
+                $price = $get_info['price'];
+                $cate_name = $get_info['cate_name'];
+                $unit_name = $get_info['unit_name'];
+                $brand_name = $get_info['brand_name'];
+                $size_name = $get_info['size_name'];
+                $img = $get_info['img'];
+                $item_array = [//ເພີ່ມຂໍ້ມູນທີ່ຮັບມາຈາກຄີບອດເຂົ້າໄວ້ໃນຕົວປ່ຽນອາເລ $item_array
+                    "pro_id" => $pro_id,
+                    "img" => $img,
+                    "pro_name" => $pro_name,
+                    "unit_name" => $unit_name,
+                    "cate_name" => $cate_name,
+                    "brand_name" => $brand_name,
+                    "size_name" => $size_name,
+                    "qty" => $qty,
+                    "price" => $price
+                ];
+                $cart_data[] = $item_array;//ເພີ່ມຂໍ້ມູນຈາກ $item_array ເຂົ້າໄປໃນ $cart_data
+            }
+            $item_data ="";
+            $item_data = json_encode($cart_data);//ປັບ item_data ໃຫ້ມັນສິ້ນສຸດການຮັບຂໍ້ມູນຈາກ $cart_data
+            setcookie('list_sell',$item_data,time() + (86400 * 30));//ຕັ້ງຄ່າເວລາຄຸກກີ້
+            echo"<script>";
+            echo"window.location.href='Sell';";
+            echo"</script>";
+        
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Sell?product=null';";
+            echo"</script>";
+        }
+    }
+    public static function del_sell($pro_id){
+        $cookie_data = $_COOKIE['list_sell'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+        $cart_data = json_decode($cookie_data, true);//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນອາເລໃນຮູບແບບ json
+        foreach($cart_data as $keys => $values){//ຊອກຫາຄ່າໄອດີຢູ່ໃນອາເລ
+            if($cart_data[$keys]['pro_id'] == $pro_id){//ຖ້າໄອດີຕົງກັນໃຫ້ລົບຂໍ້ມູນ
+                unset($cart_data[$keys]);//ລົບຂໍ້ມູນຢູ່ຄຸກກີ້ໝົດແຖວທີ່ມີໄອດີຕົງກັນ
+                $item_data = json_encode($cart_data);//ໃຫ້ຈົບການສ້າງອາເລໃນຮູບແບບ json
+                setcookie('list_sell',$item_data,time() + (86400 * 30));//ຕັ້ງເວລາຄຸກກີ້
+                foreach($cart_data as $keys => $values){}
+                if(!$cart_data[$keys]){
+                    setcookie("list_sell","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
+                }
+                echo"<script>";
+                echo"window.location.href='Sell';";
+                echo"</script>";
+            }
+        }
+    }
+    public static function get_sell(){
+        global $conn;
+        global $sell;
+        $sell = "";
+        $result_sell = mysqli_query($conn,"call get_sell();");
+        if(mysqli_num_rows($result_sell) > 0){
+            $row_sell = mysqli_fetch_array($result_sell, MYSQLI_ASSOC);
+            $sell = (int)$row_sell['sell_id'] + 1;
+            $sell = sprintf("%06s",$sell);
+        }
+        else{
+            $sell = "000001";
+        }
+        mysqli_free_result($result_sell);  
+        mysqli_next_result($conn);
+    }
+    public static function save_sell($sell_id,$emp_id,$cus_id,$stt_id,$type_pay,$sell_type,$img,$getmoney){
+        global $conn;
+        global $path;
+        if(isset($_COOKIE['list_sell'])){//ກວດສອບວ່າຄຸກກີ້ order ນັ້ນມີຄ່າຫຼືບໍ່
+            if($img == ""){
+                $Pro_image = "";
+            }
+            else{
+                $ext = pathinfo(basename($_FILES['img']['name']), PATHINFO_EXTENSION);
+                $new_image_name = 'Mix_'.uniqid().".".$ext;
+                $image_path = $path.'image/';
+                $upload_path = $image_path.$new_image_name;
+                move_uploaded_file($_FILES['img']['tmp_name'], $upload_path);
+                $Pro_image = $new_image_name;
+            }
+            if($getmoney == ""){
+                $getmoney = 0;
+            }
+            $result = mysqli_query($conn,"call insert_sell('$sell_id','$emp_id','$cus_id','$stt_id','$type_pay','$sell_type','$Pro_image','1','1','$getmoney')");
+            // mysqli_free_result($result);  
+            // mysqli_next_result($conn);
+            if(!$result){
+                echo"<script>";
+                echo"window.location.href='Sell?save=fail';";
+                echo"</script>";
+            }
+            else{
+                $cookie_data = $_COOKIE['list_sell'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+                $cart_data = json_decode($cookie_data, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
+                foreach($cart_data as $data){
+                    $pro_id = $data['pro_id'];
+                    $qty = $data['qty'];
+                    $price = $data['price'];
+                    $result2 = mysqli_query($conn,"call insert_selldetail('$pro_id','$qty','$price','$sell_id')");
+                    mysqli_free_result($result2);  
+                    mysqli_next_result($conn);
+                    $update_stokc = mysqli_query($conn,"update product set qty=qty-'$qty' where pro_id='$pro_id'");
+                }
+                if(!$result2){
+                    echo"<script>";
+                    echo"window.location.href='Sell?save=fail';";
+                    echo"</script>";
+                }
+                else{
+                    setcookie("list_sell","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
+                    echo"<script>";
+                    echo"window.location.href='Bill?billno=$sell_id';";
+                    echo"</script>";
+                }
+            }
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Sell?list=null';";
+            echo"</script>";
+        }
+    }
+    public static function bill($bill){
+        global $conn;
+        global $result_bill;
+        $result_bill = mysqli_query($conn,"call select_bill('$bill')");
+    }
+    public static function billdetail($bill){
+        global $conn;
+        global $result_billdetail;
+        $result_billdetail = mysqli_query($conn,"call select_billdetail('$bill')");
     }
 }
 $obj = new obj();

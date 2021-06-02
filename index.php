@@ -1,5 +1,6 @@
 <?php 
   $title = "ໜ້າຫຼັກ";
+  $path = "";
   include ('header-footer/header.php');
 ?>
     <main class="ps-main">
@@ -50,159 +51,67 @@
           <div class="ps-section__header mb-50">
             <h3 class="ps-section__title" data-mask="ລັກສະນະສິນຄ້າ">- ລັກສະນະສິນຄ້າ</h3>
             <ul class="ps-masonry__filter">
-              <li class="current"><a href="#" data-filter="*">ທັງໝົດ <sup>8</sup></a></li>
-              <li><a href="#" data-filter=".nike">Nike <sup>1</sup></a></li>
+              <?php
+                $all_num_product = mysqli_query($conn,"select count(*) as all_product from product;");
+                $row_all = mysqli_fetch_array($all_num_product,MYSQLI_ASSOC);
+              ?>
+              <li class="current"><a href="#" data-filter="*">ທັງໝົດ <sup><?php echo $row_all["all_product"] ?></sup></a></li>
+              <?php
+                $brand = mysqli_query($conn,"SELECT p.brand_id,brand_name,COUNT(p.brand_id) as num_pro FROM product p LEFT JOIN brand b ON p.brand_id=b.brand_id GROUP BY b.brand_id;");
+                foreach($brand as $row_brand){
+                  ?>
+                     <li><a href="#" data-filter=".<?php echo $row_brand["brand_name"] ?> "><?php echo $row_brand["brand_name"] ?> <sup><?php echo $row_brand["num_pro"] ?></sup></a></li>
+                  <?php
+                }
+                mysqli_free_result($brand);  
+                mysqli_next_result($conn);
+              ?>
+              <!-- <li><a href="#" data-filter=".nike">Nike <sup>1</sup></a></li>
               <li><a href="#" data-filter=".adidas">Adidas <sup>1</sup></a></li>
               <li><a href="#" data-filter=".men">Men <sup>1</sup></a></li>
               <li><a href="#" data-filter=".women">Women <sup>1</sup></a></li>
-              <li><a href="#" data-filter=".kids">Kids <sup>4</sup></a></li>
+              <li><a href="#" data-filter=".kids">Kids <sup>4</sup></a></li> -->
             </ul>
           </div>
           <div class="ps-section__content pb-50">
             <div class="masonry-wrapper" data-col-md="4" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
               <div class="ps-masonry">
                 <div class="grid-sizer"></div>
-                <div class="grid-item kids">
+                <?php
+                  $result_product = mysqli_query($conn,"call select_product('%%');");
+                  foreach($result_product as $row_product){
+                ?>
+                <div class="grid-item <?php echo $row_product["brand_name"] ?>">
                   <div class="grid-item__content-wrapper">
                     <div class="ps-shoe mb-30">
-                      <div class="ps-shoe__thumbnail">
-                        <div class="ps-badge"><span>New</span></div>
-                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
+                      <div class="ps-shoe__thumbnail"><img src="Administrator/image/<?php echo $row_product["img"] ?>" alt=""><a class="ps-shoe__overlay" href="Productdetail?id=<?php echo $row_product["pro_id"] ?>"></a>
                       </div>
                       <div class="ps-shoe__content">
                         <div class="ps-shoe__variants">
-                          <div class="ps-shoe__variant normal"><img src="Administrator/image/product.jpeg" alt=""><img src="Administrator/image/product.jpeg" alt=""><img src="Administrator/image/product.jpeg" alt=""><img src="Administrator/image/product.jpeg" alt=""></div>
+                          <div class="ps-shoe__variant normal">
+                            <img src="Administrator/image/<?php echo $row_product["img"] ?>" alt="">
                         </div>
-                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">Air Jordan 7 Retro</a>
-                          <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price">
-                            25,000 ກີບ</span>
+                        </div>
+                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#"><?php echo $row_product["pro_name"] ?></a>
+                          <p class="ps-shoe__categories"><a href="#"><?php echo $row_product["cate_name"] ?></a>,<a href="#"><?php echo $row_product["brand_name"] ?>,<a href="#"><?php echo $row_product["size_name"] ?></a></p><span class="ps-shoe__price"> <?php echo number_format($row_product["price"],2) ?> ກີບ</span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="grid-item nike">
-                  <div class="grid-item__content-wrapper">
-                    <div class="ps-shoe mb-30">
-                      <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product2.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                      </div>
-                      <div class="ps-shoe__content">
-                        <div class="ps-shoe__variants">
-                          <div class="ps-shoe__variant normal"><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""></div>
-                        </div>
-                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">Air Jordan 7 Retro</a>
-                          <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 30,000 ກີບ</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="grid-item adidas">
-                  <div class="grid-item__content-wrapper">
-                    <div class="ps-shoe mb-30">
-                      <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product3.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                      </div>
-                      <div class="ps-shoe__content">
-                        <div class="ps-shoe__variants">
-                          <div class="ps-shoe__variant normal"><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""></div>
-                        </div>
-                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">Air Jordan 7 Retro</a>
-                          <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 35,000 ກີບ</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="grid-item kids">
-                  <div class="grid-item__content-wrapper">
-                    <div class="ps-shoe mb-30">
-                      <div class="ps-shoe__thumbnail">
-                        <div class="ps-badge ps-badge--sale"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product5.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                      </div>
-                      <div class="ps-shoe__content">
-                        <div class="ps-shoe__variants">
-                          <div class="ps-shoe__variant normal"><img src="Administrator/image/product5.jpeg" alt=""><img src="Administrator/image/product5.jpeg" alt=""><img src="Administrator/image/product5.jpeg" alt=""><img src="Administrator/image/product5.jpeg" alt=""></div>
-                        </div>
-                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">Air Jordan 7 Retro</a>
-                          <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price">
-                            39,000 ກີບ</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="grid-item men">
-                  <div class="grid-item__content-wrapper">
-                    <div class="ps-shoe mb-30">
-                      <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product4.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                      </div>
-                      <div class="ps-shoe__content">
-                        <div class="ps-shoe__variants">
-                          <div class="ps-shoe__variant normal"><img src="Administrator/image/product4.jpeg" alt=""><img src="Administrator/image/product4.jpeg" alt=""><img src="iAdministrator/image/product4.jpeg" alt=""><img src="Administrator/image/product4.jpeg" alt=""></div>
-                        </div>
-                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">Air Jordan 7 Retro</a>
-                          <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span class="ps-shoe__price"> 15,000 ກີບ</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="grid-item women">
-                  <div class="grid-item__content-wrapper">
-                    <div class="ps-shoe mb-30">
-                      <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product6.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                      </div>
-                      <div class="ps-shoe__content">
-                        <div class="ps-shoe__variants">
-                          <div class="ps-shoe__variant normal"><img src="Administrator/image/product6.jpeg" alt=""><img src="Administrator/image/product6.jpeg" alt=""><img src="Administrator/image/product6.jpeg" alt=""><img src="Administrator/image/product6.jpeg" alt=""></div>
-                        </div>
-                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">Air Jordan 7 Retro</a>
-                          <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price">59,000 ກີບ</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="grid-item kids">
-                  <div class="grid-item__content-wrapper">
-                    <div class="ps-shoe mb-30">
-                      <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                      </div>
-                      <div class="ps-shoe__content">
-                        <div class="ps-shoe__variants">
-                          <div class="ps-shoe__variant normal"><img src="Administrator/image/product.jpeg" alt=""><img src="Administrator/image/product.jpeg" alt=""><img src="Administrator/image/product.jpeg" alt=""><img src="Administrator/image/product.jpeg" alt=""></div>
-                        </div>
-                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">Air Jordan 7 Retro</a>
-                          <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 79,000 ກີບ</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="grid-item kids">
-                  <div class="grid-item__content-wrapper">
-                    <div class="ps-shoe mb-30">
-                      <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product2.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                      </div>
-                      <div class="ps-shoe__content">
-                        <div class="ps-shoe__variants">
-                          <div class="ps-shoe__variant normal"><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""></div>
-                        </div>
-                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">Air Jordan 7 Retro</a>
-                          <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 19,000 ກີບ</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <?php
+                  }
+                  mysqli_free_result($result_product);  
+                  mysqli_next_result($conn);
+                ?>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="ps-section--offer">
-        <div class="ps-column"><a class="ps-offer" href="product-listing.html"><img src="Administrator/image/product.jpeg" alt=""></a></div>
-        <div class="ps-column"><a class="ps-offer" href="product-listing.html"><img src="Administrator/image/product.jpeg" alt=""></a></div>
+        <div class="ps-column"><a class="ps-offer" href="#"><img src="Administrator/image/product.jpeg" alt=""></a></div>
+        <div class="ps-column"><a class="ps-offer" href="#"><img src="Administrator/image/product.jpeg" alt=""></a></div>
       </div>
       <div class="ps-section ps-section--top-sales ps-owl-root pt-80 pb-80">
         <div class="ps-container">
@@ -218,103 +127,33 @@
           </div>
           <div class="ps-section__content">
             <div class="ps-owl--colection owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="30" data-owl-nav="false" data-owl-dots="false" data-owl-item="4" data-owl-item-xs="1" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-duration="1000" data-owl-mousedrag="on">
+                  <?php
+                    $result_bestsell = mysqli_query($conn,"SELECT d.pro_id,pro_name,p.price,unit_name,brand_name,size_name,cate_name,img,COUNT(d.pro_id) as count_pro FROM selldetail d LEFT JOIN product p ON d.pro_id=p.pro_id LEFT JOIN brand b ON p.brand_id=b.brand_id LEFT JOIN unit u ON p.pro_id=u.unit_id LEFT JOIN size s ON p.size_id=s.size_id LEFT JOIN category c ON p.cate_id=c.cate_id GROUP BY d.pro_id ORDER BY count_pro DESC;");
+                    foreach($result_bestsell as $row_bestsell){
+                  ?>
+
               <div class="ps-shoes--carousel">
                 <div class="ps-shoe">
                   <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product2.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
+                   
+                   <img src="Administrator/image/<?php echo $row_bestsell["img"] ?>" alt=""><a class="ps-shoe__overlay" href="Productdetail?id=<?php echo $row_bestsell["pro_id"] ?>"></a>
                   </div>
                   <div class="ps-shoe__content">
                     <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""></div>
+                      <div class="ps-shoe__variant normal">
+                        <img src="Administrator/image/<?php echo $row_bestsell["img"] ?>" alt="">
                     </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">Air Jordan 7 Retro</a>
-                      <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 15,000 ກີບ</span>
+                    </div>
+                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html"><?php echo $row_bestsell["pro_name"] ?></a>
+                      <p class="ps-shoe__categories"><a href="#"><?php echo $row_bestsell["cate_name"] ?></a>,<a href="#"> <?php echo $row_bestsell["brand_name"] ?></a>,<a href="#"> <?php echo $row_bestsell["size_name"] ?></a></p>
+                      <span class="ps-shoe__price"><?php echo number_format($row_bestsell["price"],2) ?> ກີບ</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="ps-shoes--carousel">
-                <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div>
-                    <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product3.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                  </div>
-                  <div class="ps-shoe__content">
-                    <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""></div>
-                      <select class="ps-rating ps-shoe__rating">
-                        <option value="1">1</option>
-                        <option value="1">2</option>
-                        <option value="1">3</option>
-                        <option value="1">4</option>
-                        <option value="2">5</option>
-                      </select>
-                    </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">Air Jordan 7 Retro</a>
-                      <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price">
-                        39,000 ກີບ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="ps-shoes--carousel">
-                <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product5.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                  </div>
-                  <div class="ps-shoe__content">
-                    <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product5.jpeg" alt=""><img src="Administrator/image/product5.jpeg" alt=""><img src="Administrator/image/product5.jpeg" alt=""><img src="Administrator/image/product5.jpeg" alt=""></div>
-                    </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">Air Jordan 7 Retro</a>
-                      <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 29,000 ກີບ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="ps-shoes--carousel">
-                <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product6.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                  </div>
-                  <div class="ps-shoe__content">
-                    <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product6.jpeg" alt=""><img src="Administrator/image/product6.jpeg" alt=""><img src="Administrator/image/product6.jpeg" alt=""><img src="Administrator/image/product6.jpeg" alt=""></div>
-                    </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">Air Jordan 7 Retro</a>
-                      <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 99,000 ກີບ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="ps-shoes--carousel">
-                <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail">
-                    <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product2.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                  </div>
-                  <div class="ps-shoe__content">
-                    <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""><img src="Administrator/image/product2.jpeg" alt=""></div>
-                    </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">Air Jordan 7 Retro</a>
-                      <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 9,000 ກີບ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="ps-shoes--carousel">
-                <div class="ps-shoe">
-                  <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="Administrator/image/product3.jpeg" alt=""><a class="ps-shoe__overlay" href="productdetail"></a>
-                  </div>
-                  <div class="ps-shoe__content">
-                    <div class="ps-shoe__variants">
-                      <div class="ps-shoe__variant normal"><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""><img src="Administrator/image/product3.jpeg" alt=""></div>
-                    </div>
-                    <div class="ps-shoe__detail"><a class="ps-shoe__name" href="product-detai.html">Air Jordan 7 Retro</a>
-                      <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a></p><span class="ps-shoe__price"> 79,000 ກີບ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <?php
+                    }
+            ?>
             </div>
           </div>
         </div>
@@ -358,7 +197,7 @@
           </div>
         </div>
       </div>
-      <div class="ps-home-contact">
+      <!-- <div class="ps-home-contact">
         <div id="contact-map" data-address="New York, NY" data-title="BAKERY LOCATION!" data-zoom="17"></div>
         <div class="ps-home-contact__form">
           <header>
@@ -385,21 +224,12 @@
             </form>
           </footer>
         </div>
-      </div>
+      </div> -->
       <div class="ps-subscribe">
         <div class="ps-container">
           <div class="row">
                 <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
                   <h3><i class="fa fa-envelope"></i>Sign up to Newsletter</h3>
-                </div>
-                <div class="col-lg-5 col-md-7 col-sm-12 col-xs-12 ">
-                  <form class="ps-subscribe__form" action="do_action" method="post">
-                    <input class="form-control" type="text" placeholder="">
-                    <button>Sign up now</button>
-                  </form>
-                </div>
-                <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
-                  <p>...and receive  <span>$20</span>  coupon for first shopping.</p>
                 </div>
           </div>
         </div>

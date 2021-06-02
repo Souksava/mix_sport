@@ -50,7 +50,7 @@
                     <div class="row" align="left">
                         <div class="col-md-12 col-sm-6 form-control2">
                             <label>ເລດຊື້</label>
-                            <input type="number" name="buy2" id="buy2" placeholder="ເລດຊື້" class="form-control">
+                            <input type="text" min="0" name="buy2" id="buy2" placeholder="ເລດຊື້" class="form-control">
                             <input type="hidden" name="rate_id2" id="rate_id2">
                             <i class="fas fa-check-circle "></i>
                             <i class="fas fa-exclamation-circle "></i>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="col-md-12 col-sm-6 form-control2">
                             <label>ເລດຂາຍ</label>
-                            <input type="number" name="sell2" id="sell2" placeholder="ເລດຂາຍ" class="form-control">
+                            <input type="text" min="0" name="sell2" id="sell2" placeholder="ເລດຂາຍ" class="form-control">
                             <i class="fas fa-check-circle "></i>
                             <i class="fas fa-exclamation-circle "></i>
                             <small class="">Error message</small>
@@ -155,7 +155,9 @@
                 </td>
                 <td><?php echo $row["rate_id"] ?></td>
                 <td><?php echo number_format($row["rate_buy"],2) ?></td>
+                <td style="display: none;"><?php echo $row["rate_buy"] ?></td>
                 <td><?php echo number_format($row["rate_sell"],2) ?></td>
+                <td style="display: none;"><?php echo $row["rate_sell"] ?></td>
             </tr>
             <?php
                 }
@@ -330,7 +332,7 @@ $('.btnUpdateCompany').on('click', function() {
     console.log(data);
 
     $('#rate_id2').val(data[1]);
-    $('#buy2').val(data[2]);
-    $('#sell2').val(data[3]);
+    $('#buy2').val(data[3]);
+    $('#sell2').val(data[5]);
 });
 </script>

@@ -6,226 +6,132 @@
   include ("../../header-footer/header.php");
 ?>
 <!-- del one -->
-<div class="modal fade" id="exampleModaldel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">ລົບຂໍ້ມູນ</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <P align="center">ທ່ານຕ້ອງການລົບຂໍ້ມູນ ຫຼື ບໍ່</P>
-                <input type="text" name="id" id="id">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">ຍົກເລີກ</button>
-                <button type="submit" name="btn_Delete" id="btn_Delete" class="btn btn-outline-danger" onclick="">
-                    ລົບຂໍ້ມູນ
-                    <span class="" id="load_delete"></span>
-                </button>
+<form action="Broke" id="form_delete" method="POST">
+    <div class="modal fade" id="exampleModaldel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ລົບຂໍ້ມູນ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <P align="center">ທ່ານຕ້ອງການລົບຂໍ້ມູນ ຫຼື ບໍ່</P>
+                    <input type="hidden" name="id_broke" id="id_broke">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">ຍົກເລີກ</button>
+                    <button type="submit" name="btn_Delete" id="btn_Delete" class="btn btn-outline-danger" onclick="">
+                        ລົບຂໍ້ມູນ
+                        <span class="" id="load_delete"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 <!-- End del one -->
 <!-- Update -->
-<div class="modal fade" id="btnUpdateProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">ແກ້ໄຂຂໍ້ມູ</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row" align="left">
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ຊື່ສິນຄ້າ</label>
-                        <input type="hidden" name="pro_id2" id="pro_id2">
-                        <input type="text" name="pro_name2" id="pro_name2" placeholder="ຊື່ສິນຄ້າ" class="form-control">
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ປະເພດສິນຄ້າ</label>
-                        <select name="cate_id2" id="cate_id2">
-                            <option value="">ເລືອກປະເພດສິນຄ້າ</option>
-                            <option value="1">ເສື້ອຍືດ</option>
-                            <option value="2">ສົ້ງ</option>
-                        </select>
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ຍີ່ຫໍ້</label>
-                        <select name="brand_id2" id="brand_id2">
-                            <option value="">ເລືອກຍີ່ຫໍ້</option>
-                            <option value="1">Polo</option>
-                            <option value="2">Nike</option>
-                        </select>
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ຈຳນວນ</label>
-                        <input type="text" name="qty2" id="qty2" placeholder="ຈຳນວນ" class="form-control">
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ຫົວໜ່ວຍສິນຄ້າ</label>
-                        <select name="unit_id2" id="unit_id2">
-                            <option value="">ເລືອກຫົວໜ່ວຍສິນຄ້າ</option>
-                            <option value="1">ຜືນ</option>
-                            <option value="2">ໂຕ</option>
-                        </select>
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ຂະໜາດ</label>
-                        <select name="size_id2" id="size_id2">
-                            <option value="">ເລືອກຂະໜາດ</option>
-                            <option value="1">S</option>
-                            <option value="2">M</option>
-                        </select>
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ເວລາຮັບປະກັນ</label>
-                        <input type="text" name="varanty2" id="varanty2" placeholder="ເວລາຮັບປະກັນ"
-                            class="form-control">
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ຫົວໜ່ວຍເວລາ</label>
-                        <input type="text" name="type2" id="type2" placeholder="ຫົວໜ່ວຍເວລາ" class="form-control">
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ເງື່ອນໄຂການສັ່ງຊື້</label>
-                        <input type="text" name="qtyalert2" id="qtyalert2" placeholder="ເງື່ອນໄຂການສັ່ງຊື້"
-                            class="form-control">
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ຮູບພາບສິນຄ້າ</label>
-                        <input type="file" name="img_path2" id="img_path2" onchange="loadFile2(event)"
-                            class="form-control">
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <img src="../../image/camera.jpg" id="output2" width="100%" height="250">
+<form action="Broke" id="form_update" method="POST">
+    <div class="modal fade" id="btnUpdateProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ແກ້ໄຂຂໍ້ມູ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" align="left">
+                        <div class="col-md-12 col-sm-6 form-control2">
+                            <input type="hidden" id="broke_id" name="broke_id">
+                            <label>ຈຳນວນ</label>
+                            <input type="number" name="qty2" id="qty2" placeholder="ຈຳນວນ" class="form-control">
+                            <i class="fas fa-check-circle "></i>
+                            <i class="fas fa-exclamation-circle "></i>
+                            <small class="">Error message</small>
+                        </div>
+                        <div class="col-md-12 col-sm-6 form-control2">
+                            <label>ໝາຍເຫດ</label>
+                            <input type="text" name="remark2" id="remark2" placeholder="ໝາຍເຫດ" class="form-control">
+                            <i class="fas fa-check-circle "></i>
+                            <i class="fas fa-exclamation-circle "></i>
+                            <small class="">Error message</small>
+                        </div>
+
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">ຍົກເລີກ</button>
-                <button type="submit" name="btn_load_save" id="btn_load_save" class="btn btn-outline-success"
-                    onclick="">
-                    ແກ້ໄຂ
-                    <span class="" id="load_save"></span>
-                </button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">ຍົກເລີກ</button>
+                    <button type="submit" name="btn_load_update" id="btn_load_update" class="btn btn-outline-success"
+                        onclick="">
+                        ແກ້ໄຂ
+                        <span class="" id="load_update"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 <!-- End Update -->
 <!-- Add -->
-<div class="modal fade" id="exampleModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">ເພີ່ມຂໍ້ມູນ</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row" align="left">
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ລະຫັດສິນຄ້າ</label>
-                        <input type="text" name="pro_id" id="pro_id" placeholder="ລະຫັດສິນຄ້າ" class="form-control">
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ຈຳນວນ</label>
-                        <input type="text" name="qty" id="qty" placeholder="ຈຳນວນ" class="form-control">
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
-                    </div>
-                    <div class="col-md-12 col-sm-6 form-control2">
-                        <label>ໝາຍເຫດ</label>
-                        <input type="text" name="qty" id="qty" placeholder="ໝາຍເຫດ" class="form-control">
-                        <i class="fas fa-check-circle "></i>
-                        <i class="fas fa-exclamation-circle "></i>
-                        <small class="">Error message</small>
+<form action="Broke" id="form_Save" method="POST">
+    <div class="modal fade" id="exampleModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ເພີ່ມຂໍ້ມູນ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" align="left">
+                        <div class="col-md-12 col-sm-6 form-control2">
+                            <label>ລະຫັດສິນຄ້າ</label>
+                            <input type="text" name="pro_id_broke" id="pro_id_broke" placeholder="ລະຫັດສິນຄ້າ"
+                                class="form-control">
+                            <i class="fas fa-check-circle "></i>
+                            <i class="fas fa-exclamation-circle "></i>
+                            <small class="">Error message</small>
+                        </div>
+                        <div class="col-md-12 col-sm-6 form-control2">
+                            <label>ຈຳນວນ</label>
+                            <input type="number" name="qty" id="qty" placeholder="ຈຳນວນ" class="form-control">
+                            <i class="fas fa-check-circle "></i>
+                            <i class="fas fa-exclamation-circle "></i>
+                            <small class="">Error message</small>
+                        </div>
+                        <div class="col-md-12 col-sm-6 form-control2">
+                            <label>ໝາຍເຫດ</label>
+                            <input type="text" name="remark" id="remark" placeholder="ໝາຍເຫດ" class="form-control">
+                            <i class="fas fa-check-circle "></i>
+                            <i class="fas fa-exclamation-circle "></i>
+                            <small class="">Error message</small>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">ຍົກເລີກ</button>
-                <button type="submit" name="btn_load_save" id="btn_load_save" class="btn btn-outline-primary"
-                    onclick="">
-                    ເພີ່ມຂໍ້ມູນ
-                    <span class="" id="load_save"></span>
-                </button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">ຍົກເລີກ</button>
+                    <button type="submit" name="btn_load_save" id="btn_load_save" class="btn btn-outline-primary"
+                        onclick="">
+                        ເພີ່ມຂໍ້ມູນ
+                        <span class="" id="load_save"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 <!-- End Add -->
-
-<div class="modal fade" id="exampleModaldelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">ລົບຂໍ້ມູນ</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <P align="center">ທ່ານຕ້ອງການລົບຂໍ້ມູນຫຼືບໍ່</P>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">ຍົກເລີກ</button>
-                <button type="submit" name="Com_Update" id="Com_Update" class="btn btn-outline-danger" onclick="">
-                    ລົບຂໍ້ມູນ
-                    <span class="" id="load_save"></span>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="col-xs-12 col-sm-6">
-        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModaldelete"><i
+        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModaldelete_many"><i
                 class="fas fa-trash"></i> ລົບຂໍ້ມູນ</button>
     </div>
     <div class="col-xs-12 col-sm-6" align="right">
@@ -233,99 +139,240 @@
                 class="fas fa-plus-circle"></i> ເພີ່ມຂໍ້ມູນ</button>
     </div>
 </div><br>
-<div class="row">
-    <div class="table-responsive">
-        <table class="table-bordered" style="width: 1500px;text-align: center;">
-            <tr style="font-size: 18px;">
-                <th style="width: 120px;">ເຄື່ອງມື</th>
-                <th>ລຳດັບ</th>
-                <th>ລະຫັດສິນຄ້າ</th>
-                <th>ສິນຄ້າ</th>
-                <th>ຈຳນວນ</th>
-                <th>ລາຄາ</th>
-                <th>ມູນຄ່າ</th>
-                <th>ໝາຍເຫດ</th>
-                <th>ຮູບພາບ</th>
-                <th>ວັນທີ</th>
-            </tr>
-            <tr>
-                <td>
-                    <input class="" type="checkbox" name="sticker[]" value="" id="flexCheckDefault">
-                    &nbsp; &nbsp;
-                    <a href="#" data-toggle="modal" data-target="#btnUpdateProduct"
-                        class="fa fa-pen toolcolor btnUpdateProduct"></a>&nbsp; &nbsp;
-                    <a href="#" data-toggle="modal" data-target="#exampleModaldel"
-                        class="fa fa-trash toolcolor btnDelete_com"></a>
-                </td>
-                <td>1</td>
-                <td>105052100001</td>
-                <td style="display: none;">ສະກ໋ອດ</td>
-                <td style="display: none;">1</td>
-                <td style="display: none;">1</td>
-                <td style="display: none;">2</td>
-                <td style="display: none;">1</td>
-                <td style="display: none;">5</td>
-                <td style="display: none;">10</td>
-                <td style="display: none;">../../image/product.jpeg</td>
-                <td>
-                    ເສືອຍືດ Polo ສະກ໋ອດ M
-                </td>
-                <td>5 ຜືນ</td>
-                <td>50,000</td>
-                <td>250,000</td>
-                <td>ເຄື່ອງຈີກຂາດ</td>
-                <td>
-                    <img src="../../image/product.jpeg" class="img-circle elevation-2" alt="" width="55px">
-                </td>
-                <td>19/04/2021 15:00:00</td>
-            </tr>
-        </table>
+<form action="Broke" id="form_delete_manay" method="POST">
+    <div id="result_data" class="result_data">
+        <?php
+            include ($path."header-footer/loading.php");
+        ?>
     </div>
-</div>
+    <div class="modal fade" id="exampleModaldelete_many" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ລົບຂໍ້ມູນ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <P align="center">ທ່ານຕ້ອງການລົບຂໍ້ມູນຫຼືບໍ່</P>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">ຍົກເລີກ</button>
+                    <button type="submit" name="btnDelete_many" id="btnDelete_many" class="btn btn-outline-danger">
+                        ລົບຂໍ້ມູນ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <?php
     include ("../../header-footer/footer.php");
+    if(isset($_POST["pro_id_broke"])){
+        $obj->insert_broke(trim($_POST["pro_id_broke"]),trim($_POST["qty"]),trim($_POST["remark"]));
+    }
+    if(isset($_POST["broke_id"])){
+        $obj->update_broke(trim($_POST["broke_id"]),trim($_POST["qty2"]),trim($_POST["remark2"]));
+    }
+    if(isset($_POST["id_broke"])){
+        $obj->del_broke(trim($_POST["id_broke"]));
+    }
+    if(isset($_POST["btnDelete_many"])){
+        $logic = 0;
+            if(isset($_POST["id2"])){
+                    $delete = 0;
+                    foreach($_POST["id2"] as $id){
+                        $delete_many = mysqli_query($conn,"call del_broke('$id')");
+                        if(!$delete_many){
+                            $delete = 1;
+                            echo"<script>";
+                            echo"window.location.href='Broke?del=fail';";
+                            echo"</script>";
+                        }
+                        mysqli_free_result($delete_many);  
+                        mysqli_next_result($conn);
+                    }
+                    if($delete == 0){
+                        echo"<script>";
+                        echo"window.location.href='Broke?del2=success';";
+                        echo"</script>";
+                    }
+                    
+                
+            }
+            else{
+                echo"<script>";
+                echo"window.location.href='Broke?Checkbox=null';";
+                echo"</script>";
+            }
+    }
+    if(isset($_GET["update"])=="fail"){
+        echo'<script type="text/javascript">
+        swal("", "ແກ້ໄຂຂໍ້ມູນຜິດພາດ !", "error");
+        </script>';
+      }  
+      if(isset($_GET["update2"])=="success"){
+        echo'<script type="text/javascript">
+        swal("", "ແກ້ໄຂຂໍ້ມູນສຳເລັດ !", "success");
+        </script>';
+      }  
+      if(isset($_GET["del"])=="fail"){
+        echo'<script type="text/javascript">
+        swal("", "ລົບຂໍ້ມູນຜິດພາດ !", "error");
+        </script>';
+      }  
+      if(isset($_GET["del2"])=="success"){
+        echo'<script type="text/javascript">
+        swal("", "ລົບຂໍ້ມູນສຳເລັດ !", "success");
+        </script>';
+      }  
+    if(isset($_GET["Checkbox"])=="null"){
+        echo'<script type="text/javascript">
+        swal("", "ກະລຸນາເລືອກລາຍການກ່ອນ !", "info");
+        </script>';
+      }  
+    if(isset($_GET['product'])=='null'){
+        echo'<script type="text/javascript">
+        swal("", "ລະຫັດສິນຄ້າບໍ່ຖືກຕ້ອງ", "info");
+        </script>';
+      }
+      if(isset($_GET['save'])=='fail'){
+        echo'<script type="text/javascript">
+        swal("", "ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ", "error");
+        </script>';
+      }
+      if(isset($_GET['save2'])=='success'){
+        echo'<script type="text/javascript">
+        swal("", "ບັນທຶກຂໍ້ມູນສຳເລັດ", "success");
+        </script>';
+      }
   ?>
 <script>
-var loadFile = function(event) {
-    var output = document.getElementById('output');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function() {
-        URL.revokeObjectURL(output.src) // free memory
+$(document).ready(function() {
+    load_data("%%", "0");
+
+    function load_data(query, page) {
+        $.ajax({
+            url: "fetch_broke.php",
+            method: "POST",
+            data: {
+                query: query,
+                page: page
+            },
+            success: function(data) {
+                $("#result_data").html(data);
+            }
+        });
     }
-};
-var loadFile2 = function(event) {
-    var output2 = document.getElementById('output2');
-    output2.src = URL.createObjectURL(event.target.files[0]);
-    output2.onload = function() {
-        URL.revokeObjectURL(output2.src) // free memory
-    }
-};
+    $('#search').keyup(function() {
+        var page = "0";
+        var search = $('#search').val();
+        if (search != '') {
+            load_data(search, page);
+        } else {
+            load_data('%%', page);
+        }
+    });
+    $(document).on("click", ".page-links_table", function() {
+        var page = this.id;
+        var search = $('#search').val();
+        if (search != "") {
+            load_data(search, page);
+        } else {
+            load_data("%%", page);
+        }
+    });
+});
 </script>
 <script>
-    $('.btnUpdateProduct').on('click', function() {
-        $('#btnUpdateProduct').modal('show');
-        $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function() {
-            return $(this).text();
-        }).get();
+const myform_form_Save = document.getElementById("form_Save");
+const pro_id = document.getElementById("pro_id_broke");
+const qty = document.getElementById("qty");
+const remark = document.getElementById("remark");
+const load_save = document.getElementById("load_save");
+const btn_load_save = document.getElementById("btn_load_save");
+myform_form_Save.addEventListener('submit', (e) => {
+    e.preventDefault();
+    checkInputs_form_Save();
+});
 
-        console.log(data);
+function checkInputs_form_Save() {
+    const pro_idValue = pro_id.value.trim();
+    const qtyValue = qty.value.trim();
+    const remarkValue = remark.value.trim();
+    if (pro_idValue === "") {
+        setErrorFor(pro_id, 'ກະລຸນາປ້ອນລະຫັດສິນຄ້າ');
+    } else {
+        setSuccessFor(pro_id);
+    }
+    if (qtyValue === "") {
+        setErrorFor(qty, 'ກະລຸນາປ້ອນຈຳນວນ');
+    } else {
+        setSuccessFor(qty);
+    }
+    if (remarkValue === "") {
+        setErrorFor(remark, 'ກະລຸນາປ້ອນ Remark');
+    } else {
+        setSuccessFor(remark);
+    }
+    if (pro_idValue !== "" && qtyValue !== "" && remarkValue !== "") {
+        setloading(load_save, btn_load_save);
+        document.getElementById("form_Save").action = "Broke";
+        document.getElementById("form_Save").submit();
+    }
+}
 
-        $('#pro_id2').val(data[2]);
-        $('#pro_name2').val(data[3]);
-        $('#cate_id2').val(data[4]);
-        $('#brand_id2').val(data[5]);
-        $('#size_id2').val(data[6]);
-        $('#unit_id2').val(data[7]);
-        $('#qty2').val(data[8]);
-        $('#qtyalert2').val(data[9]);
-        if(data[10] === ''){
-            document.getElementById("output2").src = ('../image/camera.jpg');
-        }
-        else{
-            document.getElementById("output2").src = ('../image/'+data[10]);
-        }
-        $('#price2').val(data[13]);
-    });
 
+const myform_form_update = document.getElementById("form_update");
+const broke_id = document.getElementById("broke_id");
+const qty2 = document.getElementById("qty2");
+const remark2 = document.getElementById("remark2");
+const load_update = document.getElementById("load_update");
+const btn_load_update = document.getElementById("btn_load_update");
+myform_form_update.addEventListener('submit', (e) => {
+    e.preventDefault();
+    checkInputs_form_update();
+});
+
+function checkInputs_form_update() {
+    const broke_idValue = broke_id.value.trim();
+    const qty2Value = qty2.value.trim();
+    const remark2Value = remark2.value.trim();
+    if (qty2Value === "") {
+        setErrorFor(qty2, 'ກະລຸນາປ້ອນຈຳນວນ');
+    } else {
+        setSuccessFor(qty2);
+    }
+    if (remark2Value === "") {
+        setErrorFor(remark2, 'ກະລຸນາປ້ອນ Remark');
+    } else {
+        setSuccessFor(remark);
+    }
+    if (qty2Value !== "" && remark2Value !== "") {
+        setloading(load_update, btn_load_update);
+        document.getElementById("form_update").action = "Broke";
+        document.getElementById("form_update").submit();
+    }
+}
+
+
+
+
+const myform_form_delete = document.getElementById("form_delete");
+const id = document.getElementById("id_broke");
+const load_delete = document.getElementById("load_delete");
+const btn_Delete = document.getElementById("btn_Delete");
+myform_form_delete.addEventListener('submit', (e) => {
+    e.preventDefault();
+    checkInputs_form_delete();
+});
+
+function checkInputs_form_delete() {
+        setloading(load_delete, btn_Delete);
+        document.getElementById("form_delete").action = "Broke";
+        document.getElementById("form_delete").submit();
+    
+}
 </script>

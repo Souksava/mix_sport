@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Noto Sans Lao';
+  src: url(NotoSansLao-Bold.ttf) format('truetype'), url(notosanslao-bold-webfont.woff) format('woff'), url(notosanslao-bold-webfont.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /*
     Project: Shoes Store
     Version: 1.4
