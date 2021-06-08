@@ -51,6 +51,7 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="<?php echo $path ?>dist/js/pageload.js"></script>
 <script src="<?php echo $path ?>dist/js/jquery.highlight.js"></script>
 <script src="<?php echo $path ?>dist/js/datepicker.js"></script>
+<script src="<?php echo $path ?>dist/js/export.js"></script>
 
 </body>
 

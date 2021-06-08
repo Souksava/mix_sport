@@ -1336,6 +1336,36 @@ class obj{
         global $result_billdetail;
         $result_billdetail = mysqli_query($conn,"call select_billdetail('$bill')");
     }
+    public static function report_sell_limit($date1,$date2,$page){
+        global $conn;
+        global $result_report_sell_limit;
+        $result_report_sell_limit = mysqli_query($conn,"call report_sell_limit('$date1','$date2','$page')");
+    }
+    public static function report_sell($date1,$date2){
+        global $conn;
+        global $result_report_sell;
+        $result_report_sell = mysqli_query($conn,"call report_sell('$date1','$date2')");
+    }
+    public static function report_order_limit($date1,$date2,$page){
+        global $conn;
+        global $result_report_order_limit;
+        $result_report_order_limit = mysqli_query($conn,"call report_order_limit('$date1','$date2','$page')");
+    }
+    public static function report_order($date1,$date2){
+        global $conn;
+        global $result_report_order;
+        $result_report_order = mysqli_query($conn,"call report_order('$date1','$date2')");
+    }
+    public static function bill_order($id){
+        global $conn;
+        global $result_bill_order;
+        $result_bill_order = mysqli_query($conn,"call bill_order('$id')");
+    }
+    public static function report_orderdetail($id){
+        global $conn;
+        global $result_report_orderdetail;
+        $result_report_orderdetail = mysqli_query($conn,"call report_orderdetail('$id')");
+    }
 }
 $obj = new obj();
 ?>

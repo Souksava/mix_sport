@@ -652,7 +652,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-employee" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportsell" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານການຂາຍສິນຄ້າ</p>
                                     </a>
@@ -660,7 +660,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-customer" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportorder" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານການສັ່ງຊື້ສິນຄ້າ</p>
                                     </a>

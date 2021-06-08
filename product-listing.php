@@ -9,44 +9,10 @@
         <div class="ps-products" data-mh="product-listing">
           <div class="ps-product-action">
           </div>
-          <div class="ps-product__columns">
-              <?php
-              $i = 0;
-              if($i == 0){
-                ?>
-                  <!-- Start Catalog -->
-                <div class="ps-product__column">
-                  <div class="ps-shoe mb-30">
-                    <div class="ps-shoe__thumbnail">
-                      <img src="images/shoe/1.jpg" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
-                    </div>
-                    <div class="ps-shoe__content">
-                      <div class="ps-shoe__variants">
-                        <div class="ps-shoe__variant normal">
-                          <img src="images/shoe/2.jpg" alt="">
-                        </div>
-                      </div>
-                      <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">Air Jordan 7 Retro</a>
-                        <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span class="ps-shoe__price">
-                          <del>£220</del> £ 120</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Catalog -->
-                <?php
-              }
-              else{
-                ?>
-                <hr size="1" width="90%">
-                <p align="center">ບໍ່ມີຂໍ້ມູນ</p>
-                <hr size="1" width="90%">
-                <?php
-              }
-              ?>                                   
+          <div class="ps-product__columns" id="result">
+
           </div>
-          <div class="ps-product-action">
-            <div class="ps-pagination">
+            <!-- <div class="ps-pagination">
               <ul class="pagination">
                 <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
                 <li class="active"><a href="#">1</a></li>
@@ -55,9 +21,9 @@
                 <li><a href="#">...</a></li>
                 <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
               </ul>
-            </div>
+            </div> -->
           </div>
-        </div>
+      
             <!-- End Product list -->
         <div class="ps-sidebar" data-mh="product-listing">
           <aside class="ps-widget--sidebar ps-widget--category">
@@ -66,23 +32,18 @@
             </div>
             <div class="ps-widget__content">
               <ul class="ps-list--checked">
-                <li class=""><a href="#">Life(521)</a></li>
-                <li><a href="#">Running(76)</a></li>
-                <li><a href="#">Baseball(21)</a></li>
-                <li><a href="#">Football(105)</a></li>
-                <li><a href="#">Soccer(108)</a></li>
-                <li><a href="#">Trainning & game(47)</a></li>
+                <?php 
+                  $result_category = mysqli_query($conn,"call select_category_limit('%%','0');");
+                  foreach($result_category as $row_category){
+                ?>
+                <li><a href="#"><?php echo $row_category["cate_name"] ?></a></li>
+                <?php 
+                  }
+                  mysqli_free_result($result_category);  
+                  mysqli_next_result($conn);
+                ?>
                 <li><a href="#">More</a></li>
               </ul>
-            </div>
-          </aside>
-          <aside class="ps-widget--sidebar ps-widget--category">
-            <div class="ps-widget__header">
-              <h3>Radio</h3>
-            </div>
-            <div>
-                <label style="cursor: pointer;" class="" id="id1">test1</label><br>
-                <label style="cursor: pointer;" class="" id="id2">test2</label>
             </div>
           </aside>
           <aside class="ps-widget--sidebar ps-widget--category">
@@ -91,37 +52,60 @@
             </div>
             <div class="ps-widget__content">
               <ul class="ps-list--checked">
-                <li class="current"><a href="product-listing.html">Nike(521)</a></li>
-                <li><a href="product-listing.php">Adidas(76)</a></li>
-                <li><a href="product-listing.php">Baseball(69)</a></li>
-                <li><a href="product-listing.php">Gucci(36)</a></li>
-                <li><a href="product-listing.php">Dior(108)</a></li>
-                <li><a href="product-listing.php">B&G(108)</a></li>
-                <li><a href="product-listing.php">Louis Vuiton(47)</a></li>
+              <?php 
+                  $result_brand = mysqli_query($conn,"call select_brand_limit('%%','0');");
+                  foreach($result_brand as $row_brand){
+                ?>
+                <li><a href="#"><?php echo $row_brand["brand_name"] ?></a></li>
+                <?php 
+                  }
+                  mysqli_free_result($result_brand);  
+                  mysqli_next_result($conn);
+                ?>
+                <li><a href="#">More</a></li>
               </ul>
             </div>
           </aside>
         </div>
       </div>
-            <div>
-              <?php $test = "test"; ?>
-              <label id="test"><?php echo $test ?></label>
-            </div>
     </main>
     <?php 
   include ('header-footer/footer.php');
 ?>
 <script>
 $(document).ready(function() {
-  $(document).on("click", "#id1", function() {
-    const idcheck = $('#id1').text();
-\
+      load_data("%%", "0");
 
-  });
-  $(document).on("click", "#id2", function() {
-    const idcheck = $('#id2').text();
-    console.log(idcheck);
-    $('#id2').addClass('btn btn-primary-outline');
-  });
+    function load_data(query, page) {
+        $.ajax({
+            url: "fetch_product.php",
+            method: "POST",
+            data: {
+                query: query,
+                page: page
+            },
+            success: function(data) {
+                $("#result").html(data);
+            }
+        });
+    }
+    $('#search').keyup(function() {
+        var page = "0";
+        var search = $('#search').val();
+        if (search != '') {
+            load_data(search, page);
+        } else {
+            load_data('%%', page);
+        }
+    });
+    $(document).on("click", ".page-links_table", function() {
+        var page = this.id;
+        var search = $('#search').val();
+        if (search != "") {
+            load_data(search, page);
+        } else {
+            load_data("%%", page);
+        }
+    });
 });
 </script>

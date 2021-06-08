@@ -22,3 +22,11 @@ RewriteRule ^Administrator/User/Service/Confirm?$ Administrator/User/Service/con
 RewriteRule ^Administrator/User/Service/Payment?$ Administrator/User/Service/payment.php
 RewriteRule ^Administrator/User/Service/Sell?$ Administrator/User/Service/sell.php
 RewriteRule ^Administrator/User/Service/Bill?$ Administrator/User/Service/bill.php
+RewriteRule ^Administrator/User/Report/Reportsell?$ Administrator/User/Report/report_sell.php
+RewriteRule ^Administrator/User/Report/PDF-Sell?$ Administrator/User/Report/pdf_sell.php
+RewriteRule ^Administrator/User/Report/Excel-Sell?$ Administrator/User/Report/excel_sell.php
+RewriteRule ^Administrator/User/Report/Bill?$ Administrator/User/Report/bill.php
+RewriteRule ^Administrator/User/Report/Reportorder?$ Administrator/User/Report/report_order.php
+RewriteRule ^Administrator/User/Report/OrderBill?$ Administrator/User/Report/bill_order.php
+RewriteRule ^Administrator/User/Report/PDF-Order?$ Administrator/User/Report/pdf_order.php
+RewriteRule ^Administrator/User/Report/Excel-Order?$ Administrator/User/Report/excel_order.php

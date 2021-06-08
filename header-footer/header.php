@@ -41,7 +41,7 @@
 
   </head>
   <?php
-    include (''.$path.'Administrator/oop/connect.php');
+    include (''.$path.'Administrator/oop/obj.php');
   ?>
   <!--[if IE 7]><body class="ie7 lt-ie8 lt-ie9 lt-ie10"><![endif]-->
   <!--[if IE 8]><body class="ie8 lt-ie9 lt-ie10"><![endif]-->

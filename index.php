@@ -84,12 +84,12 @@
                 <div class="grid-item <?php echo $row_product["brand_name"] ?>">
                   <div class="grid-item__content-wrapper">
                     <div class="ps-shoe mb-30">
-                      <div class="ps-shoe__thumbnail"><img src="Administrator/image/<?php echo $row_product["img"] ?>" alt=""><a class="ps-shoe__overlay" href="Productdetail?id=<?php echo $row_product["pro_id"] ?>"></a>
+                      <div class="ps-shoe__thumbnail"><img src="Administrator/image/<?php echo $row_product["img"] ?>" style="width: 500px;height:300px;" alt=""><a class="ps-shoe__overlay" href="Productdetail?id=<?php echo $row_product["pro_id"] ?>"></a>
                       </div>
                       <div class="ps-shoe__content">
                         <div class="ps-shoe__variants">
                           <div class="ps-shoe__variant normal">
-                            <img src="Administrator/image/<?php echo $row_product["img"] ?>" alt="">
+                            <img src="Administrator/image/<?php echo $row_product["img"] ?>" style="width:50px;height:50px;" alt="">
                         </div>
                         </div>
                         <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#"><?php echo $row_product["pro_name"] ?></a>
