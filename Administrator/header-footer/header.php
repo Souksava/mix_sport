@@ -289,7 +289,37 @@
                         </div>
                     ';
                 }
+                if($title == "ລາຍງານຜູ້ສະໜອງ"){
+                    echo'
+                        <div class="form-inline ml-3">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" name="search" id="search"
+                                    placeholder="ຄົ້ນຫາ" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
                 if($title == "ລູກຄ້າ"){
+                    echo'
+                        <div class="form-inline ml-3">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" name="search" id="search"
+                                    placeholder="ຄົ້ນຫາ" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
+                if($title == "ລາຍງານລູກຄ້າ"){
                     echo'
                         <div class="form-inline ml-3">
                             <div class="input-group input-group-sm">
@@ -668,7 +698,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-supplier" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportpay" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານລາຍຈ່າຍ</p>
                                     </a>
@@ -676,7 +706,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-product" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportrevenue" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານລາຍຮັບ</p>
                                     </a>
@@ -684,7 +714,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-stock" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportcustomer" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານຂໍ້ມູນລູກຄ້າ</p>
                                     </a>
@@ -692,7 +722,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-check-stock" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportsupplier" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານຂໍ້ມູນຜູ້ສະໜອງ</p>
                                     </a>
@@ -700,7 +730,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-warehouse" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reserv" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານການສັ່ງຈອງສິນຄ້າ</p>
                                     </a>

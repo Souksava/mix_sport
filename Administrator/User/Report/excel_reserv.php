@@ -4,7 +4,7 @@
     if(isset($_POST["btnExcel"]))
     {
         require '../../oop/obj.php';
-        $obj->report_sell(trim($_POST["excel_date1"]),trim($_POST["excel_date2"]));
+        $obj->report_reserv(trim($_POST["excel_date1"]),trim($_POST["excel_date2"]));
         $output .= '
         <table style="width: 1500px;font-size: 18px;font-family: '."Phetsarath OT".';" border="1">
         <tr style="font-size: 16px;" >
@@ -20,7 +20,7 @@
         </tr>
         ';
         $Bill = 0;
-        while($row = mysqli_fetch_array($result_report_sell)){
+        while($row = mysqli_fetch_array($result_reserv_sell)){
             $amount = $amount + $row["amount"];
             $Bill = $Bill + 1 ;
             $output .='
@@ -45,7 +45,7 @@
             </table><br>
         ';
         header("Content-Type: application/xls");
-        header("Content-Disposition:attachment; filename=sell.xls");
+        header("Content-Disposition:attachment; filename=reserv.xls");
         echo $output;
     }
 ?>

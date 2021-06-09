@@ -1366,6 +1366,36 @@ class obj{
         global $result_report_orderdetail;
         $result_report_orderdetail = mysqli_query($conn,"call report_orderdetail('$id')");
     }
+    public static function report_reserv_limit($date1,$date2,$page){
+        global $conn;
+        global $result_report_reserv_limit;
+        $result_report_reserv_limit = mysqli_query($conn,"call report_reserv_limit('$date1','$date2','$page')");
+    }
+    public static function report_reserv($date1,$date2){
+        global $conn;
+        global $result_reserv_sell;
+        $result_reserv_sell = mysqli_query($conn,"call report_reserv('$date1','$date2')");
+    }
+    public static function report_revenue_limit($date1,$date2,$page){
+        global $conn;
+        global $result_revenue_limit;
+        $result_revenue_limit = mysqli_query($conn,"call select_revenue_limit('$date1','$date2','$page')");
+    }
+    public static function report_revenue($date1,$date2){
+        global $conn;
+        global $result_revenue;
+        $result_revenue = mysqli_query($conn,"call select_revenue('$date1','$date2')");
+    }
+    public static function report_pay_limit($date1,$date2,$page){
+        global $conn;
+        global $result_pay_limit;
+        $result_pay_limit = mysqli_query($conn,"call report_pay_limit('$date1','$date2','$page')");
+    }
+    public static function report_pay($date1,$date2){
+        global $conn;
+        global $result_pay;
+        $result_pay = mysqli_query($conn,"call report_pay('$date1','$date2')");
+    }
 }
 $obj = new obj();
 ?>

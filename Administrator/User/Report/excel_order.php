@@ -23,11 +23,11 @@
             $output .='
                 <tr align="center">
                     <td>'.$Bill.'</td>
-                    <td>'.$row["order_id"].'</td>
+                    <td>'."'".''.$row["order_id"].'</td>
                     <td>'.$row["emp_name"].'</td>
                     <td>'.$row["company"].'</td>
                     <td>'.number_format($row["amount"],2).'</td>
-                    <td>'.$row["timestamp"].'</td>
+                    <td>'.date("d/m/Y H:i:s",strtotime($row["timestamp"])).'</td>
                 </tr>
             ';
         }   

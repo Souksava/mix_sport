@@ -6,11 +6,11 @@ $amount = 0;
     require '../../oop/obj.php';
     if(isset($_POST["btnPDF"]))
     {
-       $obj->report_sell(trim($_POST["pdf_date1"]),trim($_POST["pdf_date2"]));
+       $obj->report_reserv(trim($_POST["pdf_date1"]),trim($_POST["pdf_date2"]));
     }
      else
      {
-        $obj->report_sell("","");
+        $obj->report_reserv("","");
      } 
 $content .= '
         <style>
@@ -58,7 +58,7 @@ $content .= '
             <div align="center" style="font-size: 16px;">
                 <u>
                     <b>
-                        ລາຍງານການຂາຍ
+                        ລາຍງານການສັ່ງຈອງສິນຄ້າ
                     </b>
                 </u>
             </div>
@@ -75,10 +75,10 @@ $content .= '
                     <th style="width: 200px;">ວັນທີ</th>
                 </tr>
                 ';
-                if(mysqli_num_rows($result_report_sell) > 0){
+                if(mysqli_num_rows($result_reserv_sell) > 0){
                     $Bill = 0;
                   
-                    while($row = mysqli_fetch_array($result_report_sell)){
+                    while($row = mysqli_fetch_array($result_reserv_sell)){
                         $amount = $amount + $row["amount"];
                         $Bill = $Bill + 1 ;
                         $content .='
@@ -117,5 +117,5 @@ $footer = '<p align="center" style="font-size: 8px;">ໜ້າທີ່ {PAGENO}
 $mpdf->SetFooter($footer);
 
 $mpdf->WriteHTML($content);
-$mpdf->Output('ລາຍງານການຂາຍ.pdf','I');
+$mpdf->Output('ລາຍງານການສັ່ງຈອງສິນຄ້າ.pdf','I');
 ?>

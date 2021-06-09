@@ -6,11 +6,11 @@ $amount = 0;
     require '../../oop/obj.php';
     if(isset($_POST["btnPDF"]))
     {
-       $obj->report_sell(trim($_POST["pdf_date1"]),trim($_POST["pdf_date2"]));
+       $obj->report_pay(trim($_POST["pdf_date1"]),trim($_POST["pdf_date2"]));
     }
      else
      {
-        $obj->report_sell("","");
+        $obj->report_pay("","");
      } 
 $content .= '
         <style>
@@ -58,39 +58,45 @@ $content .= '
             <div align="center" style="font-size: 16px;">
                 <u>
                     <b>
-                        ລາຍງານການຂາຍ
+                        ລາຍງານລາຍຈ່າຍ
                     </b>
                 </u>
             </div>
             <table width="100%;">
                 <tr style="font-size: 16px;" >
-                    <th style="width: 30px;">#</th>
-                    <th style="width: 200px;">ເລກທີບິນ</th>
-                    <th style="width: 200px;">ພະນັກງານ</th>
-                    <th style="width: 200px;">ລູກຄ້າ</th>
-                    <th style="width: 200px;">ມູນຄ່າລວມ</th>
-                    <th style="width: 200px;">ສະຖານະ</th>
-                    <th style="width: 200px;">ການຈ່າຍ</th>
-                    <th style="width: 200px;">ປະເພດການຂາຍ</th>
+                    <th style="width: 75px;">#</th>
+                    <th style="width: 150px;">ເລກທີໃບສັ່ງຊື້</th>
+                    <th style="width: 175px;">ເລກທີ່ບິນນຳເຂົ້າ</th>
+                    <th style="width: 150px;">ພະນັກງານ</th>
+                    <th style="width: 450px;">ຜູ້ສະໜອງ</th>
+                    <th style="width: 190px;">ລະຫັດສິນຄ້າ</th>
+                    <th style="width: 350px;">ສິນຄ້າ</th>
+                    <th style="width: 120px;">ຈຳນວນ</th>
+                    <th style="width: 150px;">ລາຄາ</th>
+                    <th style="width: 180px;">ລວມ</th>
+                    <th style="width: 200px;">ໝາຍເຫດ </th>
                     <th style="width: 200px;">ວັນທີ</th>
                 </tr>
                 ';
-                if(mysqli_num_rows($result_report_sell) > 0){
+                if(mysqli_num_rows($result_pay) > 0){
                     $Bill = 0;
                   
-                    while($row = mysqli_fetch_array($result_report_sell)){
-                        $amount = $amount + $row["amount"];
+                    while($row = mysqli_fetch_array($result_pay)){
+                        $amount = $amount + $row["total"];
                         $Bill = $Bill + 1 ;
                         $content .='
                             <tr align="center">
                                 <td>'.$Bill.'</td>
-                                <td>'.$row["sell_id"].'</td>
+                                <td>'.$row["order_id"].'</td>
+                                <td>'.$row["imp_bill"].'</td>
                                 <td>'.$row["emp_name"].'</td>
-                                <td>'.$row["cus_name"].'</td>
-                                <td>'.number_format($row["amount"],2).'</td>
-                                <td>'.$row["stt_name"].'</td>
-                                <td>'.$row["type_pay"].'</td>
-                                <td>'.$row["sell_type"].'</td>
+                                <td>'.$row["company"].'</td>
+                                <td>'.$row["pro_id"].'</td>
+                                <td>'.$row["cate_name"].' '.$row["brand_name"].' '.$row["pro_name"].' '.$row["size_name"].'</td>
+                                <td>'.$row["qty"].' '.$row["unit_name"].'</td>
+                                <td>'.number_format($row["price"],2).'</td>
+                                <td>'.number_format($row["total"],2).'</td>
+                                <td>'.$row["remark"].'</td>
                                 <td>'.date("d/m/Y H:i:s",strtotime($row["timestamp"])).'</td>
                             </tr>
                         ';
@@ -98,13 +104,13 @@ $content .= '
                 }   
                 $content .='
                 <tr>
-                    <td colspan="5" align="right"><h4>ມູນຄ່າທັງໝົດ:</h4></td>
+                    <td colspan="9" align="right"><h4>ມູນຄ່າທັງໝົດ:</h4></td>
                     <td colspan="3" align="right"><h4 style="color: red;">'.number_format($amount,2).' ກີບ</h4></td>
                 </tr>
                 </table><br>
             ';
 $mpdf = new \Mpdf\Mpdf([
-    'format'            => 'A4',
+    'format'            => 'A4-L',
     'mode'              => 'utf-8',      
     'tempDir'           => '/tmp',
     'default_font_size' => 14,
@@ -117,5 +123,5 @@ $footer = '<p align="center" style="font-size: 8px;">ໜ້າທີ່ {PAGENO}
 $mpdf->SetFooter($footer);
 
 $mpdf->WriteHTML($content);
-$mpdf->Output('ລາຍງານການຂາຍ.pdf','I');
+$mpdf->Output('ລາຍງານລາຍຮັບ.pdf','I');
 ?>
