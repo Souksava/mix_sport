@@ -1,127 +1,41 @@
 <?php
-//    session_start();
-//    if($_SESSION['ses_status_id'] == 1){
-//         $stt = 1;
-//    }
-//    if($_SESSION['ses_status_id'] == 2){
-//     $stt = 2;
-//     }
-//     if($_SESSION['ses_status_id'] == 3){
-//         $stt = 3;
-//     }
-//     if($_SESSION['ses_status_id'] == 4){
-//         $stt = 4;
+   session_start();
+   if($_SESSION['mixsport_ses_status_id'] == 1){
+        $stt = 1;
+   }
+   if($_SESSION['mixsport_ses_status_id'] == 2){
     $stt = 2;
-//     }
-//     if($_SESSION['ses_seven_id'] == ''){
-//         unset($_SESSION['ses_id']);
-//         unset($_SESSION['email']);
-//         unset($_SESSION['emp_name']);
-//         unset($_SESSION['emp_id']);
-//         unset($_SESSION['img_path']);
-//         unset($_SESSION['ses_status_id']);
-//         echo"<meta http-equiv='refresh' content='1;URL=$path'>";        
-//     }
-//     else if($_SESSION['ses_status_id'] != $stt){
-//         unset($_SESSION['ses_id']);
-//         unset($_SESSION['email']);
-//         unset($_SESSION['emp_name']);
-//         unset($_SESSION['emp_id']);
-//         unset($_SESSION['img_path']);
-//         unset($_SESSION['ses_status_id']);
-//         echo"<meta http-equiv='refresh' content='1;URL=$path'>";
-//     }
-//     else{
-//             include (''.$path.'oop/obj.php');
-//             // Import
-//             if(isset($_POST['stock'])){
-//                 $obj->cookie_stock(trim($_POST['code']),trim($_POST['serial']),trim($_POST['qty']),trim($_POST['price']),trim($_POST['pro_no']),trim($_POST['dnv']),trim($_POST['imp_no']),trim($_POST['remark']));
-//             }
-//             if(isset($_POST['btnDelete_stock'])){
-//                 $obj->del_stock(trim($_POST['id']));
-//             }
-//             if(isset($_POST['clear-stock'])){
-//                 $obj->clear_stock();
-//             }
-//             if(isset($_POST['btnStock'])){
-//                 $obj->save_stock(trim($_POST['sup_id']),trim($_POST['rate_id']),$_SESSION['emp_id']);
-//             }
-//             //End Import
-//             // Check-Stock
-//             if(isset($_POST['check_stock'])){
-//                 $obj->cookie_check_stock(trim($_POST['code']),trim($_POST['serial']),trim($_POST['qty']),trim($_POST['remark']));
-//             }
-//             if(isset($_POST['btnDelete_Check_Stock'])){
-//                 $obj->del_check_stock(trim($_POST['id']));
-//             }
-//             if(isset($_POST['clear_check_stock'])){
-//                 $obj->clear_check_stock();
-//             }
-            
-//             if(isset($_POST['btnCheck_stock'])){
-//                 $obj->save_check_stock($_SESSION['emp_id'],$_POST['pro_addr']);
-//             }
-//             //End Check-Stock
+    }
+    if($_SESSION['mixsport_ses_id'] == ''){
+        unset($_SESSION['mixsport_ses_id']);
+        unset($_SESSION['emp_id']);
+        unset($_SESSION['email']);
+        unset($_SESSION['emp_name']);
+        unset($_SESSION['img_path']);
+        unset($_SESSION['mixsport_ses_status_id']);
+        echo"<meta http-equiv='refresh' content='1;URL=$path'>";        
+    }
+    else if($_SESSION['mixsport_ses_status_id'] != $stt){
+        unset($_SESSION['mixsport_ses_id']);
+        unset($_SESSION['emp_id']);
+        unset($_SESSION['email']);
+        unset($_SESSION['emp_name']);
+        unset($_SESSION['img_path']);
+        unset($_SESSION['mixsport_ses_status_id']);
+        echo"<meta http-equiv='refresh' content='1;URL=$path'>";
+    }
+    // else if($_SESSION['mixsport_ses_status_id'] != $stt && $permission != 1){
+    //     unset($_SESSION['mixsport_ses_id']);
+    //     unset($_SESSION['emp_id']);
+    //     unset($_SESSION['email']);
+    //     unset($_SESSION['emp_name']);
+    //     unset($_SESSION['img_path']);
+    //     unset($_SESSION['mixsport_ses_status_id']);
+    //     echo"<meta http-equiv='refresh' content='1;URL=$path'>";
+    // }
+    else{
 
-//             //Spare-part
-//             if(isset($_POST['add_spare'])){
-//                 $obj->cookie_spare_part(trim($_POST['code']),trim($_POST['serialout']),trim($_POST['spare_part']),trim($_POST['pro_id']),trim($_POST['serialin']),trim($_POST['remark']));
-//             }
-//             if(isset($_POST['btnDelete_spare'])){
-//                 $obj->del_spare_part(trim($_POST['id']));
-//             }
-//             if(isset($_POST['clear_spare'])){
-//                 $obj->clear_spare_part();
-//             }
-//             if(isset($_POST['btnSave_spare'])){
-//                 $obj->save_spare_part($_SESSION['emp_id']);
-//             }
-//             //ປ່ຽນອາໄຫຼ່ End Spare-Part
-//             //ຟອມເບີກ
-//             if(isset($_POST['add_distribute'])){
-//                 $obj->cookie_distribute(trim($_POST['code']),trim($_POST['serial']),trim($_POST['qty']),trim($_POST['form_id']),trim($_POST['remark']));
-//             }
-//             if(isset($_POST['clear_distribute'])){
-//                 $obj->clear_distribute();
-//             }
-//             if(isset($_POST['btnDelete_distribute'])){
-//                 $obj->del_distribute(trim($_POST['id']));
-//             }
-//             if(isset($_POST['btnSave_distribute'])){
-//                 $obj->save_distribute($_SESSION['emp_id']);
-//             }
-//             //ສິ້ນສຸດຟອມເບີກ
-//             //ສິນຄ້າເບີກແລ້ວນຳກັບຄືນ
-//             if(isset($_POST['add_putback'])){
-//                 $obj->cookie_putback(trim($_POST['code']),trim($_POST['serial']),trim($_POST['qty']),trim($_POST['form_id']),trim($_POST['remark']));
-//             }
-//             if(isset($_POST['clear_putback'])){
-//                 $obj->clear_putback();
-//             }
-//             if(isset($_POST['btnDelete_putback'])){
-//                 $obj->del_putback(trim($_POST['id']));
-//             }
-//             if(isset($_POST['btnSave_putback'])){
-//                 $obj->save_putback($_SESSION['emp_id']);
-//             }
-//             //ສິ້ນສຸດ
-//                         //ສິນຄ້າເບີກແລ້ວນຳກັບຄືນ
-//                         if(isset($_POST['form_add'])){
-//                             $obj->cookie_form(trim($_POST['code']),trim($_POST['qty']));
-//                         }
-//                         if(isset($_POST['clear_form'])){
-//                             $obj->clear_form();
-//                         }
-//                         if(isset($_POST['del_list_form_id'])){
-//                             $obj->del_form(trim($_POST['del_list_form_id']));
-//                         }
-//                         if(isset($_POST['form_id'])){
-//                             $mail_user_name = $_SESSION['emp_name'];
-//                             $obj->save_form(trim($_POST['form_id']),$_SESSION['emp_id'],trim($_POST['cus_id']),trim($_POST['amount']),trim($_POST['packing']));
-            
-//                         }
-//                         //ສິ້ນສຸດ
-//                     }
+        }
                     
       ?>
 <!DOCTYPE html>
@@ -164,7 +78,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="<?php echo $path ?>dist/js/sweetalert.min.js"></script>
 </head>
-    <?php
+<?php
         include (''.$path.'oop/obj.php');
         if(isset($_POST['pro_id_order'])){
             $obj->cookie_order(trim($_POST['pro_id_order']),trim($_POST['qty']),trim($_POST['price']));
@@ -176,7 +90,7 @@
             $obj->del_order(trim($_POST['cookie_pro_id']));
         }
         if(isset($_POST['order_id'])){
-            $obj->save_order(trim($_POST['order_id']),"1",trim($_POST['sup_id']));
+            $obj->save_order(trim($_POST['order_id']),$_SESSION["emp_id"],trim($_POST['sup_id']));
         }
         if(isset($_POST['pro_id_import'])){
             $obj->cookie_import(trim($_POST['pro_id_import']),trim($_POST['qty']),trim($_POST['price']),trim($_POST['remark']));
@@ -188,7 +102,7 @@
             $obj->del_import(trim($_POST['cookie_pro_id_import']));
         }
         if(isset($_POST['sup_id_import'])){
-            $obj->save_import(trim($_POST['order_id_import']),"1",trim($_POST['sup_id_import']),trim($_POST['import_no']));
+            $obj->save_import(trim($_POST['order_id_import']),$_SESSION["emp_id"],trim($_POST['sup_id_import']),trim($_POST['import_no']));
         }
         if(isset($_POST["btnAdd_sell"])){
             $obj->cookie_sell(trim($_POST["pro_id_sell"]),trim($_POST["qty_sell"]));
@@ -197,10 +111,11 @@
             $obj->del_sell(trim($_GET["listsell"]));
         }
         if(isset($_POST["sell_id"])){
-            $obj->save_sell(trim($_POST["sell_id"]),"1","1","1","ເງິນສົດ","ໜ້າຮ້ານ",trim($_FILES["img"]["name"]),trim($_POST["getmoney"]));
+            $obj->save_sell(trim($_POST["sell_id"]),$_SESSION["emp_id"],"1","1","ເງິນສົດ","ໜ້າຮ້ານ",trim($_FILES["img"]["name"]),trim($_POST["getmoney"]));
         }
         
     ?>
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <div id="loader-wrapper">
         <div id="loader"></div>
@@ -227,7 +142,7 @@
                     </div>
                 </div>
             </form> -->
-            
+
             <?php
                 if($title == "ປະເພດສິນຄ້າ"){
                     echo'
@@ -349,6 +264,21 @@
                         </div>
                     ';
                 }
+                if($title == "ພະນັກງານ"){
+                    echo'
+                        <div class="form-inline ml-3">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" name="search" id="search"
+                                    placeholder="ຄົ້ນຫາ" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
                 if($title == "ສັ່ງຊື້ສິນຄ້າ"){
                     echo'
                         <div class="form-inline ml-3">
@@ -414,7 +344,7 @@
                 <?php
                     if($stt == 1){  
                 ?>
-                                <nav class="mt-2">
+                <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item has-treeview">
@@ -427,7 +357,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Management/auther" class="nav-link">
+                                    <a href="<?php echo $links ?>Management/Employee" class="nav-link">
                                         <i class="fas fa-user nav-icon"></i>
                                         <p>ຈັດການຂໍ້ມູນພະນັກງານ</p>
                                     </a>
@@ -445,7 +375,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-employee" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportsell" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານການຂາຍສິນຄ້າ</p>
                                     </a>
@@ -453,7 +383,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-customer" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportorder" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານການສັ່ງຊື້ສິນຄ້າ</p>
                                     </a>
@@ -461,7 +391,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-supplier" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportpay" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານລາຍຈ່າຍ</p>
                                     </a>
@@ -469,7 +399,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-product" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportrevenue" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານລາຍຮັບ</p>
                                     </a>
@@ -477,7 +407,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-stock" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportcustomer" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານຂໍ້ມູນລູກຄ້າ</p>
                                     </a>
@@ -485,7 +415,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-check-stock" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reportsupplier" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານຂໍ້ມູນຜູ້ສະໜອງ</p>
                                     </a>
@@ -493,7 +423,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="'.$links.'Report/report-warehouse" class="nav-link">
+                                    <a href="<?php echo $links ?>Report/Reserv" class="nav-link">
                                         <i class="far fas fa-book nav-icon"></i>
                                         <p>ລາຍງານການສັ່ງຈອງສິນຄ້າ</p>
                                     </a>
@@ -528,7 +458,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="<?php echo $links ?>Management/Employee" class="nav-link">
-                                        <i class="fas fa-network-wired nav-icon"></i>
+                                        <i class="fas fa-user nav-icon"></i>
                                         <p>ຈັດການຂໍ້ມູນພະນັກງານ</p>
                                     </a>
                                 </li>
@@ -543,7 +473,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                <a href="<?php echo $links ?>Management/Unit" class="nav-link">
+                                    <a href="<?php echo $links ?>Management/Unit" class="nav-link">
                                         <i class="far fas fa-boxes nav-icon"></i>
                                         <p>ຈັດການຂໍ້ມູນຫົວໜ່ວຍສິນຄ້າ</p>
                                     </a>
@@ -777,8 +707,8 @@
             </div>
         </form>
         <?php
-            // if(isset($_POST['btnLogout'])){
-            //     $obj->logout();
-            // }
+            if(isset($_POST['btnLogout'])){
+                $obj->logout();
+            }
         ?>
         <div class="main-footer">

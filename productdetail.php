@@ -14,6 +14,7 @@ $row_product = mysqli_fetch_array($result_product,MYSQLI_ASSOC);
           </div>
         </div>
       </div>
+      <form action="Cart" method="POST" id="form_cart" >
       <div class="ps-product--detail pt-60">
         <div class="ps-container">
           <div class="row">
@@ -50,10 +51,11 @@ $row_product = mysqli_fetch_array($result_product,MYSQLI_ASSOC);
                   <h4>ຂະໜາດ: <?php echo $row_product["size_name"] ?></h4>
                  
                   <div class="form-group">
-                    <input class="form-control" min="1" type="number" value="1">
+                    <input class="form-control" name="qty" min="1" type="number" value="1">
+                    <input type="hidden" name="pro_id" value="<?php echo $pro_id ?>">
                   </div>
                 </div>
-                <div class="ps-product__shopping"><a class="ps-btn mb-10" href="cart.html">ເພີ່ມໃສ່ກະຕາ<i class="ps-icon-next"></i></a>
+                <div class="ps-product__shopping"><button class="ps-btn mb-10" name="btnAddCart" type="submit">ເພີ່ມໃສ່ກະຕ່າ<i class="ps-icon-next"></i></button>
                 </div>
               </div>
               <div class="clearfix"></div>
@@ -61,6 +63,7 @@ $row_product = mysqli_fetch_array($result_product,MYSQLI_ASSOC);
           </div>
         </div>
       </div>
+      </form>
       <div class="ps-section ps-section--top-sales ps-owl-root pt-40 pb-80">
         <div class="ps-container">
           <div class="ps-section__header mb-50">

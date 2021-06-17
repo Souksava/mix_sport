@@ -19,65 +19,54 @@
  if(isset($_POST["query"]))
 {
    $highlight = $_POST['query'];
-   $obj->select_product_limit("%".$_POST['query']."%",$page);
+   $obj->select_supplier_limit("%".$_POST['query']."%",$page);
 }
 else
 {
-   $obj->select_product_limit("%%",$page);
+   $obj->select_supplier_limit("%%",$page);
 }
 
-if(mysqli_num_rows($resultproduct_limit) > 0)
+if(mysqli_num_rows($result_supplier_limit) > 0)
 {
  $output .= '
-  <div class="table-responsive">
-  <table class="table-bordered" style="width: 1500px;text-align: center;">
-    <tr style="font-size: 18px;">
-        <th style="width: 90px;">ລຳດັບ</th>
-        <th style="width: 90px;">ສິນຄ້າ</th>
-        <th style="width: 150px;">ລະຫັດສິນຄ້າ</th>
-        <th style="width: 180px;">ຊື່ສິນຄ້າ</th>
-        <th style="width: 120px;">ຈຳນວນ</th>
-        <th style="width: 150px;">ລາຄາ</th>
-        <th style="width: 180px;">ເງື່ອນໄຂການສັ່ງຊື້</th>
-
-    </tr>
+    <div class="table-responsive">
+        <table class="table-bordered" style="width: 1700px;text-align: center;">
+            <tr style="font-size: 18px;">
+                <th style="width: 120px;">ເຄື່ອງມື</th>
+                <th style="width: 100px;">ລຳດັບ</th>
+                <th style="width: 70px;">ລະຫັດ</th>
+                <th style="width: 550px;">ຊື່ບໍລິສັດ</th>
+                <th style="width: 200px;">ເບີໂທລະສັບ</th>
+                <th style="width: 200px;">ເບີແຟັກ</th>
+                <th style="width: 350px;">ທີ່ຢູ່</th>
+                <th style="width: 350px;">ອີເມວ</th>
+            </tr>
  ';
  $no_ =  $rank;
- while($row = mysqli_fetch_array($resultproduct_limit))
+ while($row = mysqli_fetch_array($result_supplier_limit))
  {
 $no_ += 1;
   $output .= '
-    <tr class="result click modalorder" data-toggle="modal" data-target="#exampleModalUpdate">
+    <tr>
+        <td>
+        <input type="checkbox" name="id2[]" value="'.$row["sup_id"].'" id="flexCheckDefault">
+        &nbsp; &nbsp;
+        <a href="#" data-toggle="modal" data-target="#exampleModalupdate"
+            class="fa fa-pen toolcolor btnUpdateCompany"></a>&nbsp; &nbsp;
+        <a href="#" data-toggle="modal" data-target="#exampleModaldel"
+            class="fa fa-trash toolcolor btnDelete_com"></a>
+        </td>
         <td>'.$no_.'</td>
-        <td style="display: none;">'.$row["img"].'</td>
-        ';
-        if($row["img"] == ""){
-            $row["img"] = "image.jpeg";
-        }
-        $output .='
-        <td>
-            <img src="../../image/'.$row["img"].'" class="img-circle elevation-2" alt="" width="55px">
-        </td>
-        <td>'.$row["pro_id"].'</td>
-        <td style="display: none;">'.$row["pro_name"].'</td>
-        <td style="display: none;">'.$row["cate_id"].'</td>
-        <td style="display: none;">'.$row["brand_id"].'</td>
-        <td style="display: none;">'.$row["size_id"].'</td>
-        <td style="display: none;">'.$row["unit_id"].'</td>
-        <td style="display: none;">'.$row["qty"].'</td>
-        <td style="display: none;">'.$row["qty_alert"].'</td>
-        <td style="display: none;">'.$row["img"].'</td>
-        <td>
-            '.$row["cate_name"].' '.$row["brand_name"].' '.$row["pro_name"].' '.$row["size_name"].'
-        </td>
-        <td>'.$row["qty"].' '.$row["unit_name"].'</td>
-        <td>'.number_format($row["price"],2).'</td>
-        <td>'.$row["qty_alert"].' '.$row["unit_name"].'</td>
-        <td style="display: none;">'.$row["price"].'</td>
+        <td>'.$row["sup_id"].'</td>
+        <td>'.$row["company"].'</td>
+        <td>'.$row["tel"].'</td>
+        <td>'.$row["fax"].'</td>
+        <td>'.$row["address"].'</td>
+        <td>'.$row["email"].'</td>
     </tr>
   ';
  }
- mysqli_free_result($resultproduct_limit);  
+ mysqli_free_result($result_supplier_limit);  
  mysqli_next_result($conn);
  $output .='
    </table>
@@ -86,15 +75,15 @@ $no_ += 1;
  echo $output;
  if(isset($_POST["query"]))
  {
-    $obj->select_product("%".$_POST['query']."%");
+    $obj->select_supplier("%".$_POST['query']."%");
  }
  else
  {
-    $obj->select_product("%%");
+    $obj->select_supplier("%%");
  }
 
- $count = mysqli_num_rows($resultproduct);
- mysqli_free_result($resultproduct);  
+ $count = mysqli_num_rows($result_supplier);
+ mysqli_free_result($result_supplier);  
  mysqli_next_result($conn);
  $a = ceil($count/50);
  if(isset($_POST['page'])){
@@ -181,26 +170,23 @@ else
 <script type="text/javascript">
 var highlight = "<?php echo $_POST['query']; ?>";
 $('.result_data').highlight([highlight]);
-    $('.modalorder').on('click', function() {
-        $('#btnUpdateProduct').modal('show');
+    $('.btnUpdateCompany').on('click', function() {
+        $('#exampleModalupdate').modal('show');
         $tr = $(this).closest('tr');
         var data = $tr.children("td").map(function() {
             return $(this).text();
         }).get();
 
         console.log(data);
-
-        $('#pro_id_order').val(data[3]);
-        if(data[1] === ''){
-            document.getElementById("output").src = ('../../image/image.jpeg');
-        }
-        else{
-            document.getElementById("output").src = ('../../image/'+data[1]);
-        }
-        $('#price2').val(data[16]);
+        $('#sup_id').val(data[2]);
+        $('#company2').val(data[3]);
+        $('#tel2').val(data[4]);
+        $('#fax2').val(data[5]);
+        $('#address2').val(data[6]);
+        $('#email2').val(data[7]);
     });
     $('.btnDelete_com').on('click', function() {
-        $('#exampleModalUpdate').modal('show');
+        $('#exampleModaldel').modal('show');
         $tr = $(this).closest('tr');
         var data = $tr.children("td").map(function() {
             return $(this).text();

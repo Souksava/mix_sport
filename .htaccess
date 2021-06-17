@@ -1,7 +1,19 @@
 RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+ErrorDocument 404 /Mix_sport/404.php
+
 
 RewriteRule ^/?$ index.php
+RewriteRule ^index?$ index.php
+RewriteRule ^Cart?$ cart.php
+RewriteRule ^Signin?$ login.php
 RewriteRule ^Productdetail?$ productdetail.php
+RewriteRule ^Checkout?$ checkout.php
+RewriteRule ^Bill?$ bill.php
+RewriteRule ^Products?$ product-listing.php
+RewriteRule ^Contact-us?$ contact-us.php
 RewriteRule ^Administrator/Login?$ Administrator/index.php
 RewriteRule ^Administrator/User/Main?$ Administrator/User/Main.php
 RewriteRule ^Administrator/User/Management/Employee?$ Administrator/User/Management/employee.php
@@ -45,3 +57,31 @@ RewriteRule ^Administrator/User/Report/PDF-Pay?$ Administrator/User/Report/pdf_p
 RewriteRule ^Administrator/User/Report/Excel-Pay?$ Administrator/User/Report/excel_pay.php
 RewriteRule ^Administrator/User/Report/Reportrevenue?$ Administrator/User/Report/report_revenue.php
 RewriteRule ^Administrator/User/Report/Reportpay?$ Administrator/User/Report/report_pay.php
+
+
+
+RewriteRule ^Administrator/Admin/Main?$ Administrator/Admin/Main.php
+RewriteRule ^Administrator/Admin/Management/Employee?$ Administrator/Admin/Management/employee.php
+RewriteRule ^Administrator/Admin/Report/Reportsell?$ Administrator/Admin/Report/report_sell.php
+RewriteRule ^Administrator/Admin/Report/PDF-Sell?$ Administrator/Admin/Report/pdf_sell.php
+RewriteRule ^Administrator/Admin/Report/Excel-Sell?$ Administrator/Admin/Report/excel_sell.php
+RewriteRule ^Administrator/Admin/Report/Bill?$ Administrator/Admin/Report/bill.php
+RewriteRule ^Administrator/Admin/Report/Reportorder?$ Administrator/Admin/Report/report_order.php
+RewriteRule ^Administrator/Admin/Report/OrderBill?$ Administrator/Admin/Report/bill_order.php
+RewriteRule ^Administrator/Admin/Report/PDF-Order?$ Administrator/Admin/Report/pdf_order.php
+RewriteRule ^Administrator/Admin/Report/Excel-Order?$ Administrator/Admin/Report/excel_order.php
+RewriteRule ^Administrator/Admin/Report/Reserv?$ Administrator/Admin/Report/report_reserv.php
+RewriteRule ^Administrator/Admin/Report/PDF-Reserv?$ Administrator/Admin/Report/pdf_reserv.php
+RewriteRule ^Administrator/Admin/Report/Excel-Reserv?$ Administrator/Admin/Report/excel_reserv.php
+RewriteRule ^Administrator/Admin/Report/Reportcustomer?$ Administrator/Admin/Report/report_customer.php
+RewriteRule ^Administrator/Admin/Report/PDF-Customer?$ Administrator/Admin/Report/pdf_customer.php
+RewriteRule ^Administrator/Admin/Report/Excel-Customer?$ Administrator/Admin/Report/excel_customer.php
+RewriteRule ^Administrator/Admin/Report/PDF-Supplier?$ Administrator/Admin/Report/pdf_supplier.php
+RewriteRule ^Administrator/Admin/Report/Excel-Supplier?$ Administrator/Admin/Report/excel_supplier.php
+RewriteRule ^Administrator/Admin/Report/Reportsupplier?$ Administrator/Admin/Report/report_supplier.php
+RewriteRule ^Administrator/Admin/Report/PDF-Revenue?$ Administrator/Admin/Report/pdf_revenue.php
+RewriteRule ^Administrator/Admin/Report/Excel-Revenue?$ Administrator/Admin/Report/excel_revenue.php
+RewriteRule ^Administrator/Admin/Report/PDF-Pay?$ Administrator/Admin/Report/pdf_pay.php
+RewriteRule ^Administrator/Admin/Report/Excel-Pay?$ Administrator/Admin/Report/excel_pay.php
+RewriteRule ^Administrator/Admin/Report/Reportrevenue?$ Administrator/Admin/Report/report_revenue.php
+RewriteRule ^Administrator/Admin/Report/Reportpay?$ Administrator/Admin/Report/report_pay.php

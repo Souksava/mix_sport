@@ -37,6 +37,13 @@
 <script type="text/javascript" src="<?php echo $path ?>plugins/revolution/js/extensions/revolution.extension.actions.min.js"></script>
 <!-- Custom scripts-->
 <script type="text/javascript" src="<?php echo $path ?>js/main.js"></script>
+
+<script>
+    $(document).ready(function() {
+        var qty = $('#atycart').text();
+        $('#showQtycart').text(qty)
+    });
+</script>
 </body>
 
 </html>

@@ -1,4 +1,18 @@
 <?php
+// session_start();
+//    unset($_SESSION['mixsport_ses_id']);
+//    unset($_SESSION['emp_id']);
+//    unset($_SESSION['email']);
+//    unset($_SESSION['emp_name']);
+//    unset($_SESSION['img_path']);
+//    unset($_SESSION['mixsport_ses_status_id']);
+//    unset($_SESSION['ses_seven_id']);
+//    unset($_SESSION['email']);
+//    unset($_SESSION['emp_name']);
+//    unset($_SESSION['emp_id']);
+//    unset($_SESSION['img_path']);
+//    unset($_SESSION['ses_status_id']);
+//    session_destroy();
   include ('oop/obj.php');
   if(isset($_POST['btnLogin'])){
     $obj->login($_POST['email'],$_POST['pass']);
@@ -10,7 +24,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="icon" href="image/logo.png">
+  <link rel="icon" href="icon/logo.jpg">
   <title>Mix Sport</title>
   <link rel="stylesheet" href="dist/css/alt/style2.css">
   <link rel="stylesheet" href="dist/css/alt/style.css">
@@ -38,7 +52,7 @@
     <div class="container">
       <div class="forms-container">
           <div class="signin-signup">
-              <form action="home" method="POST" id="formLogin" class="sign-in-form">
+              <form action="Login" method="POST" id="formLogin" class="sign-in-form">
                 <img src="icon/logo.jpg" alt="" width="100px" style="border-radius: 50%;"><br>
                 <h2 class="title">ເຂົ້າສູ່ລະບົບ</h2>
                   <div class="input-field">
