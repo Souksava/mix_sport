@@ -1366,56 +1366,92 @@ class obj{
         mysqli_free_result($result_sell);  
         mysqli_next_result($conn);
     }
+    public static function customer_alert_bill($cus_id){
+        global $conn;
+        global $alert;
+        $alert = "";
+        $result = mysqli_query($conn,"call customer_alert_bill('$cus_id');");
+        if(mysqli_num_rows($result) > 0){
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $alert = $row['alert'];
+        }
+        else{
+            $alert = "0";
+        }
+        mysqli_free_result($result);  
+        mysqli_next_result($conn);
+    }
     public static function save_sell($sell_id,$emp_id,$cus_id,$stt_id,$type_pay,$sell_type,$img,$getmoney){
         global $conn;
         global $path;
         if(isset($_COOKIE['list_sell'])){//ກວດສອບວ່າຄຸກກີ້ order ນັ້ນມີຄ່າຫຼືບໍ່
-            if($img == ""){
-                $Pro_image = "";
+            $cookie_data_check_stokc = $_COOKIE['list_sell'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+            $cart_data_check_stock = json_decode($cookie_data_check_stokc, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
+            foreach($cart_data_check_stock as $check_stock){
+                $check_pro_id = $check_stock['pro_id'];
+                $check_pro_name = trim($check_stock['pro_name']);
+                $check_qty = $check_stock['qty'];
+                $check = mysqli_query($conn,"select * from product where pro_id='$check_pro_id'");
+                $db_qty = mysqli_fetch_array($check,MYSQLI_ASSOC);
+                if($check_qty > $db_qty['qty']){
+                    echo"<script>";
+                    echo"window.location.href='Sell?stock=over&&msg=$check_pro_name&&productid=$check_pro_id';";
+                    echo"</script>";
+                    $i = true;
+                    break;        
+                }
+            }
+            if($i == true){
+
             }
             else{
-                $ext = pathinfo(basename($_FILES['img']['name']), PATHINFO_EXTENSION);
-                $new_image_name = 'Mix_'.uniqid().".".$ext;
-                $image_path = $path.'image/';
-                $upload_path = $image_path.$new_image_name;
-                move_uploaded_file($_FILES['img']['tmp_name'], $upload_path);
-                $Pro_image = $new_image_name;
-            }
-            if($getmoney == ""){
-                $getmoney = 0;
-            }
-            $result = mysqli_query($conn,"call insert_sell('$sell_id','$emp_id','$cus_id','$stt_id','$type_pay','$sell_type','$Pro_image','1','1','$getmoney')");
-            // mysqli_free_result($result);  
-            // mysqli_next_result($conn);
-            if(!$result){
-                echo"<script>";
-                echo"window.location.href='Sell?save=fail';";
-                echo"</script>";
-            }
-            else{
-                $cookie_data = $_COOKIE['list_sell'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
-                $cart_data = json_decode($cookie_data, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
-                foreach($cart_data as $data){
-                    $pro_id = $data['pro_id'];
-                    $qty = $data['qty'];
-                    $price = $data['price'];
-                    $result2 = mysqli_query($conn,"call insert_selldetail('$pro_id','$qty','$price','$sell_id')");
-                    mysqli_free_result($result2);  
-                    mysqli_next_result($conn);
-                    $update_stokc = mysqli_query($conn,"update product set qty=qty-'$qty' where pro_id='$pro_id'");
+                    if($img == ""){
+                        $Pro_image = "";
+                    }
+                    else{
+                        $ext = pathinfo(basename($_FILES['img']['name']), PATHINFO_EXTENSION);
+                        $new_image_name = 'Mix_'.uniqid().".".$ext;
+                        $image_path = $path.'image/';
+                        $upload_path = $image_path.$new_image_name;
+                        move_uploaded_file($_FILES['img']['tmp_name'], $upload_path);
+                        $Pro_image = $new_image_name;
+                    }
+                    if($getmoney == ""){
+                        $getmoney = 0;
+                    }
+                    $result = mysqli_query($conn,"call insert_sell('$sell_id','$emp_id','$cus_id','$stt_id','$type_pay','$sell_type','$Pro_image','1','1','$getmoney')");
+                    // mysqli_free_result($result);  
+                    // mysqli_next_result($conn);
+                    if(!$result){
+                        echo"<script>";
+                        echo"window.location.href='Sell?save=fail';";
+                        echo"</script>";
+                    }
+                    else{
+                        $cookie_data = $_COOKIE['list_sell'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+                        $cart_data = json_decode($cookie_data, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
+                        foreach($cart_data as $data){
+                            $pro_id = $data['pro_id'];
+                            $qty = $data['qty'];
+                            $price = $data['price'];
+                            $result2 = mysqli_query($conn,"call insert_selldetail('$pro_id','$qty','$price','$sell_id')");
+                            mysqli_free_result($result2);  
+                            mysqli_next_result($conn);
+                            $update_stokc = mysqli_query($conn,"update product set qty=qty-'$qty' where pro_id='$pro_id'");
+                        }
+                        if(!$result2){
+                            echo"<script>";
+                            echo"window.location.href='Sell?save=fail';";
+                            echo"</script>";
+                        }
+                        else{
+                            setcookie("list_sell","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
+                            echo"<script>";
+                            echo"window.location.href='Bill?billno=$sell_id';";
+                            echo"</script>";
+                        }
+                    }
                 }
-                if(!$result2){
-                    echo"<script>";
-                    echo"window.location.href='Sell?save=fail';";
-                    echo"</script>";
-                }
-                else{
-                    setcookie("list_sell","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
-                    echo"<script>";
-                    echo"window.location.href='Bill?billno=$sell_id';";
-                    echo"</script>";
-                }
-            }
         }
         else{
             echo"<script>";
@@ -1438,67 +1474,69 @@ class obj{
         }
         else{
             if(isset($_COOKIE["list_cart"])){
-            // $cookie_data_check_stokc = $_COOKIE['list_cart'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
-            // $cart_data_check_stock = json_decode($cookie_data_check_stokc, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
-            // foreach($cart_data_check_stock as $check_stock){
-            //     $check_cart = 0;
-            //     $check_pro_id = $check_stock['pro_id'];
-            //     $check_pro_name = trim($check_stock['pro_name']);
-            //     $check_qty = $check_stock['qty'];
-            //     $check = mysqli_query($conn,"select * from product where pro_id='$check_pro_id'");
-            //     $db_qty = mysqli_fetch_array($check,MYSQLI_ASSOC);
-            //     if($check_qty > $db_qty['qty']){
-            //         echo"<script>";
-            //         echo"window.location.href='Checkout?stock=over&&msg=$check_pro_name';";
-            //         echo"</script>";
-                 
-            //         break;        
-            //     }
-            // }
- 
-                if($img_path == ""){
-                    $Pro_image = "";
+            $cookie_data_check_stokc = $_COOKIE['list_cart'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+            $cart_data_check_stock = json_decode($cookie_data_check_stokc, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
+            foreach($cart_data_check_stock as $check_stock){
+                $check_pro_id = $check_stock['pro_id'];
+                $check_pro_name = trim($check_stock['pro_name']);
+                $check_qty = $check_stock['qty'];
+                $check = mysqli_query($conn,"select * from product where pro_id='$check_pro_id'");
+                $db_qty = mysqli_fetch_array($check,MYSQLI_ASSOC);
+                if($check_qty > $db_qty['qty']){
+                    echo"<script>";
+                    echo"window.location.href='Checkout?stock=over&&msg=$check_pro_name';";
+                    echo"</script>";
+                    $i = true;
+                    break;        
+                }
+            }
+                if($i == true){
+
                 }
                 else{
-                    $ext = pathinfo(basename($_FILES['img_path']['name']), PATHINFO_EXTENSION);
-                    $new_image_name = 'Mix_'.uniqid().".".$ext;
-                    $image_path = $path.'Administrator/image/';
-                    $upload_path = $image_path.$new_image_name;
-                    move_uploaded_file($_FILES['img_path']['tmp_name'], $upload_path);
-                    $Pro_image = $new_image_name;
-                }
-                    $result = mysqli_query($conn,"insert into sell(sell_id,emp_id,cus_id,stt_id,type_pay,sell_type,img_path,remark) values('$sell_id','$emp_id','$cus_id','$stt_id','$type_pay','$sell_type','$Pro_image','$remark')");
-                    // mysqli_free_result($result);  
-                    // mysqli_next_result($conn);
-                    if(!$result){
-                        echo"<script>";
-                        echo"window.location.href='Checkout?save=fail';";
-                        echo"</script>";
-                    }
-                    else{
-                        $cookie_data = $_COOKIE['list_cart'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
-                        $cart_data = json_decode($cookie_data, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
-                        foreach($cart_data as $data){
-                            $pro_id = $data['pro_id'];
-                            $qty = $data['qty'];
-                            $price = $data['price'];
-                            $result2 = mysqli_query($conn,"insert into selldetail(pro_id,qty,price,sell_id) values('$pro_id','$qty','$price','$sell_id')");
-                            $update_stokc = mysqli_query($conn,"update product set qty=qty-'$qty' where pro_id='$pro_id'");
+                        if($img_path == ""){
+                            $Pro_image = "";
                         }
-                        if(!$result2){
+                        else{
+                            $ext = pathinfo(basename($_FILES['img_path']['name']), PATHINFO_EXTENSION);
+                            $new_image_name = 'Mix_'.uniqid().".".$ext;
+                            $image_path = $path.'Administrator/image/';
+                            $upload_path = $image_path.$new_image_name;
+                            move_uploaded_file($_FILES['img_path']['tmp_name'], $upload_path);
+                            $Pro_image = $new_image_name;
+                        }
+                        $result = mysqli_query($conn,"insert into sell(sell_id,emp_id,cus_id,stt_id,type_pay,sell_type,img_path,remark,seen1,seen2) values('$sell_id','$emp_id','$cus_id','$stt_id','$type_pay','$sell_type','$Pro_image','$remark','0','0')");
+                        // mysqli_free_result($result);  
+                        // mysqli_next_result($conn);
+                        if(!$result){
                             echo"<script>";
                             echo"window.location.href='Checkout?save=fail';";
                             echo"</script>";
                         }
                         else{
-                            $update_customer = mysqli_query($conn,"update customer set whatsapp='$whatsapp',tel='$tel',address='$address' where cus_id='$cus_id'");
-                            setcookie("list_cart","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
-                            echo"<script>";
-                            echo"window.location.href='Cart?save=success';";
-                            echo"</script>";
+                            $cookie_data = $_COOKIE['list_cart'];//ຕັ້ງຄ່າຄຸກກີ້ໃຫ້ເປັນ String
+                            $cart_data = json_decode($cookie_data, true);//Decode ຄ່າຄຸກກີ້ອອກມາໃຫ້ອ່ານຄ່າເປັນ Array ໄດ້ໃນຮູບແບບ json
+                            foreach($cart_data as $data){
+                                $pro_id = $data['pro_id'];
+                                $qty = $data['qty'];
+                                $price = $data['price'];
+                                $result2 = mysqli_query($conn,"insert into selldetail(pro_id,qty,price,sell_id) values('$pro_id','$qty','$price','$sell_id')");
+                                $update_stokc = mysqli_query($conn,"update product set qty=qty-'$qty' where pro_id='$pro_id'");
+                            }
+                            if(!$result2){
+                                echo"<script>";
+                                echo"window.location.href='Checkout?save=fail';";
+                                echo"</script>";
+                            }
+                            else{
+                                $update_customer = mysqli_query($conn,"update customer set whatsapp='$whatsapp',tel='$tel',address='$address' where cus_id='$cus_id'");
+                                setcookie("list_cart","",time() - 3600);//ຕັ້ງຄ່າໃຫ້ຄຸກກີ້ໃຫ້ເປັນຄ່າວ່າງ
+                                echo"<script>";
+                                echo"window.location.href='Cart?save=success';";
+                                echo"</script>";
+                            }
                         }
                     }
-                
                 }
                 else{
                     echo"<script>";
@@ -1527,6 +1565,16 @@ class obj{
         global $conn;
         global $result_report_sell;
         $result_report_sell = mysqli_query($conn,"call report_sell('$date1','$date2')");
+    }
+    public static function web_order_limit($page){
+        global $conn;
+        global $result_web_order_limit;
+        $result_web_order_limit = mysqli_query($conn,"call web_order_limit('$page')");
+    }
+    public static function web_order(){
+        global $conn;
+        global $result_web_order;
+        $result_web_order = mysqli_query($conn,"call web_order()");
     }
     public static function report_order_limit($date1,$date2,$page){
         global $conn;
@@ -1917,6 +1965,31 @@ class obj{
                 echo"window.location.href='Cart';";
                 echo"</script>";
             }
+        }
+    }
+    public static function select_customer_bill($cus_id){
+        global $conn;
+        global $result_customer_bill;
+        $result_customer_bill = mysqli_query($conn,"call select_customer_bill('$cus_id')");
+    }
+    public static function customer_bill($cus_id){
+        global $conn;
+        global $result_customer;
+        $result_customer = mysqli_query($conn,"call customer_bill('$cus_id')");
+    }
+    public static function confirm_order($sell_id){
+        global $conn;
+        global $confirm_order;
+        $confirm_order = mysqli_query($conn,"call confirm_order('$sell_id')");
+        if(!$confirm_order){
+            echo"<script>";
+            echo"window.location.href='Confirm?save=fail';";
+            echo"</script>";
+        }
+        else{
+            echo"<script>";
+            echo"window.location.href='Confirm?save2=success';";
+            echo"</script>";
         }
     }
 

@@ -33,6 +33,7 @@ RewriteRule ^Administrator/User/Order/Broken?$ Administrator/User/Order/broken.p
 RewriteRule ^Administrator/User/Service/Confirm?$ Administrator/User/Service/confirm.php
 RewriteRule ^Administrator/User/Service/Payment?$ Administrator/User/Service/payment.php
 RewriteRule ^Administrator/User/Service/Sell?$ Administrator/User/Service/sell.php
+RewriteRule ^Administrator/User/Service/Comfirm?$ Administrator/User/Service/confirm.php
 RewriteRule ^Administrator/User/Service/Bill?$ Administrator/User/Service/bill.php
 RewriteRule ^Administrator/User/Report/Reportsell?$ Administrator/User/Report/report_sell.php
 RewriteRule ^Administrator/User/Report/PDF-Sell?$ Administrator/User/Report/pdf_sell.php

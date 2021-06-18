@@ -319,6 +319,23 @@
                     ';
                 }
             ?>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-danger navbar-badge" id="alert"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">ແຈ້ງເຕືອນ</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="<?php echo $links ?>Service/Confirm">
+                            <div id="result_list" style="overflow-y: scroll;height:120px;font-size: 14px;"></div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="<?php echo $links ?>Service/Confirm" class="dropdown-item dropdown-footer">ເບິ່ງລາຍການທັງໝົດ</a>
+                    </div>
+                </li>
+            </ul> &nbsp; &nbsp; &nbsp;
         </nav>
 
         <!-- Main Sidebar Container -->
@@ -582,14 +599,6 @@
                                     <a href="<?php echo $links ?>Service/Confirm" class="nav-link">
                                         <i class="fas fa-vote-yea nav-icon"></i>
                                         <p>ຢືນຢັນການສັ່ງຊື້</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $links ?>Service/Payment" class="nav-link">
-                                        <i class="fab fa-amazon-pay nav-icon"></i>
-                                        <p>ຊ່ຳລະການສັ່ງຊື້</p>
                                     </a>
                                 </li>
                             </ul>

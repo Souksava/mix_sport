@@ -183,7 +183,7 @@ $(document).ready(function() {
     });
     load_data_selldetail("");
 
-    function load_data_selldetail(query, page) {
+    function load_data_selldetail(query) {
         $.ajax({
             url: "fetch_selldetail.php",
             method: "POST",

@@ -97,3 +97,41 @@ img{
       }
   include ('header-footer/footer.php');
 ?>
+<?php
+if(isset($_SESSION["cus_id"])){
+?>
+<script>
+$(document).ready(function() {
+    load_data(<?php echo $_SESSION["cus_id"] ?>);
+    load_data_bill(<?php echo $_SESSION["cus_id"] ?>);
+
+    function load_data(query) {
+        $.ajax({
+            url: "customer_alert.php",
+            method: "POST",
+            data: {
+                query: query
+            },
+            success: function(data) {
+                $("#showbill").html(data);
+            }
+        });
+    }
+    function load_data_bill(query) {
+        $.ajax({
+            url: "customer_bill.php",
+            method: "POST",
+            data: {
+                query: query
+            },
+            success: function(data) {
+                $("#result_bill").html(data);
+            }
+        });
+    }
+    
+});
+</script>
+<?php
+}
+?>

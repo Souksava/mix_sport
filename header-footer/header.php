@@ -158,7 +158,7 @@
                                         <img src="Administrator/image/<?php echo $row2["img"] ?>" alt="">
                                     </div>
                                     <div class="ps-cart-item__content"><a class="ps-cart-item__title"
-                                            href="productdetail"><?php echo $row2["cate_name"] ?>
+                                            href="Cart"><?php echo $row2["cate_name"] ?>
                                             <?php echo $row2["brand_name"] ?> <?php echo $row2["pro_name"] ?></a>
                                         <p><span>ຈຳນວນ:<i><?php echo $row2["qty"] ?></i></span><span>ລວມ:<i><?php echo number_format($row2["price"]) ?></i></span>
                                         </p>
@@ -191,21 +191,15 @@
                     <?php
                       }
                       else{
+                          if(isset($_SESSION["cus_id"])){
                         ?>
-                    <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i id="showbill">0</i></span>
+                    <div class="ps-cart"><a class="ps-cart__toggle" href="Bill"><span><i id="showbill"></i></span>
                     <i class="fas fa-file-invoice"></i></a>
                         <div class="ps-cart__listing">
                             <div class="ps-cart__content">
-                                <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                                    <div class="ps-cart-item__thumbnail">
-                                        <a href="Bill"></a>
-                                        <img src="Administrator/image/bill.png" alt="">
-                                    </div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title"
-                                            href="Productdetail">ເລກທີບິນ: 000001 <span><i>ສັ່ງຊື້ສຳເລັດ</i></span></a>
-                                        <p><span>ມູນຄ່າ:<i>200,000</i></span>
-                                        </p>
-                                    </div>
+                                <div class="ps-cart-item">
+                                    <div id="result_bill"></div>
+
                                 </div>
                             </div>
                             <div class="ps-cart__footer"><a class="ps-btn" href="Bill">ໄປທີບິນ<i
@@ -213,6 +207,7 @@
                         </div>
                     </div>
                     <?php
+                          }
                       }
                     ?>
                     <div class="menu-toggle"><span></span></div>

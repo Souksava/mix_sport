@@ -65,16 +65,12 @@
             ສິນຄ້າຊຳ່ຫຼຸດ
         </div>
     </a>
-    <a href="<?php echo $links ?>Service/t" class="m-a">
+    <a href="<?php echo $links ?>Service/Confirm" class="m-a">
         <div class="btn btn-light mainlink">
             ຢືນຢັນການສັ່ງຊື້
         </div>
     </a>
-    <a href="<?php echo $links ?>Service/" class="m-a">
-        <div class="btn btn-light mainlink">
-            ຊ່ຳລະການສັ່ງຊື້
-        </div>
-    </a>
+
     <a href="<?php echo $links ?>Service/Sell" class="m-a">
         <div class="btn btn-light mainlink">
             ຂາຍສິນຄ້າໜ້າຮ້ານ

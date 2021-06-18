@@ -237,6 +237,13 @@
         swal("", "ຈຳນວນສິນຄ້າເກີນສະຕ໋ອກ", "info");
         </script>';
       }
+      if(isset($_GET['stock'])=='over'){
+        $msg = $_GET["msg"];
+        $productid = $_GET["productid"];
+        echo'<script type="text/javascript">
+        swal("", "ບໍ່ສາມາດສັ່ງຊື້ສິນຄ້າໄດ້ ເນື່ອງສິນຄ້າຊື່: '.$productid.' '.$msg.' ທີ່ທ່ານສັ່ງຊື້ເກີນຈຳນວນໃນສະຕ໋ອກ", "info");
+        </script>';
+      }
   ?>
 <script>
 loadorder();

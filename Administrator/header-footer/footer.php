@@ -52,7 +52,73 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="<?php echo $path ?>dist/js/jquery.highlight.js"></script>
 <script src="<?php echo $path ?>dist/js/datepicker.js"></script>
 <script src="<?php echo $path ?>dist/js/export.js"></script>
+<script>
+// loadorder2();
 
+// function loadorder2() {
+//     $.ajax({
+//         url: "../header-footer/alert.php",
+//         success: function(result) {
+//             $('#alert').val(result); //insert text of test.php into your div
+//             setTimeout(function() {
+//                 loadorder2(); //this will send request again and again;
+//             }, 2000);
+//         }
+//     });
+// }
+// loadorder3();
+
+// function loadorder3() {
+//     $.ajax({
+//         url: "../header-footer/alert_list.php",
+//         success: function(result) {
+//             $('#alert').val(result); //insert text of test.php into your div
+//             setTimeout(function() {
+//                 loadorder3(); //this will send request again and again;
+//             }, 2000);
+//         }
+//     });
+// }
+</script>
+<script type="text/javascript">
+<?php
+if($stt == 2){
+?>
+    function loadDocalert() {
+            setInterval(function(){
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("alert").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "<?php echo $path ?>header-footer/alert.php", true);
+                xhttp.send();
+            },1000);
+        }
+        loadDocalert(); 
+<?php
+}
+if($stt == 2){
+?>
+  function loadDocalert2() {
+            setInterval(function(){
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result_list").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "<?php echo $path ?>header-footer/fetch_list.php", true);
+                xhttp.send();
+            },1000);
+        }
+        loadDocalert2(); 
+<?php
+}
+?>
+       
+</script>
 </body>
 
 </html>
