@@ -11,6 +11,7 @@ RewriteRule ^Cart?$ cart.php
 RewriteRule ^Signin?$ login.php
 RewriteRule ^Productdetail?$ productdetail.php
 RewriteRule ^Checkout?$ checkout.php
+RewriteRule ^AboutUs?$ aboutus.php
 RewriteRule ^Bill?$ bill.php
 RewriteRule ^Products?$ product-listing.php
 RewriteRule ^Contact-us?$ contact-us.php

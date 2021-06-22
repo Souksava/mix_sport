@@ -111,7 +111,7 @@
                         </li>
                         <li class="menu-item menu-item-has-children has-mega-menu"><a href="Products">ສິນຄ້າ</a>
                         </li>
-                        <li class="menu-item menu-item-has-children dropdown"><a href="contact-us.html">ກ່ຽວກັບເຮົາ</a>
+                        <li class="menu-item menu-item-has-children dropdown"><a href="AboutUs">ກ່ຽວກັບເຮົາ</a>
                         <li class="menu-item menu-item-has-children dropdown"><a href="Contact-us">ຕິດຕໍ່ເຮົາ</a>
                         </li>
                     </ul>
